@@ -11,6 +11,7 @@ A collection of Ruby benchmarks.
 ## Table of Contents
 
   - [Features](#features)
+  - [Screencasts](#screencasts)
   - [Requirements](#requirements)
   - [Setup](#setup)
   - [Usage](#usage)

@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "benchmark-ips", "~> 2.7"
 gem "bundler-audit", "~> 0.6"
 gem "git-cop", "~> 3.0"
 gem "guard-rspec", "~> 4.7"
