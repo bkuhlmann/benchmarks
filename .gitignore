@@ -1,0 +1,5 @@
+*.gem
+.bundle
+.rubocop-http*
+Gemfile.lock
+tmp
