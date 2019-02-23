@@ -32,6 +32,7 @@ checks:
 exclude_patterns:
 - "config/"
 - "db/"
+- "scripts/"
 - "**/elm-stuff/"
 - "**/node_modules/"
 - "**/spec/"
