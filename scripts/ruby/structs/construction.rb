@@ -7,7 +7,7 @@ MAX = 1_000_000
 
 ExampleStruct = Struct.new :to, :from
 
-class ExampleClass
+ExampleClass = Class.new do
   attr_reader :to, :from
 
   def initialize to:, from:
