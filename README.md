@@ -4,7 +4,7 @@
 [![Code Climate Test Coverage](https://api.codeclimate.com/v1/badges/03890a29f08c29966b1b/test_coverage)](https://codeclimate.com/github/bkuhlmann/benchmarks/test_coverage)
 [![Circle CI Status](https://circleci.com/gh/bkuhlmann/benchmarks.svg?style=svg)](https://circleci.com/gh/bkuhlmann/benchmarks)
 
-A collection of Ruby benchmarks.
+A collection of Ruby micro benchmarks.
 
 <!-- Tocer[start]: Auto-generated, don't remove. -->
 
@@ -45,7 +45,7 @@ Current Version (stable):
 
     git clone https://github.com/bkuhlmann/benchmarks.git
     cd benchmarks
-    git checkout 0.1.0
+    git checkout 0.2.0
 
 Master Version (unstable):
 
