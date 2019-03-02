@@ -26,7 +26,7 @@ module Types
   include Dry::Types.module
 end
 
-DryExample = Class.new(Dry::Struct) do
+DryExample = Class.new Dry::Struct do
   attribute :to, Types::Strict::String
   attribute :from, Types::Strict::String
 end

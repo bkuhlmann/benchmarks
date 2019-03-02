@@ -18,7 +18,7 @@ Person = Class.new do
   attr_reader :first, :last
 end
 
-Example = Class.new(Person) do
+Example = Class.new Person do
   extend Forwardable
 
   define_method :unbound_full_name, Person.instance_method(:full_name)

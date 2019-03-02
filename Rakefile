@@ -8,7 +8,7 @@ begin
   require "rubocop/rake_task"
 
   Bundler::Audit::Task.new
-  RSpec::Core::RakeTask.new(:spec)
+  RSpec::Core::RakeTask.new :spec
   Reek::Rake::Task.new
   RuboCop::RakeTask.new
 rescue LoadError => error

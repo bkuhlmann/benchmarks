@@ -17,7 +17,7 @@ Benchmark.ips do |benchmark|
 
   benchmark.report "With Block" do
     selections = []
-    text.split(delimiter) { |word| selections << word if word.match?(pattern) }
+    text.split(delimiter) { |word| selections << word if word.match? pattern }
   end
 
   benchmark.compare!

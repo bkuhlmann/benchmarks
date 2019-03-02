@@ -6,7 +6,7 @@ MAX = 1_000_000
 
 PlotStruct = Struct.new :x, :y
 
-class PlotSubclass < Struct.new(:x, :y)
+class PlotSubclass < Struct.new :x, :y
 end
 
 struct = -> { PlotStruct.new x: 1, y: 2 }
