@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="benchmarks.png" alt="Benchmarks Icon"/>
+</p>
+
 # Benchmarks
 
 [![Code Climate Maintainability](https://api.codeclimate.com/v1/badges/03890a29f08c29966b1b/maintainability)](https://codeclimate.com/github/bkuhlmann/benchmarks/maintainability)
