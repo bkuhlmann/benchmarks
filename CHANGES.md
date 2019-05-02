@@ -1,3 +1,10 @@
+# 0.3.1 (2019-05-01)
+
+- Added Ruby warnings to RSpec helper.
+- Added project icon to README.
+- Updated to Rubocop 0.67.0.
+- Updated to Ruby 2.6.3.
+
 # 0.3.0 (2019-04-01)
 
 - Fixed Rubocop Style/MethodCallWithArgsParentheses issues.
