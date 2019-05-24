@@ -2,6 +2,10 @@ inherit_from:
   - https://raw.githubusercontent.com/bkuhlmann/code_quality/master/configurations/rubocop/ruby.yml
   - https://raw.githubusercontent.com/bkuhlmann/code_quality/master/configurations/rubocop/rspec.yml
 
+Lint/ImplicitStringConcatenation:
+  Exclude:
+    - "scripts/ruby/strings/concatenation.rb"
+
 Style/StructInheritance:
   Exclude:
     - "scripts/ruby/structs/inheritance.rb"

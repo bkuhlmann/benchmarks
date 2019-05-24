@@ -8,6 +8,10 @@ text_2 = "Example"
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
+  benchmark.report "Implicit" do
+    "Test" "Example"
+  end
+
   benchmark.report "Interpolation" do
     "#{text_1} #{text_2}"
   end
@@ -36,21 +40,24 @@ end
 __END__
 
 Warming up --------------------------------------
-       Interpolation   260.317k i/100ms
-            Addition   284.975k i/100ms
-       String#concat   207.103k i/100ms
-           String#<<   212.497k i/100ms
-          Array#join   141.401k i/100ms
+            Implicit   409.598k i/100ms
+       Interpolation   253.230k i/100ms
+            Addition   276.776k i/100ms
+       String#concat   208.632k i/100ms
+           String#<<   210.205k i/100ms
+          Array#join   137.953k i/100ms
 Calculating -------------------------------------
-       Interpolation      6.039M (± 7.9%) i/s -     29.936M in   5.004322s
-            Addition      6.565M (± 8.8%) i/s -     32.487M in   5.003820s
-       String#concat      3.686M (± 4.5%) i/s -     18.432M in   5.010922s
-           String#<<      3.905M (± 3.5%) i/s -     19.550M in   5.012176s
-          Array#join      1.980M (± 7.0%) i/s -      9.898M in   5.028729s
+            Implicit     26.189M (± 4.9%) i/s -    130.662M in   5.002351s
+       Interpolation      6.073M (± 4.2%) i/s -     30.388M in   5.013407s
+            Addition      6.676M (± 4.4%) i/s -     33.490M in   5.026986s
+       String#concat      3.548M (± 9.5%) i/s -     17.525M in   5.009926s
+           String#<<      3.684M (± 5.7%) i/s -     18.498M in   5.039367s
+          Array#join      1.944M (± 6.7%) i/s -      9.795M in   5.062777s
 
 Comparison:
-            Addition:  6565359.3 i/s
-       Interpolation:  6039397.8 i/s - same-ish: difference falls within error
-           String#<<:  3905443.7 i/s - 1.68x  slower
-       String#concat:  3686375.1 i/s - 1.78x  slower
-          Array#join:  1980095.5 i/s - 3.32x  slower
+            Implicit: 26189407.1 i/s
+            Addition:  6675827.8 i/s - 3.92x  slower
+       Interpolation:  6072734.5 i/s - 4.31x  slower
+           String#<<:  3683995.3 i/s - 7.11x  slower
+       String#concat:  3547868.6 i/s - 7.38x  slower
+          Array#join:  1944381.0 i/s - 13.47x  slower
