@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gem "benchmark-ips", "~> 2.7"
 gem "bundler-audit", "~> 0.6"
-gem "git-cop", "~> 3.0"
+gem "git-cop", "~> 3.5"
 gem "guard-rspec", "~> 4.7"
 gem "pry", "~> 0.10"
 gem "pry-byebug", "~> 3.5"
