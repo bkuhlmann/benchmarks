@@ -1,3 +1,16 @@
+# 0.4.0 (2019-06-01)
+
+- Fixed RSpec/ContextWording issues.
+- Added implicit string concatenation benchmark.
+- Added method proc benchmark.
+- Updated contributing documentation.
+- Updated to Git Cop 3.5.0.
+- Updated to Reek 5.4.0.
+- Updated to Rubocop 0.69.0.
+- Updated to Rubocop RSpec 1.33.0.
+- Updated to Tocer 9.0.0.
+- Removed Rubocop Performance cops.
+
 # 0.3.1 (2019-05-01)
 
 - Added Ruby warnings to RSpec helper.
