@@ -6,6 +6,7 @@ begin
   require "rspec/core/rake_task"
   require "reek/rake/task"
   require "rubocop/rake_task"
+  require "tocer/rake/setup"
 
   Bundler::Audit::Task.new
   RSpec::Core::RakeTask.new :spec
