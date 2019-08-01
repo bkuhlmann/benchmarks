@@ -1,3 +1,9 @@
+# 0.4.1 (2019-08-01)
+
+- Updated to Rubocop 0.73.0.
+- Updated to Tocer 9.1.0.
+- Refactored RSpec helper support requirements.
+
 # 0.4.0 (2019-06-01)
 
 - Fixed RSpec/ContextWording issues.
