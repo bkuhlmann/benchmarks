@@ -44,7 +44,7 @@ Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
   benchmark.report "Struct" do
-    MAX.times { StructExample.new to: "Rick", from: "Morty" }
+    MAX.times { StructExample[to: "Rick", from: "Morty"] }
   end
 
   benchmark.report "OpenStruct" do

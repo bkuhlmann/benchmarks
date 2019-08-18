@@ -9,8 +9,8 @@ PlotStruct = Struct.new :x, :y
 class PlotSubclass < Struct.new :x, :y
 end
 
-struct = -> { PlotStruct.new x: 1, y: 2 }
-subclass = -> { PlotSubclass.new x: 1, y: 2 }
+struct = -> { PlotStruct[x: 1, y: 2] }
+subclass = -> { PlotSubclass[x: 1, y: 2] }
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
