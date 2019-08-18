@@ -35,7 +35,7 @@ A collection of Ruby micro benchmarks.
 
 ## Screencasts
 
-[![asciicast](https://asciinema.org/a/224800.png)](https://asciinema.org/a/224800)
+[![asciicast](https://asciinema.org/a/263054.svg)](https://asciinema.org/a/263054)
 
 ## Requirements
 
