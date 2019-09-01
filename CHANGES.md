@@ -1,3 +1,10 @@
+# 0.5.0 (2019-09-01)
+
+- Added Hash merge benchmark.
+- Updated README screencast tutorial.
+- Updated to Ruby 2.6.4.
+- Refactored structs to use hash-like syntax.
+
 # 0.4.1 (2019-08-01)
 
 - Updated to Rubocop 0.73.0.
