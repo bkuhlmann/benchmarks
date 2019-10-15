@@ -1,21 +1,11 @@
 # frozen_string_literal: true
 
-begin
-  require "bundler/inline"
-rescue LoadError
-  abort "Bundler 1.10 or later is required."
-end
-
-gemfile true do
-  source "https://rubygems.org"
-  gem "benchmark-ips"
-  gem "values"
-  gem "dry-struct"
-  gem "value_semantics"
-end
-
+require "bundler/setup"
 require "benchmark/ips"
 require "ostruct"
+require "values"
+require "dry-struct"
+require "value_semantics"
 
 MAX = 1_000_000
 
@@ -23,7 +13,7 @@ StructExample = Struct.new :to, :from
 ValueExample = Value.new :to, :from
 
 module Types
-  include Dry::Types.module
+  include Dry.Types
 end
 
 DryExample = Class.new Dry::Struct do
