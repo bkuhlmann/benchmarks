@@ -1,3 +1,13 @@
+# 0.6.0 (2019-10-14)
+
+- Fixed benchmark scripts to user Bundler.
+- Added Rubocop Rake support.
+- Added Ruby array concatenation benchmarks.
+- Updated to Rake 13.0.0.
+- Updated to Rubocop 0.75.0.
+- Updated to Ruby 2.6.5.
+- Refactored value benchmarks into multple scripts.
+
 # 0.5.0 (2019-09-01)
 
 - Added Hash merge benchmark.
