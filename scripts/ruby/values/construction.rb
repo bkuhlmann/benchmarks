@@ -3,11 +3,9 @@
 require "bundler/setup"
 require "benchmark/ips"
 require "ostruct"
-require "values"
 require "dry-struct"
+require "values"
 require "value_semantics"
-
-MAX = 1_000_000
 
 StructExample = Struct.new :to, :from
 ValueExample = Value.new :to, :from
@@ -22,35 +20,35 @@ DryExample = Class.new Dry::Struct do
 end
 
 ValueSemanticsExample = Class.new do
-  # rubocop:disable Lint/AmbiguousBlockAssociation
-  include ValueSemantics.for_attributes {
-    to String
-    from String
-  }
-  # rubocop:enable Lint/AmbiguousBlockAssociation
+  include(
+    ValueSemantics.for_attributes do
+      to String
+      from String
+    end
+  )
 end
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
   benchmark.report "Struct" do
-    MAX.times { StructExample[to: "Rick", from: "Morty"] }
+    StructExample[to: "Rick", from: "Morty"]
   end
 
   benchmark.report "OpenStruct" do
-    MAX.times { OpenStruct.new to: "Rick", from: "Morty" }
-  end
-
-  benchmark.report "Values" do
-    MAX.times { ValueExample.new "Rick", "Morty" }
+    OpenStruct.new to: "Rick", from: "Morty"
   end
 
   benchmark.report "Dry Struct" do
-    MAX.times { DryExample.new to: "Rick", from: "Morty" }
+    DryExample[to: "Rick", from: "Morty"]
+  end
+
+  benchmark.report "Values" do
+    ValueExample.new "Rick", "Morty"
   end
 
   benchmark.report "Value Semantics" do
-    MAX.times { ValueSemanticsExample.new to: "Rick", from: "Morty" }
+    ValueSemanticsExample.new to: "Rick", from: "Morty"
   end
 
   benchmark.compare!
@@ -59,21 +57,21 @@ end
 __END__
 
 Warming up --------------------------------------
-              Struct     1.000  i/100ms
-          OpenStruct     1.000  i/100ms
-              Values     1.000  i/100ms
-          Dry Struct     1.000  i/100ms
-     Value Semantics     1.000  i/100ms
+              Struct   124.577k i/100ms
+          OpenStruct    70.932k i/100ms
+          Dry Struct    28.404k i/100ms
+              Values    47.441k i/100ms
+     Value Semantics    28.793k i/100ms
 Calculating -------------------------------------
-              Struct      1.804  (± 0.0%) i/s -     10.000  in   5.559868s
-          OpenStruct      0.771  (± 0.0%) i/s -      4.000  in   5.211279s
-              Values      0.494  (± 0.0%) i/s -      3.000  in   6.090192s
-          Dry Struct      0.156  (± 0.0%) i/s -      1.000  in   6.409267s
-     Value Semantics      0.246  (± 0.0%) i/s -      2.000  in   8.131972s
+              Struct      2.010M (±16.2%) i/s -      9.842M in   5.000784s
+          OpenStruct    873.558k (±10.1%) i/s -      4.327M in   5.003154s
+          Dry Struct    296.609k (±10.1%) i/s -      1.477M in   5.038729s
+              Values    554.974k (± 7.1%) i/s -      2.799M in   5.073966s
+     Value Semantics    332.732k (± 5.0%) i/s -      1.670M in   5.031237s
 
 Comparison:
-              Struct:        1.8 i/s
-          OpenStruct:        0.8 i/s - 2.34x  slower
-              Values:        0.5 i/s - 3.65x  slower
-     Value Semantics:        0.2 i/s - 7.33x  slower
-          Dry Struct:        0.2 i/s - 11.56x  slower
+              Struct:  2010059.9 i/s
+          OpenStruct:   873557.9 i/s - 2.30x  slower
+              Values:   554973.8 i/s - 3.62x  slower
+     Value Semantics:   332732.3 i/s - 6.04x  slower
+          Dry Struct:   296609.2 i/s - 6.78x  slower
