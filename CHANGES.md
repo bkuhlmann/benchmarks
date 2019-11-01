@@ -1,3 +1,9 @@
+# 0.6.1 (2019-11-01)
+
+- Updated README screencast link.
+- Updated to RSpec 3.9.0.
+- Updated to Rubocop 0.76.0.
+
 # 0.6.0 (2019-10-14)
 
 - Fixed benchmark scripts to user Bundler.
