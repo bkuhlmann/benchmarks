@@ -39,7 +39,7 @@ A collection of Ruby micro benchmarks.
 
 ## Requirements
 
-1. [Ruby 2.6.x](https://www.ruby-lang.org)
+1. [Ruby 2.7.x](https://www.ruby-lang.org)
 
 ## Setup
 
