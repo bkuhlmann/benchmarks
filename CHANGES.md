@@ -1,3 +1,11 @@
+# 0.8.0 (2020-03-01)
+
+- Added Ruby delegation micro benchmarks
+- Updated README project requirements
+- Updated to Reek 5.6.0
+- Updated to Rubocop 0.79.0
+- Updated to SimpleCov 0.18.0
+
 # 0.7.0 (2020-01-01)
 
 - Fixed SimpleCov setup in RSpec spec helper.

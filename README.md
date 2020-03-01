@@ -49,7 +49,7 @@ Current Version (stable):
 
     git clone https://github.com/bkuhlmann/benchmarks.git
     cd benchmarks
-    git checkout 0.7.0
+    git checkout 0.8.0
     bin/setup
 
 Master Version (unstable):
