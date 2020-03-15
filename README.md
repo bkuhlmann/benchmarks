@@ -16,6 +16,8 @@ A collection of Ruby micro benchmarks.
   - [Screencasts](#screencasts)
   - [Requirements](#requirements)
   - [Setup](#setup)
+    - [Production](#production)
+    - [Development](#development)
   - [Usage](#usage)
   - [Tests](#tests)
   - [Versioning](#versioning)
@@ -41,16 +43,18 @@ A collection of Ruby micro benchmarks.
 
 ## Setup
 
-Open a terminal window and execute one of the following depending on your version preference:
+### Production
 
-Current Version (stable):
+To install, run:
 
     git clone https://github.com/bkuhlmann/benchmarks.git
     cd benchmarks
     git checkout 0.8.0
     bin/setup
 
-Master Version (unstable):
+### Development
+
+To contribute, run:
 
     git clone https://github.com/bkuhlmann/benchmarks.git
     cd benchmarks
