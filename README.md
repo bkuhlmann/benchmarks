@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="benchmarks.png" alt="Benchmarks Icon"/>
+  <img src="https://www.alchemists.io/images/projects/benchmarks/icon.png" alt="Benchmarks Icon"/>
 </p>
 
 # Benchmarks
