@@ -4,8 +4,6 @@
 
 # Benchmarks
 
-[![Code Climate Maintainability](https://api.codeclimate.com/v1/badges/03890a29f08c29966b1b/maintainability)](https://codeclimate.com/github/bkuhlmann/benchmarks/maintainability)
-[![Code Climate Test Coverage](https://api.codeclimate.com/v1/badges/03890a29f08c29966b1b/test_coverage)](https://codeclimate.com/github/bkuhlmann/benchmarks/test_coverage)
 [![Circle CI Status](https://circleci.com/gh/bkuhlmann/benchmarks.svg?style=svg)](https://circleci.com/gh/bkuhlmann/benchmarks)
 
 A collection of Ruby micro benchmarks.
