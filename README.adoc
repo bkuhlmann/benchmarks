@@ -1,0 +1,97 @@
+:toc: macro
+:toclevels: 5
+:figure-caption!:
+
+= Benchmarks
+
+[link=https://circleci.com/gh/bkuhlmann/benchmarks]
+image::https://circleci.com/gh/bkuhlmann/benchmarks.svg?style=svg[Circle CI Status]
+
+A collection of Ruby micro benchmarks.
+
+toc::[]
+
+== Features
+
+* Uses link:https://github.com/evanphx/benchmark-ips[Benchmark IPS] to calculate CPU/speed results.
+
+== Screencasts
+
+[link=https://www.alchemists.io/screencasts/benchmarks.html]
+image::https://www.alchemists.io/images/screencasts/benchmarks.png[Screencast]
+
+== Requirements
+
+. link:https://www.ruby-lang.org[Ruby 2.7.x]
+
+== Setup
+
+=== Production
+
+To install, run:
+
+[source,bash]
+----
+git clone https://github.com/bkuhlmann/benchmarks.git
+cd benchmarks
+git checkout 0.8.0
+bin/setup
+----
+
+=== Development
+
+To contribute, run:
+
+[source,bash]
+----
+git clone https://github.com/bkuhlmann/benchmarks.git
+cd benchmarks
+bin/setup
+----
+
+== Usage
+
+Every benchmark is executable. To run, copy a benchmark file path and pass it to Ruby. Example:
+
+[source,bash]
+----
+ruby scripts/ruby/strings/split.rb
+----
+
+== Tests
+
+To test, run:
+
+[source,bash]
+----
+bundle exec rake
+----
+
+== Versioning
+
+Read link:https://semver.org[Semantic Versioning] for details. Briefly, it means:
+
+* Major (X.y.z) - Incremented for any backwards incompatible public API changes.
+* Minor (x.Y.z) - Incremented for new, backwards compatible, public API enhancements/fixes.
+* Patch (x.y.Z) - Incremented for small, backwards compatible, bug fixes.
+
+== Code of Conduct
+
+Please note that this project is released with a link:CODE_OF_CONDUCT.adoc[CODE OF CONDUCT]. By
+participating in this project you agree to abide by its terms.
+
+== Contributions
+
+Read link:CONTRIBUTING.adoc[CONTRIBUTING] for details.
+
+== License
+
+Read link:LICENSE.adoc[LICENSE] for details.
+
+== History
+
+Read link:CHANGES.adoc[CHANGES] for details.
+
+== Credits
+
+Engineered by link:https://www.alchemists.io/team/brooke_kuhlmann.html[Brooke Kuhlmann].
