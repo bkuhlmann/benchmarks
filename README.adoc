@@ -18,7 +18,7 @@ toc::[]
 == Screencasts
 
 [link=https://www.alchemists.io/screencasts/benchmarks.html]
-image::https://www.alchemists.io/images/screencasts/benchmarks.png[Screencast]
+image::https://www.alchemists.io/images/screencasts/benchmarks/cover-original.png[Screencast,role=focal_point]
 
 == Requirements
 
