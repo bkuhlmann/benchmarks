@@ -10,3 +10,7 @@ Lint/ImplicitStringConcatenation:
 Style/StructInheritance:
   Exclude:
     - "scripts/ruby/structs/inheritance.rb"
+
+Style/RedundantFetchBlock:
+  Exclude:
+    - "scripts/ruby/hashes/lookup.rb"
