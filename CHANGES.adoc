@@ -1,24 +1,38 @@
 = Changes
 
+== 0.11.0 (2020-07-18)
+
+* Fixed Bundler/OrderedGems issue
+* Fixed Rubocop Lint/NonDeterministicRequireOrder issues
+* Fixed Style/RedundantFetchBlock issue
+* Fixed project requirements
+* Added array search benchmark
+* Added then benchmark
+* Updated GitHub templates
+* Updated README screencast cover to SVG format
+* Updated to Git Lint 1.0.0
+* Refactored Rakefile requirements
+
+
 == 0.10.0 (2020-05-23)
 
-- Added duplicate hash merge benchmark
-- Updated Pry gem dependencies
-- Updated README credit URL
-- Updated README screencast URL
-- Updated Rubocop gem dependencies
-- Removed Tocer gem
+* Added duplicate hash merge benchmark
+* Updated Pry gem dependencies
+* Updated README credit URL
+* Updated README screencast URL
+* Updated Rubocop gem dependencies
+* Removed Tocer gem
 
 == 0.9.0 (2020-04-01)
 
-- Added README production and development setup instructions
-- Updated README screencast to use larger image
-- Updated documentation to ASCII Doc format
-- Updated to Code of Conduct 2.0.0
-- Updated to Reek 6.0.0
-- Updated to Ruby 2.7.1
-- Removed Code Climate support
-- Removed README images
+* Added README production and development setup instructions
+* Updated README screencast to use larger image
+* Updated documentation to ASCII Doc format
+* Updated to Code of Conduct 2.0.0
+* Updated to Reek 6.0.0
+* Updated to Ruby 2.7.1
+* Removed Code Climate support
+* Removed README images
 
 == 0.8.0 (2020-03-01)
 
