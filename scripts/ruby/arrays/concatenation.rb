@@ -36,30 +36,37 @@ Benchmark.ips do |benchmark|
     [a, *b].flatten
   end
 
+  benchmark.report "multi-splat" do
+    [*a, *b]
+  end
+
   benchmark.compare!
 end
 
 __END__
 
 Warming up --------------------------------------
-                  #+   233.885k i/100ms
-                 #+=   203.519k i/100ms
-             #concat   145.623k i/100ms
-                  #|   128.432k i/100ms
-      #<< + #flatten    45.658k i/100ms
-    splat + #flatten    49.643k i/100ms
+                  #+   457.697k i/100ms
+                 #+=   411.714k i/100ms
+             #concat   222.004k i/100ms
+                  #|   145.737k i/100ms
+      #<< + #flatten    60.253k i/100ms
+    splat + #flatten    58.633k i/100ms
+         multi-splat   282.676k i/100ms
 Calculating -------------------------------------
-                  #+      4.551M (± 8.4%) i/s -     22.687M in   5.020530s
-                 #+=      3.519M (± 3.4%) i/s -     17.706M in   5.036935s
-             #concat      2.124M (±17.4%) i/s -     10.339M in   5.017638s
-                  #|      1.719M (±14.4%) i/s -      8.477M in   5.036505s
-      #<< + #flatten    511.798k (±15.9%) i/s -      2.511M in   5.014936s
-    splat + #flatten    540.469k (±15.2%) i/s -      2.681M in   5.051894s
+                  #+      4.570M (±21.2%) i/s -     22.427M in   5.017876s
+                 #+=      3.742M (± 3.8%) i/s -     18.939M in   5.068411s
+             #concat      2.187M (±11.5%) i/s -     10.878M in   5.026729s
+                  #|      1.637M (±10.6%) i/s -      8.161M in   5.030635s
+      #<< + #flatten    521.165k (± 9.3%) i/s -      2.591M in   5.012084s
+    splat + #flatten    520.261k (± 8.5%) i/s -      2.638M in   5.105158s
+         multi-splat      2.580M (±16.1%) i/s -     13.003M in   5.124962s
 
 Comparison:
-                  #+:  4551193.4 i/s
-                 #+=:  3519429.7 i/s - 1.29x  slower
-             #concat:  2124293.9 i/s - 2.14x  slower
-                  #|:  1718510.1 i/s - 2.65x  slower
-    splat + #flatten:   540468.6 i/s - 8.42x  slower
-      #<< + #flatten:   511798.5 i/s - 8.89x  slower
+                  #+:  4569764.7 i/s
+                 #+=:  3742049.9 i/s - same-ish: difference falls within error
+         multi-splat:  2579852.5 i/s - 1.77x  (± 0.00) slower
+             #concat:  2186681.7 i/s - 2.09x  (± 0.00) slower
+                  #|:  1637445.5 i/s - 2.79x  (± 0.00) slower
+      #<< + #flatten:   521164.6 i/s - 8.77x  (± 0.00) slower
+    splat + #flatten:   520261.5 i/s - 8.78x  (± 0.00) slower
