@@ -3,6 +3,8 @@ inherit_from:
   - https://raw.githubusercontent.com/bkuhlmann/code_quality/master/configurations/rubocop/rake.yml
   - https://raw.githubusercontent.com/bkuhlmann/code_quality/master/configurations/rubocop/rspec.yml
 
+Layout/MultilineOperationIndentation:
+  Enabled: false
 Lint/ImplicitStringConcatenation:
   Exclude:
     - "scripts/ruby/strings/concatenation.rb"
