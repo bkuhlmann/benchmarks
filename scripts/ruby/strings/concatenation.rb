@@ -3,36 +3,71 @@
 require "bundler/setup"
 require "benchmark/ips"
 
-text_1 = "Test"
-text_2 = "Example"
+one = "One"
+two = "Two"
+three = "Three"
+four = "Four"
+five = "Five"
+six = "Six"
+seven = "Seven"
+eight = "Eight"
+nine = "Nine"
+ten = "Ten"
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "Implicit" do
-    "Test" "Example"
+  benchmark.report "Implicit (<)" do
+    "One" "Two"
   end
 
-  benchmark.report "Interpolation" do
-    "#{text_1} #{text_2}"
+  benchmark.report "Implicit (>)" do
+    "One" "Two" "Three" "Four" "Five" "Six" "Seven" "Eight" "Nine" "Ten"
   end
 
-  benchmark.report "Addition" do
-    text_1 + " " + text_2
+  benchmark.report "Interpolation (<)" do
+    "#{one} #{two}"
+  end
+
+  benchmark.report "Interpolation (>)" do
+    "#{one} #{two} #{three} #{four} #{five} #{six} #{seven} #{eight} #{nine} #{ten}"
+  end
+
+  benchmark.report "#+ (<)" do
+    one + " " + two
+  end
+
+  benchmark.report "#+ (>)" do
+    one + " " + two + " " + three + " " + four + " " + five + " " + six + " " + seven + " " +
+    eight + " " + nine + " " + ten
   end
 
   # WARNING: Mutation.
-  benchmark.report "String#concat" do
-    text_1.dup.concat text_2
+  benchmark.report "#concat (<)" do
+    one.dup.concat two
   end
 
   # WARNING: Mutation.
-  benchmark.report "String#<<" do
-    text_1.dup << text_2
+  benchmark.report "#concat (>)" do
+    one.dup.concat two, three, four, five, six, seven, eight, nine, ten
   end
 
-  benchmark.report "Array#join" do
-    [text_1, text_2].join " "
+  # WARNING: Mutation.
+  benchmark.report "#<< (<)" do
+    one.dup << two
+  end
+
+  # WARNING: Mutation.
+  benchmark.report "#<< (>)" do
+    one.dup << two << three << four << five << six << seven << eight << nine << ten
+  end
+
+  benchmark.report "Array#join (<)" do
+    [one, two].join " "
+  end
+
+  benchmark.report "Array#join (>)" do
+    [one, two, three, four, five, six, seven, eight, nine, ten].join " "
   end
 
   benchmark.compare!
@@ -41,24 +76,42 @@ end
 __END__
 
 Warming up --------------------------------------
-            Implicit   409.598k i/100ms
-       Interpolation   253.230k i/100ms
-            Addition   276.776k i/100ms
-       String#concat   208.632k i/100ms
-           String#<<   210.205k i/100ms
-          Array#join   137.953k i/100ms
+        Implicit (<)     2.287M i/100ms
+        Implicit (>)     2.296M i/100ms
+   Interpolation (<)   629.712k i/100ms
+   Interpolation (>)   102.494k i/100ms
+              #+ (<)   596.644k i/100ms
+              #+ (>)    29.245k i/100ms
+         #concat (<)   399.783k i/100ms
+         #concat (>)    90.769k i/100ms
+             #<< (<)   413.890k i/100ms
+             #<< (>)   122.904k i/100ms
+      Array#join (<)   358.464k i/100ms
+      Array#join (>)    88.466k i/100ms
 Calculating -------------------------------------
-            Implicit     26.189M (± 4.9%) i/s -    130.662M in   5.002351s
-       Interpolation      6.073M (± 4.2%) i/s -     30.388M in   5.013407s
-            Addition      6.676M (± 4.4%) i/s -     33.490M in   5.026986s
-       String#concat      3.548M (± 9.5%) i/s -     17.525M in   5.009926s
-           String#<<      3.684M (± 5.7%) i/s -     18.498M in   5.039367s
-          Array#join      1.944M (± 6.7%) i/s -      9.795M in   5.062777s
+        Implicit (<)     21.264M (± 4.9%) i/s -    107.485M in   5.067389s
+        Implicit (>)     20.780M (± 3.4%) i/s -    105.607M in   5.087911s
+   Interpolation (<)      5.562M (± 3.3%) i/s -     28.337M in   5.100727s
+   Interpolation (>)    924.232k (± 4.1%) i/s -      4.715M in   5.109650s
+              #+ (<)      5.326M (± 3.5%) i/s -     26.849M in   5.047792s
+              #+ (>)    272.241k (± 7.1%) i/s -      1.375M in   5.068927s
+         #concat (<)      3.445M (± 3.7%) i/s -     17.590M in   5.113979s
+         #concat (>)    800.634k (± 7.6%) i/s -      3.994M in   5.013023s
+             #<< (<)      3.747M (± 3.7%) i/s -     19.039M in   5.088030s
+             #<< (>)      1.107M (± 4.0%) i/s -      5.531M in   5.001731s
+      Array#join (<)      3.209M (± 3.1%) i/s -     16.131M in   5.032059s
+      Array#join (>)    785.421k (± 3.5%) i/s -      3.981M in   5.074823s
 
 Comparison:
-            Implicit: 26189407.1 i/s
-            Addition:  6675827.8 i/s - 3.92x  slower
-       Interpolation:  6072734.5 i/s - 4.31x  slower
-           String#<<:  3683995.3 i/s - 7.11x  slower
-       String#concat:  3547868.6 i/s - 7.38x  slower
-          Array#join:  1944381.0 i/s - 13.47x  slower
+        Implicit (<): 21264015.4 i/s
+        Implicit (>): 20779948.5 i/s - same-ish: difference falls within error
+   Interpolation (<):  5561634.7 i/s - 3.82x  (± 0.00) slower
+              #+ (<):  5325796.6 i/s - 3.99x  (± 0.00) slower
+             #<< (<):  3747260.5 i/s - 5.67x  (± 0.00) slower
+         #concat (<):  3444625.8 i/s - 6.17x  (± 0.00) slower
+      Array#join (<):  3208698.1 i/s - 6.63x  (± 0.00) slower
+             #<< (>):  1107459.5 i/s - 19.20x  (± 0.00) slower
+   Interpolation (>):   924231.9 i/s - 23.01x  (± 0.00) slower
+         #concat (>):   800633.8 i/s - 26.56x  (± 0.00) slower
+      Array#join (>):   785420.6 i/s - 27.07x  (± 0.00) slower
+              #+ (>):   272241.1 i/s - 78.11x  (± 0.00) slower
