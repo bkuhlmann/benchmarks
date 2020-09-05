@@ -1,5 +1,15 @@
 = Changes
 
+== 0.12.0 (2020-09-05)
+
+- Fixed Style/SingleArgumentDig issue
+- Added Guard and Rubocop binstubs
+- Added concatenation benchmarks for smaller and larger strings
+- Added multi-splat array concatenation benchmark
+- Updated to Rubocop 0.89.0
+- Removed Rubocop Layout/MultilineOperationIndentation enablement
+- Removed empty benchmark spec
+
 == 0.11.0 (2020-07-18)
 
 * Fixed Bundler/OrderedGems issue
