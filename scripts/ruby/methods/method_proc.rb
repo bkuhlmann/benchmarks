@@ -3,9 +3,9 @@
 require "bundler/setup"
 require "benchmark/ips"
 
-Example = Class.new do
-  WORD = "hello"
+WORD = "hello"
 
+Example = Class.new do
   def self.direct_say
     say WORD
   end
