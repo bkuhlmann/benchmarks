@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 gem "benchmark-ips", "~> 2.7"
-gem "bundler-audit", "~> 0.6"
+gem "bundler-audit", "~> 0.7"
 gem "bundler-leak", "~> 0.2"
 gem "dry-struct", "~> 1.1"
 gem "git-lint", "~> 1.0"
