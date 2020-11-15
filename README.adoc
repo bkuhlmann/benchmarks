@@ -32,7 +32,7 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 0.12.0
+git checkout 0.13.0
 bin/setup
 ----
 
