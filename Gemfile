@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "amazing_print", "~> 1.2"
 gem "benchmark-ips", "~> 2.7"
 gem "bundler-audit", "~> 0.7"
 gem "bundler-leak", "~> 0.2"
