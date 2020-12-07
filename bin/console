@@ -2,8 +2,8 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "pry"
-require "pry-byebug"
+Bundler.require :tools
+
 require "irb"
 
 IRB.start __FILE__
