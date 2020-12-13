@@ -1,5 +1,20 @@
 = Changes
 
+== 0.14.0 (2020-12-13)
+
+* Fixed Rubocop Performance/MethodObjectAsBlock issues
+* Fixed spec helper to only require tools
+* Added Amazing Print
+* Added Gemfile groups
+* Added Refinements development dependency
+* Added RubyCritic
+* Added RubyCritic configuration
+* Added additional method proc benchmarks
+* Updated Circle CI configuration to skip RubyCritic
+* Updated Gemfile to put Guard RSpec in test group
+* Updated Gemfile to put SimpleCov in code quality group
+* Removed RubyGems requirement from binstubs
+
 == 0.13.0 (2020-11-14)
 
 * Fixed Rubocop Lint/ConstantDefinitionInBlock issue
