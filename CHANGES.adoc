@@ -1,5 +1,16 @@
 = Changes
 
+== 0.15.0 (2020-12-30)
+
+* Fixed Circle CI configuration for Bundler config path - Brooke Kuhlmann
+* Fixed Rubocop Style/RedundantFreeze issue - Brooke Kuhlmann
+* Added Circle CI explicit Bundle install configuration - Brooke Kuhlmann
+* Updated to Gemsmith 15.0.0 - Brooke Kuhlmann
+* Updated to Git Lint 2.0.0 - Brooke Kuhlmann
+* Updated to Refinements 7.18.0 - Brooke Kuhlmann
+* Updated to Refinements 8.0.0 - Brooke Kuhlmann
+* Updated to Ruby 3.0.0 - Brooke Kuhlmann
+
 == 0.14.0 (2020-12-13)
 
 * Fixed Rubocop Performance/MethodObjectAsBlock issues
