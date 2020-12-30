@@ -6,7 +6,7 @@ require "securerandom"
 
 word = SecureRandom.alphanumeric 100
 string_matcher = "a"
-regex_matcher = /\Aa/.freeze
+regex_matcher = /\Aa/
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
