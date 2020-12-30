@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "bundler/gem_tasks"
 require "bundler/audit/task"
 require "bundler/plumber/task"
 require "git/lint/rake/setup"
