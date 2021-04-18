@@ -63,15 +63,15 @@ end
 __END__
 
 Warming up --------------------------------------
-             Wrapped   229.882k i/100ms
-             Defined   233.064k i/100ms
-           Delegated   191.248k i/100ms
+             Wrapped   662.226k i/100ms
+             Defined   769.532k i/100ms
+           Delegated   474.200k i/100ms
 Calculating -------------------------------------
-             Wrapped      4.765M (± 4.5%) i/s -     23.908M in   5.028370s
-             Defined      4.979M (± 5.9%) i/s -     24.938M in   5.027629s
-           Delegated      3.081M (± 4.1%) i/s -     15.491M in   5.035950s
+             Wrapped      6.633M (± 1.1%) i/s -     33.774M in   5.092087s
+             Defined      7.741M (± 1.1%) i/s -     39.246M in   5.070731s
+           Delegated      4.732M (± 0.6%) i/s -     23.710M in   5.010734s
 
 Comparison:
-             Defined:  4979374.1 i/s
-             Wrapped:  4764772.8 i/s - same-ish: difference falls within error
-           Delegated:  3081388.7 i/s - 1.62x  slower
+             Defined:  7740639.5 i/s
+             Wrapped:  6633351.8 i/s - 1.17x  (± 0.00) slower
+           Delegated:  4732020.7 i/s - 1.64x  (± 0.00) slower

@@ -53,12 +53,12 @@ end
 __END__
 
 Warming up --------------------------------------
-              Struct   352.737k i/100ms
-          OpenStruct   233.353k i/100ms
+              Struct     1.648M i/100ms
+          OpenStruct   996.676k i/100ms
 Calculating -------------------------------------
-              Struct     13.186M (±10.8%) i/s -     65.256M in   5.016097s
-          OpenStruct      5.071M (±14.6%) i/s -     24.735M in   5.002361s
+              Struct     16.249M (± 0.9%) i/s -     82.412M in   5.072310s
+          OpenStruct     10.234M (± 0.6%) i/s -     51.827M in   5.064561s
 
 Comparison:
-              Struct: 13186291.6 i/s
-          OpenStruct:  5070848.1 i/s - 2.60x  slower
+              Struct: 16248681.6 i/s
+          OpenStruct: 10233668.4 i/s - 1.59x  (± 0.00) slower

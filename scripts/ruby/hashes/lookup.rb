@@ -38,21 +38,21 @@ end
 __END__
 
 Warming up --------------------------------------
-                 #[]   375.416k i/100ms
-              #fetch   366.082k i/100ms
-    #fetch (default)   354.917k i/100ms
-      #fetch (block)   357.727k i/100ms
-                #dig   349.634k i/100ms
+                 #[]     2.244M i/100ms
+              #fetch     1.721M i/100ms
+    #fetch (default)     1.714M i/100ms
+      #fetch (block)     1.681M i/100ms
+                #dig     1.797M i/100ms
 Calculating -------------------------------------
-                 #[]     19.604M (± 6.4%) i/s -     97.608M in   5.002071s
-              #fetch     14.924M (± 4.0%) i/s -     74.681M in   5.013259s
-    #fetch (default)     13.611M (± 4.7%) i/s -     68.144M in   5.019503s
-      #fetch (block)     13.326M (± 7.1%) i/s -     66.179M in   5.006153s
-                #dig     14.981M (± 5.7%) i/s -     74.822M in   5.012374s
+                 #[]     21.986M (± 1.0%) i/s -    109.980M in   5.002711s
+              #fetch     16.983M (± 0.7%) i/s -     86.044M in   5.066709s
+    #fetch (default)     16.893M (± 0.9%) i/s -     85.724M in   5.074970s
+      #fetch (block)     16.531M (± 1.1%) i/s -     84.047M in   5.084762s
+                #dig     17.941M (± 1.0%) i/s -     89.834M in   5.007847s
 
 Comparison:
-                 #[]: 19604099.2 i/s
-                #dig: 14981167.4 i/s - 1.31x  slower
-              #fetch: 14923916.7 i/s - 1.31x  slower
-    #fetch (default): 13611323.6 i/s - 1.44x  slower
-      #fetch (block): 13325886.9 i/s - 1.47x  slower
+                 #[]: 21986220.5 i/s
+                #dig: 17940603.8 i/s - 1.23x  (± 0.00) slower
+              #fetch: 16983133.0 i/s - 1.29x  (± 0.00) slower
+    #fetch (default): 16893042.1 i/s - 1.30x  (± 0.00) slower
+      #fetch (block): 16531200.1 i/s - 1.33x  (± 0.00) slower

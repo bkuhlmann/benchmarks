@@ -23,12 +23,12 @@ end
 __END__
 
 Warming up --------------------------------------
-               #grep    25.971k i/100ms
-             #select    60.217k i/100ms
+               #grep   172.486k i/100ms
+             #select   126.997k i/100ms
 Calculating -------------------------------------
-               #grep    195.371k (±18.3%) i/s -    934.956k in   5.038134s
-             #select    496.217k (±20.7%) i/s -      2.348M in   5.100625s
+               #grep      1.756M (± 2.4%) i/s -      8.797M in   5.011998s
+             #select      1.272M (± 3.0%) i/s -      6.477M in   5.096228s
 
 Comparison:
-             #select:   496216.9 i/s
-               #grep:   195370.7 i/s - 2.54x  (± 0.00) slower
+               #grep:  1756126.5 i/s
+             #select:  1272013.2 i/s - 1.38x  (± 0.00) slower

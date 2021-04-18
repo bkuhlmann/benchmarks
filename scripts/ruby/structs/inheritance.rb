@@ -33,9 +33,9 @@ Warming up --------------------------------------
               Struct     1.000  i/100ms
             Subclass     1.000  i/100ms
 Calculating -------------------------------------
-              Struct      2.090  (± 0.0%) i/s -     11.000  in   5.266773s
-            Subclass      2.022  (± 0.0%) i/s -     11.000  in   5.446788s
+              Struct      4.520  (± 0.0%) i/s -     23.000  in   5.091008s
+            Subclass      4.516  (± 0.0%) i/s -     23.000  in   5.094814s
 
 Comparison:
-              Struct:        2.1 i/s
-            Subclass:        2.0 i/s - 1.03x  slower
+              Struct:        4.5 i/s
+            Subclass:        4.5 i/s - 1.00x  (± 0.00) slower

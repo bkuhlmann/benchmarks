@@ -20,12 +20,12 @@ end
 __END__
 
 Warming up --------------------------------------
-            standard   129.160k i/100ms
-                then   101.525k i/100ms
+            standard   339.158k i/100ms
+                then   309.907k i/100ms
 Calculating -------------------------------------
-            standard      1.731M (± 7.8%) i/s -      8.654M in   5.034653s
-                then      1.587M (± 8.4%) i/s -      7.919M in   5.047628s
+            standard      3.379M (± 0.9%) i/s -     16.958M in   5.018758s
+                then      3.084M (± 0.9%) i/s -     15.495M in   5.024083s
 
 Comparison:
-            standard:  1731215.7 i/s
-                then:  1586638.7 i/s - same-ish: difference falls within error
+            standard:  3379176.5 i/s
+                then:  3084483.1 i/s - 1.10x  (± 0.00) slower

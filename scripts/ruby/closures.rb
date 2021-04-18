@@ -62,28 +62,28 @@ end
 __END__
 
 Warming up --------------------------------------
-    Block (implicit)   363.125k i/100ms
+    Block (implicit)     1.445M i/100ms
 Block (implicit guard)
-                       329.634k i/100ms
-    Block (explicit)   137.856k i/100ms
+                         1.208M i/100ms
+    Block (explicit)   402.677k i/100ms
 Block (explicit guard)
-                       141.157k i/100ms
-              Lambda   362.908k i/100ms
-                Proc   365.367k i/100ms
+                       394.207k i/100ms
+              Lambda     1.657M i/100ms
+                Proc     1.686M i/100ms
 Calculating -------------------------------------
-    Block (implicit)     12.973M (± 4.7%) i/s -     64.999M in   5.022696s
+    Block (implicit)     14.320M (± 1.0%) i/s -     72.268M in   5.047006s
 Block (implicit guard)
-                         10.000M (± 4.7%) i/s -     50.104M in   5.022405s
-    Block (explicit)      1.865M (±14.2%) i/s -      9.236M in   5.050631s
+                         11.985M (± 0.5%) i/s -     60.393M in   5.039127s
+    Block (explicit)      3.996M (± 5.4%) i/s -     20.134M in   5.051219s
 Block (explicit guard)
-                          1.806M (±15.1%) i/s -      8.893M in   5.018571s
-              Lambda     13.902M (± 5.4%) i/s -     69.315M in   5.001246s
-                Proc     13.960M (± 5.4%) i/s -     69.785M in   5.013967s
+                          3.939M (± 5.2%) i/s -     19.710M in   5.015816s
+              Lambda     16.673M (± 0.4%) i/s -     84.509M in   5.068818s
+                Proc     16.589M (± 0.4%) i/s -     84.309M in   5.082291s
 
 Comparison:
-                  Proc: 13959561.8 i/s
-                Lambda: 13901543.3 i/s - same-ish: difference falls within error
-      Block (implicit): 12972643.5 i/s - same-ish: difference falls within error
-Block (implicit guard): 10000074.6 i/s - 1.40x  slower
-      Block (explicit): 1864599.3 i/s - 7.49x  slower
-Block (explicit guard): 1805793.9 i/s - 7.73x  slower
+              Lambda: 16672549.1 i/s
+                Proc: 16589090.1 i/s - same-ish: difference falls within error
+    Block (implicit): 14320229.3 i/s - 1.16x  (± 0.00) slower
+Block (implicit guard): 11985042.8 i/s - 1.39x  (± 0.00) slower
+    Block (explicit):  3995551.0 i/s - 4.17x  (± 0.00) slower
+Block (explicit guard):  3938951.4 i/s - 4.23x  (± 0.00) slower

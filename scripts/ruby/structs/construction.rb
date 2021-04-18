@@ -47,13 +47,13 @@ Warming up --------------------------------------
                Class     1.000  i/100ms
                 Hash     1.000  i/100ms
 Calculating -------------------------------------
-              Struct      1.976  (± 0.0%) i/s -     10.000  in   5.149870s
-          OpenStruct      0.906  (± 0.0%) i/s -      5.000  in   5.631735s
-               Class      1.106  (± 0.0%) i/s -      6.000  in   5.436882s
-                Hash      3.601  (± 0.0%) i/s -     18.000  in   5.007363s
+              Struct      5.036  (± 0.0%) i/s -     26.000  in   5.165117s
+          OpenStruct      0.192  (± 0.0%) i/s -      1.000  in   5.217452s
+               Class      4.364  (± 0.0%) i/s -     22.000  in   5.042370s
+                Hash     10.015  (± 0.0%) i/s -     50.000  in   5.002598s
 
 Comparison:
-                Hash:        3.6 i/s
-              Struct:        2.0 i/s - 1.82x  slower
-               Class:        1.1 i/s - 3.26x  slower
-          OpenStruct:        0.9 i/s - 3.98x  slower
+                Hash:       10.0 i/s
+              Struct:        5.0 i/s - 1.99x  (± 0.00) slower
+               Class:        4.4 i/s - 2.29x  (± 0.00) slower
+          OpenStruct:        0.2 i/s - 52.25x  (± 0.00) slower

@@ -63,21 +63,21 @@ end
 __END__
 
 Warming up --------------------------------------
-              Struct   364.572k i/100ms
-          OpenStruct   294.449k i/100ms
-          Dry Struct   308.103k i/100ms
-              Values   316.972k i/100ms
-     Value Semantics   308.440k i/100ms
+              Struct     2.063M i/100ms
+          OpenStruct     1.245M i/100ms
+          Dry Struct     1.691M i/100ms
+              Values     2.162M i/100ms
+     Value Semantics     1.971M i/100ms
 Calculating -------------------------------------
-              Struct     16.113M (± 8.4%) i/s -     80.206M in   5.020886s
-          OpenStruct      7.980M (± 9.0%) i/s -     39.751M in   5.027391s
-          Dry Struct     12.634M (± 6.4%) i/s -     63.161M in   5.021099s
-              Values     17.151M (± 7.0%) i/s -     85.582M in   5.015734s
-     Value Semantics     15.038M (± 6.9%) i/s -     74.951M in   5.009867s
+              Struct     20.409M (± 1.0%) i/s -    103.159M in   5.055048s
+          OpenStruct     12.337M (± 0.6%) i/s -     62.250M in   5.045816s
+          Dry Struct     16.759M (± 0.1%) i/s -     84.547M in   5.044793s
+              Values     21.725M (± 0.3%) i/s -    110.283M in   5.076286s
+     Value Semantics     19.885M (± 0.8%) i/s -    100.514M in   5.055095s
 
 Comparison:
-              Values: 17150852.8 i/s
-              Struct: 16112953.3 i/s - same-ish: difference falls within error
-     Value Semantics: 15037930.9 i/s - same-ish: difference falls within error
-          Dry Struct: 12634384.8 i/s - 1.36x  slower
-          OpenStruct:  7979713.3 i/s - 2.15x  slower
+              Values: 21725412.5 i/s
+              Struct: 20409006.1 i/s - 1.06x  (± 0.00) slower
+     Value Semantics: 19885038.3 i/s - 1.09x  (± 0.00) slower
+          Dry Struct: 16759259.0 i/s - 1.30x  (± 0.00) slower
+          OpenStruct: 12337377.7 i/s - 1.76x  (± 0.00) slower

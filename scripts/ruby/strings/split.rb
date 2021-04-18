@@ -27,12 +27,12 @@ end
 __END__
 
 Warming up --------------------------------------
-       Without Block     5.000  i/100ms
-          With Block     5.000  i/100ms
+       Without Block    10.000  i/100ms
+          With Block    11.000  i/100ms
 Calculating -------------------------------------
-       Without Block     53.861  (± 7.4%) i/s -    270.000  in   5.058124s
-          With Block     58.258  (± 5.1%) i/s -    295.000  in   5.073450s
+       Without Block    103.251  (± 1.9%) i/s -    520.000  in   5.037928s
+          With Block    112.077  (± 0.9%) i/s -    561.000  in   5.005743s
 
 Comparison:
-          With Block:       58.3 i/s
-       Without Block:       53.9 i/s - same-ish: difference falls within error
+          With Block:      112.1 i/s
+       Without Block:      103.3 i/s - 1.09x  (± 0.00) slower

@@ -37,23 +37,23 @@ end
 __END__
 
 Warming up --------------------------------------
-             #match?   319.666k i/100ms
-                 #=~   177.965k i/100ms
+             #match?     1.446M i/100ms
+                 #=~   748.378k i/100ms
 #start_with? (String)
-                       338.345k i/100ms
-#start_with? (Regex)   177.292k i/100ms
-          #end_with?   323.497k i/100ms
+                         1.521M i/100ms
+#start_with? (Regex)   672.990k i/100ms
+          #end_with?     1.473M i/100ms
 Calculating -------------------------------------
-             #match?     10.228M (± 3.9%) i/s -     51.147M in   5.008606s
-                 #=~      3.008M (± 3.9%) i/s -     15.127M in   5.036687s
+             #match?     14.216M (± 0.5%) i/s -     72.314M in   5.086920s
+                 #=~      7.142M (± 2.4%) i/s -     35.922M in   5.032710s
 #start_with? (String)
-                         11.839M (± 4.2%) i/s -     59.210M in   5.010791s
-#start_with? (Regex)      2.985M (± 7.6%) i/s -     14.893M in   5.036714s
-          #end_with?     10.921M (± 4.8%) i/s -     54.671M in   5.018046s
+                         15.027M (± 0.3%) i/s -     76.067M in   5.062133s
+#start_with? (Regex)      6.322M (± 2.0%) i/s -     31.631M in   5.005092s
+          #end_with?     14.821M (± 0.6%) i/s -     75.143M in   5.070323s
 
 Comparison:
-#start_with? (String): 11839083.3 i/s
-          #end_with?: 10921469.3 i/s - same-ish: difference falls within error
-             #match?: 10228274.3 i/s - 1.16x  slower
-                 #=~:  3008045.0 i/s - 3.94x  slower
-#start_with? (Regex):  2984676.3 i/s - 3.97x  slower
+#start_with? (String): 15026855.4 i/s
+          #end_with?: 14820633.2 i/s - 1.01x  (± 0.00) slower
+             #match?: 14216141.3 i/s - 1.06x  (± 0.00) slower
+                 #=~:  7141893.3 i/s - 2.10x  (± 0.00) slower
+#start_with? (Regex):  6322083.6 i/s - 2.38x  (± 0.00) slower

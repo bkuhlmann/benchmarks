@@ -77,24 +77,24 @@ end
 __END__
 
 Warming up --------------------------------------
-          Direct (s)   466.500k i/100ms
-          Direct (m)   150.790k i/100ms
-            Proc (s)   178.430k i/100ms
-            Proc (m)    57.301k i/100ms
-  Method To Proc (s)    89.281k i/100ms
-  Method To Proc (m)    60.635k i/100ms
+          Direct (s)   737.120k i/100ms
+          Direct (m)   267.719k i/100ms
+            Proc (s)   349.044k i/100ms
+            Proc (m)   122.588k i/100ms
+  Method To Proc (s)   185.665k i/100ms
+  Method To Proc (m)   137.666k i/100ms
 Calculating -------------------------------------
-          Direct (s)      4.444M (± 3.3%) i/s -     22.392M in   5.044717s
-          Direct (m)      1.310M (± 8.0%) i/s -      6.635M in   5.101708s
-            Proc (s)      1.603M (± 5.5%) i/s -      8.029M in   5.022631s
-            Proc (m)    513.423k (± 5.9%) i/s -      2.579M in   5.038619s
-  Method To Proc (s)    782.483k (± 6.3%) i/s -      3.928M in   5.037407s
-  Method To Proc (m)    541.210k (± 6.4%) i/s -      2.729M in   5.061138s
+          Direct (s)      7.391M (± 1.0%) i/s -     37.593M in   5.087103s
+          Direct (m)      2.666M (± 1.0%) i/s -     13.386M in   5.021959s
+            Proc (s)      3.445M (± 2.5%) i/s -     17.452M in   5.068574s
+            Proc (m)      1.200M (± 2.6%) i/s -      6.007M in   5.010571s
+  Method To Proc (s)      1.867M (± 3.5%) i/s -      9.469M in   5.077309s
+  Method To Proc (m)      1.339M (± 3.0%) i/s -      6.746M in   5.040639s
 
 Comparison:
-          Direct (s):  4443575.1 i/s
-            Proc (s):  1603188.1 i/s - 2.77x  (± 0.00) slower
-          Direct (m):  1309656.9 i/s - 3.39x  (± 0.00) slower
-  Method To Proc (s):   782482.9 i/s - 5.68x  (± 0.00) slower
-  Method To Proc (m):   541209.5 i/s - 8.21x  (± 0.00) slower
-            Proc (m):   513423.4 i/s - 8.65x  (± 0.00) slower
+          Direct (s):  7390579.1 i/s
+            Proc (s):  3445035.9 i/s - 2.15x  (± 0.00) slower
+          Direct (m):  2665754.8 i/s - 2.77x  (± 0.00) slower
+  Method To Proc (s):  1867035.7 i/s - 3.96x  (± 0.00) slower
+  Method To Proc (m):  1339351.2 i/s - 5.52x  (± 0.00) slower
+            Proc (m):  1199565.8 i/s - 6.16x  (± 0.00) slower

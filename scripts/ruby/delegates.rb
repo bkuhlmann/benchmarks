@@ -57,15 +57,15 @@ end
 __END__
 
 Warming up --------------------------------------
-           .delegate   236.239k i/100ms
-     SimpleDelegator   119.178k i/100ms
-       DelegateClass   183.086k i/100ms
+           .delegate   770.615k i/100ms
+     SimpleDelegator   262.759k i/100ms
+       DelegateClass   545.888k i/100ms
 Calculating -------------------------------------
-           .delegate      4.948M (± 4.9%) i/s -     24.805M in   5.026020s
-     SimpleDelegator      1.633M (± 3.7%) i/s -      8.223M in   5.043243s
-       DelegateClass      2.996M (± 3.9%) i/s -     15.013M in   5.018692s
+           .delegate      7.585M (± 0.6%) i/s -     38.531M in   5.080172s
+     SimpleDelegator      2.661M (± 1.3%) i/s -     13.401M in   5.036776s
+       DelegateClass      5.447M (± 0.6%) i/s -     27.294M in   5.011068s
 
 Comparison:
-           .delegate:  4947613.2 i/s
-       DelegateClass:  2996102.6 i/s - 1.65x  slower
-     SimpleDelegator:  1632850.2 i/s - 3.03x  slower
+           .delegate:  7584844.9 i/s
+       DelegateClass:  5447021.8 i/s - 1.39x  (± 0.00) slower
+     SimpleDelegator:  2661020.2 i/s - 2.85x  (± 0.00) slower
