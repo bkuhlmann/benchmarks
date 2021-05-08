@@ -3,11 +3,7 @@
 require "bundler/setup"
 require "benchmark/ips"
 
-example = {
-  a: 1,
-  b: 2,
-  c: 3
-}
+example = {a: 1, b: 2, c: 3}
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
