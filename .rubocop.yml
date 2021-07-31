@@ -8,6 +8,9 @@ Layout/MultilineOperationIndentation:
 Lint/ImplicitStringConcatenation:
   Exclude:
     - "scripts/ruby/strings/concatenation.rb"
+Style/For:
+  Exclude:
+    - "scripts/ruby/loops.rb"
 Style/SingleArgumentDig:
   Exclude:
     - "scripts/ruby/hashes/lookup.rb"
