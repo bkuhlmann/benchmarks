@@ -1,5 +1,12 @@
 = Changes
 
+== 0.17.0 (2021-07-31)
+
+* Fixed Rubocop Layout/RedundantLineBreak issue - Brooke Kuhlmann
+* Added Ruby loops benchmark - Brooke Kuhlmann
+* Updated to Rubocop 1.14.0 - Brooke Kuhlmann
+* Updated to Ruby 3.0.2 - Brooke Kuhlmann
+
 == 0.16.0 (2021-04-18)
 
 * Added Ruby garbage collection compaction - Brooke Kuhlmann
