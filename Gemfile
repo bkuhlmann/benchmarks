@@ -9,7 +9,6 @@ gem "values", "~> 1.8"
 gem "value_semantics", "~> 3.2"
 
 group :code_quality do
-  gem "bundler-audit", "~> 0.7"
   gem "bundler-leak", "~> 0.2"
   gem "git-lint", "~> 2.0"
   gem "reek", "~> 6.0"
