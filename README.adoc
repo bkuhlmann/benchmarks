@@ -7,7 +7,9 @@
 [link=https://circleci.com/gh/bkuhlmann/benchmarks]
 image::https://circleci.com/gh/bkuhlmann/benchmarks.svg?style=svg[Circle CI Status]
 
-A collection of Ruby micro benchmarks.
+Benchmarks is a collection of Ruby micro benchmarks which can be cloned and run locally or used as
+an information point of reference. The various statistics on Ruby performance captured within this
+project may or may not surprise you.
 
 toc::[]
 
