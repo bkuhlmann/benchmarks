@@ -6,15 +6,13 @@ require "git/lint/rake/setup"
 require "rspec/core/rake_task"
 require "reek/rake/task"
 require "rubocop/rake_task"
-require "rubycritic/rake_task"
 
 Bundler::Plumber::Task.new
 Reek::Rake::Task.new
 RSpec::Core::RakeTask.new :spec
 RuboCop::RakeTask.new
-RubyCritic::RakeTask.new
 
 desc "Run code quality checks"
-task code_quality: %i[bundle:leak git_lint reek rubocop rubycritic]
+task code_quality: %i[bundle:leak git_lint reek rubocop]
 
 task default: %i[code_quality spec]
