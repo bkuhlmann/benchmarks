@@ -13,7 +13,7 @@ Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
   benchmark.report "Without Block" do
-    text.split(delimiter).select { |word| word.match? pattern }
+    text.split(delimiter).grep(pattern)
   end
 
   benchmark.report "With Block" do
@@ -27,12 +27,12 @@ end
 __END__
 
 Warming up --------------------------------------
-       Without Block    10.000  i/100ms
+       Without Block    14.000  i/100ms
           With Block    11.000  i/100ms
 Calculating -------------------------------------
-       Without Block    103.251  (± 1.9%) i/s -    520.000  in   5.037928s
-          With Block    112.077  (± 0.9%) i/s -    561.000  in   5.005743s
+       Without Block    141.248  (± 1.4%) i/s -    714.000  in   5.055685s
+          With Block    114.756  (± 0.9%) i/s -    583.000  in   5.080980s
 
 Comparison:
-          With Block:      112.1 i/s
-       Without Block:      103.3 i/s - 1.09x  (± 0.00) slower
+       Without Block:      141.2 i/s
+          With Block:      114.8 i/s - 1.23x  (± 0.00) slower

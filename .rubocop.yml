@@ -11,6 +11,9 @@ Lint/ImplicitStringConcatenation:
 Style/For:
   Exclude:
     - "scripts/ruby/loops.rb"
+Style/SelectByRegexp:
+  Exclude:
+    - "scripts/ruby/arrays/search.rb"
 Style/SingleArgumentDig:
   Exclude:
     - "scripts/ruby/hashes/lookup.rb"
