@@ -1,5 +1,12 @@
 = Changes
 
+== 0.18.0 (2021-10-02)
+
+* Fixed Style/SelectByRegexp issues - Brooke Kuhlmann
+* Added Debug gem - Brooke Kuhlmann
+* Removed Pry dependencies - Brooke Kuhlmann
+* Removed RSpec spec helper GC automatic compaction - Brooke Kuhlmann
+
 == 0.17.1 (2021-09-05)
 
 * Updated README project description - Brooke Kuhlmann
