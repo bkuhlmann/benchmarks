@@ -21,19 +21,19 @@ Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
   benchmark.report "Struct" do
-    MAX.times { ExampleStruct[to: "Mike", from: "Mindy"] }
+    MAX.times { ExampleStruct[to: "Mork", from: "Mindy"] }
   end
 
   benchmark.report "OpenStruct" do
-    MAX.times { OpenStruct.new to: "Mike", from: "Mindy" }
+    MAX.times { OpenStruct.new to: "Mork", from: "Mindy" }
   end
 
   benchmark.report "Class" do
-    MAX.times { ExampleClass.new to: "Mike", from: "Mindy" }
+    MAX.times { ExampleClass.new to: "Mork", from: "Mindy" }
   end
 
   benchmark.report "Hash" do
-    MAX.times { {to: "Mike", from: "Mindy"} }
+    MAX.times { {to: "Mork", from: "Mindy"} }
   end
 
   benchmark.compare!
