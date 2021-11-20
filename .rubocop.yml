@@ -23,3 +23,9 @@ Style/StructInheritance:
 Style/RedundantFetchBlock:
   Exclude:
     - "scripts/ruby/hashes/lookup.rb"
+Style/OpenStructUse:
+  Exclude:
+    - "scripts/ruby/structs/construction.rb"
+    - "scripts/ruby/values/construction.rb"
+    - "scripts/ruby/values/reading.rb"
+    - "scripts/ruby/values/writing.rb"
