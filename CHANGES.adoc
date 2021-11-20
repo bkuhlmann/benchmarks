@@ -1,5 +1,14 @@
 = Changes
 
+== 0.18.1 (2021-11-20)
+
+* Fixed Rubocop Style/OpenStructUse issues - Brooke Kuhlmann
+* Fixed Ruby struct construction benchmark example names - Brooke Kuhlmann
+* Added README community link - Brooke Kuhlmann
+* Updated to Refinements 8.4.0 - Brooke Kuhlmann
+* Updated to Refinements 8.5.0 - Brooke Kuhlmann
+* Removed notes from pull request template - Brooke Kuhlmann
+
 == 0.18.0 (2021-10-02)
 
 * Fixed Style/SelectByRegexp issues - Brooke Kuhlmann
