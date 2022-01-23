@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ruby File.read(".ruby-version").strip
+
 source "https://rubygems.org"
 
 gem "benchmark-ips", "~> 2.7"
