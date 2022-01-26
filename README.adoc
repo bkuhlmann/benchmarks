@@ -34,7 +34,7 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 1.0.1
+git checkout 1.0.2
 bin/setup
 ----
 
