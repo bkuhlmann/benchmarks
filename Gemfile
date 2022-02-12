@@ -6,7 +6,7 @@ source "https://rubygems.org"
 
 gem "benchmark-ips", "~> 2.7"
 gem "dry-struct", "~> 1.1"
-gem "refinements", "~> 9.1"
+gem "refinements", "~> 9.2"
 gem "values", "~> 1.8"
 gem "value_semantics", "~> 3.2"
 
