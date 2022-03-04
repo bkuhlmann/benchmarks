@@ -1,5 +1,11 @@
 = Versions
 
+== 1.1.1 (2022-03-03)
+
+* Fixed Hippocratic License to be 2.1.0 version - Brooke Kuhlmann
+* Updated to Caliber 0.2.0 - Brooke Kuhlmann
+* Updated to Ruby 3.1.1 - Brooke Kuhlmann
+
 == 1.1.0 (2022-02-12)
 
 * Added Caliber - Brooke Kuhlmann
