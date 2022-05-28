@@ -11,7 +11,6 @@ gem "values", "~> 1.8"
 gem "value_semantics", "~> 3.2"
 
 group :code_quality do
-  gem "bundler-leak", "~> 0.2"
   gem "caliber", "~> 0.8"
   gem "git-lint", "~> 4.0"
   gem "reek", "~> 6.1"
