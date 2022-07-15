@@ -11,7 +11,7 @@ gem "values", "~> 1.8"
 gem "value_semantics", "~> 3.2"
 
 group :code_quality do
-  gem "caliber", "~> 0.8"
+  gem "caliber", "~> 0.11"
   gem "git-lint", "~> 4.0"
   gem "reek", "~> 6.1"
   gem "simplecov", "~> 0.21"
