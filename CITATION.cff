@@ -2,9 +2,9 @@ cff-version: 1.2.0
 message: Please use the following metadata when citing this project in your work.
 title: Benchmarks
 abstract: A collection of Ruby micro benchmarks which can be cloned and run locally or used as an informational point of reference.
-version: 1.1.4
+version: 1.2.0
 license: Hippocratic-2.1
-date-released: 2022-04-23
+date-released: 2022-07-17
 authors:
   - family-names: Kuhlmann
     given-names: Brooke
