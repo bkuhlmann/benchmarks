@@ -26,7 +26,7 @@ Example = Class.new do
 end
 
 block_example = Example.new
-lambda_example = ->(text) { text }
+lambda_example = -> text { text }
 proc_example = proc { |text| text }
 
 Benchmark.ips do |benchmark|
