@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 source "https://rubygems.org"
 
-gem "benchmark-ips", "~> 2.7"
+gem "benchmark-ips", "~> 2.10"
 gem "dry-struct", "~> 1.5"
 gem "refinements", "~> 9.7"
 gem "values", "~> 1.8"
