@@ -1,7 +1,13 @@
+#! /usr/bin/env ruby
 # frozen_string_literal: true
 
-require "bundler/setup"
-require "benchmark/ips"
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
 
 list = %w[one two three four five six seven eight nine ten]
 pattern = /t/

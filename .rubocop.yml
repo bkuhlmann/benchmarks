@@ -8,25 +8,25 @@ Layout/MultilineOperationIndentation:
   Enabled: false
 Lint/ImplicitStringConcatenation:
   Exclude:
-    - "scripts/ruby/strings/concatenation.rb"
+    - "scripts/ruby/strings/concatenation"
 Style/For:
   Exclude:
-    - "scripts/ruby/loops.rb"
+    - "scripts/ruby/loops"
 Style/SelectByRegexp:
   Exclude:
-    - "scripts/ruby/arrays/search.rb"
+    - "scripts/ruby/arrays/search"
 Style/SingleArgumentDig:
   Exclude:
-    - "scripts/ruby/hashes/lookup.rb"
+    - "scripts/ruby/hashes/lookup"
 Style/StructInheritance:
   Exclude:
-    - "scripts/ruby/structs/inheritance.rb"
+    - "scripts/ruby/structs/inheritance"
 Style/RedundantFetchBlock:
   Exclude:
-    - "scripts/ruby/hashes/lookup.rb"
+    - "scripts/ruby/hashes/lookup"
 Style/OpenStructUse:
   Exclude:
-    - "scripts/ruby/structs/construction.rb"
-    - "scripts/ruby/values/construction.rb"
-    - "scripts/ruby/values/reading.rb"
-    - "scripts/ruby/values/writing.rb"
+    - "scripts/ruby/structs/construction"
+    - "scripts/ruby/values/construction"
+    - "scripts/ruby/values/reading"
+    - "scripts/ruby/values/writing"

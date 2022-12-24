@@ -1,11 +1,18 @@
+#! /usr/bin/env ruby
 # frozen_string_literal: true
 
-require "bundler/setup"
-require "benchmark/ips"
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+  gem "dry-struct"
+  gem "values"
+  gem "value_semantics"
+end
+
 require "ostruct"
-require "dry-struct"
-require "values"
-require "value_semantics"
 
 StructExample = Struct.new :to, :from
 ValueExample = Value.new :to, :from

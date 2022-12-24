@@ -1,7 +1,14 @@
+#! /usr/bin/env ruby
 # frozen_string_literal: true
 
-require "bundler/setup"
-require "benchmark/ips"
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
 require "securerandom"
 
 word = SecureRandom.alphanumeric 100
