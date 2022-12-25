@@ -4,7 +4,7 @@ ruby File.read(".ruby-version").strip
 
 source "https://rubygems.org"
 
-gem "refinements", "~> 9.7"
+gem "refinements", "~> 10.0"
 
 group :code_quality do
   gem "caliber", "~> 0.16"
