@@ -14,11 +14,6 @@ toc::[]
 
 * Uses link:https://github.com/evanphx/benchmark-ips[Benchmark IPS] to calculate CPU/speed results.
 
-== Screencasts
-
-[link=https://www.alchemists.io/screencasts/benchmarks]
-image::https://www.alchemists.io/images/screencasts/benchmarks/cover.svg[Screencast,600,240,role=focal_point]
-
 == Requirements
 
 . link:https://www.ruby-lang.org[Ruby]
@@ -31,7 +26,7 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 2.0.0
+git checkout 2.0.1
 bin/setup
 ----
 

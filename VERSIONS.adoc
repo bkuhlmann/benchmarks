@@ -1,5 +1,11 @@
 = Versions
 
+== 2.0.1 (2023-01-15)
+
+* Updated to Caliber 0.21.0 - Brooke Kuhlmann
+* Updated to Git Lint 5.0.0 - Brooke Kuhlmann
+* Updated to SimpleCov 0.22.0 - Brooke Kuhlmann
+
 == 2.0.0 (2022-12-25)
 
 * Added RSpec binstub - Brooke Kuhlmann
