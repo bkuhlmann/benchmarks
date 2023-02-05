@@ -1,5 +1,12 @@
 = Versions
 
+== 2.0.2 (2023-02-05)
+
+* Fixed Guardfile to use RSpec binstub - Brooke Kuhlmann
+* Added Rake binstub - Brooke Kuhlmann
+* Updated to Caliber 0.25.0 - Brooke Kuhlmann
+* Refactored RSpec helper to use spec root constant - Brooke Kuhlmann
+
 == 2.0.1 (2023-01-15)
 
 * Updated to Caliber 0.21.0 - Brooke Kuhlmann
