@@ -1,0 +1,63 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Static
+  def self.call = rand > 0.5 ? one : two
+
+  def self.one = 1
+
+  def self.two = 2
+end
+
+module Dynamic
+  def self.with_strings = public_send rand > 0.5 ? "one" : "two"
+
+  def self.with_symbols = public_send rand > 0.5 ? :one : :two
+
+  def self.one = 1
+
+  def self.two = 2
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+  max = 1_000_000
+
+  benchmark.report "Static" do
+    max.times { Static.call }
+  end
+
+  benchmark.report "Dynamic (strings)" do
+    max.times { Dynamic.with_strings }
+  end
+
+  benchmark.report "Dynamic (symbols)" do
+    max.times { Dynamic.with_symbols }
+  end
+
+  benchmark.compare!
+end
+
+__END__
+
+Warming up --------------------------------------
+              Static     1.000  i/100ms
+   Dynamic (strings)     1.000  i/100ms
+   Dynamic (symbols)     1.000  i/100ms
+Calculating -------------------------------------
+              Static     19.002  (± 0.0%) i/s -     96.000  in   5.052387s
+   Dynamic (strings)      8.659  (± 0.0%) i/s -     44.000  in   5.081770s
+   Dynamic (symbols)     11.590  (± 0.0%) i/s -     58.000  in   5.004985s
+
+Comparison:
+              Static:       19.0 i/s
+   Dynamic (symbols):       11.6 i/s - 1.64x  slower
+   Dynamic (strings):        8.7 i/s - 2.19x  slower
