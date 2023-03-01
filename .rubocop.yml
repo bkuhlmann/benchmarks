@@ -1,6 +1,7 @@
 inherit_gem:
   caliber:
     - config/ruby.yml
+    - config/capybara.yml
     - config/rake.yml
     - config/rspec.yml
 
