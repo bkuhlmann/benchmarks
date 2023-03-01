@@ -33,8 +33,7 @@ Example = Class.new Person do
   delegate %i[full_name] => :person
 
   def initialize first, last, person: Person.new(first, last)
-    @first = first
-    @last = last
+    super first, last
     @person = person
   end
 
