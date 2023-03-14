@@ -1,0 +1,46 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+CONSTANTS = Hash.new
+
+module Constants
+  1_000.times { |index| CONSTANTS["EXAMPLE_#{index}"] = const_set "EXAMPLE_#{index}", index }
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("#[]") { CONSTANTS["EXAMPLE_666"] }
+  benchmark.report("Module.get (symbol)") { Constants.const_get :EXAMPLE_666 }
+  benchmark.report("Module.get (string)") { Constants.const_get "EXAMPLE_666" }
+  benchmark.report("Object.get") { Object.const_get "Constants::EXAMPLE_666" }
+
+  benchmark.compare!
+end
+
+__END__
+
+Warming up --------------------------------------
+                 #[]     1.549M i/100ms
+ Module.get (symbol)     1.708M i/100ms
+ Module.get (string)   939.672k i/100ms
+          Object.get   662.117k i/100ms
+Calculating -------------------------------------
+                 #[]     28.547M (± 0.9%) i/s -    144.026M in   5.045623s
+ Module.get (symbol)     30.476M (± 1.0%) i/s -    153.750M in   5.045483s
+ Module.get (string)     12.617M (± 1.0%) i/s -     63.898M in   5.065068s
+          Object.get      8.037M (± 0.9%) i/s -     40.389M in   5.025780s
+
+Comparison:
+ Module.get (symbol): 30475595.8 i/s
+                 #[]: 28546997.2 i/s - 1.07x  slower
+ Module.get (string): 12616676.3 i/s - 2.42x  slower
+          Object.get:  8037030.6 i/s - 3.79x  slower
