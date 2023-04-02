@@ -1,0 +1,50 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+numbers = {
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9,
+  ten: 10
+}
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "Reduce" do
+    numbers.reduce({}) { |collection, (key, value)| collection.merge! value => key }
+  end
+
+  benchmark.report "Object With" do
+    numbers.each.with_object({}) { |(key, value), collection| collection[value] = key }
+  end
+
+  benchmark.compare!
+end
+
+__END__
+
+Warming up --------------------------------------
+              Reduce    34.722k i/100ms
+         Object With    71.059k i/100ms
+Calculating -------------------------------------
+              Reduce    354.759k (± 3.0%) i/s -      1.806M in   5.093562s
+         Object With    740.657k (± 2.5%) i/s -      3.766M in   5.088115s
+
+Comparison:
+         Object With:   740657.0 i/s
+              Reduce:   354758.6 i/s - 2.09x  slower
