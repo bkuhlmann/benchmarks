@@ -29,7 +29,7 @@ Benchmark.ips do |benchmark|
     numbers.reduce({}) { |collection, (key, value)| collection.merge! value => key }
   end
 
-  benchmark.report "Object With" do
+  benchmark.report "With Object" do
     numbers.each.with_object({}) { |(key, value), collection| collection[value] = key }
   end
 
@@ -39,12 +39,12 @@ end
 __END__
 
 Warming up --------------------------------------
-              Reduce    34.722k i/100ms
-         Object With    71.059k i/100ms
+              Reduce    33.867k i/100ms
+         With Object    66.805k i/100ms
 Calculating -------------------------------------
-              Reduce    354.759k (± 3.0%) i/s -      1.806M in   5.093562s
-         Object With    740.657k (± 2.5%) i/s -      3.766M in   5.088115s
+              Reduce    352.792k (± 2.9%) i/s -      1.795M in   5.091711s
+         With Object    740.389k (± 2.7%) i/s -      3.741M in   5.056577s
 
 Comparison:
-         Object With:   740657.0 i/s
-              Reduce:   354758.6 i/s - 2.09x  slower
+         With Object:   740388.7 i/s
+              Reduce:   352791.7 i/s - 2.10x  slower
