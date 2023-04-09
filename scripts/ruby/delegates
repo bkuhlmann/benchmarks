@@ -12,51 +12,55 @@ end
 require "delegate"
 require "forwardable"
 
-class Example
-  def test
-    "This is a test."
-  end
+module Echo
+  def self.call(message) = message
 end
 
-class MacroExample
+class ForwardExample
+  def initialize operation
+    @operation = operation
+  end
+
+  def call(...) = operation.call(...)
+
+  private
+
+  attr_reader :operation
+end
+
+class DelegateExample
   extend Forwardable
 
-  delegate %i[test] => :object
+  delegate %i[call] => :operation
 
-  def initialize object
-    @object = object
+  def initialize operation
+    @operation = operation
   end
 
   private
 
-  attr_reader :object
+  attr_reader :operation
 end
 
 class SimpleExample < SimpleDelegator
 end
 
-class ClassExample < DelegateClass Example
+class ClassExample < DelegateClass Echo
 end
 
-example = Example.new
-macro_example = MacroExample.new example
-simple_example = SimpleExample.new example
-class_example = ClassExample.new example
+message = "A test."
+forward_example = ForwardExample.new Echo
+deletate_example = DelegateExample.new Echo
+simple_example = SimpleExample.new Echo
+class_example = ClassExample.new Echo
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report ".delegate" do
-    macro_example.test
-  end
-
-  benchmark.report "SimpleDelegator" do
-    simple_example.test
-  end
-
-  benchmark.report "DelegateClass" do
-    class_example.test
-  end
+  benchmark.report("Forward") { forward_example.call message }
+  benchmark.report("Delegate") { deletate_example.call message }
+  benchmark.report("Simple Delegator") { simple_example.call message }
+  benchmark.report("Delegate Class") { class_example.call message }
 
   benchmark.compare!
 end
@@ -64,15 +68,18 @@ end
 __END__
 
 Warming up --------------------------------------
-           .delegate   770.615k i/100ms
-     SimpleDelegator   262.759k i/100ms
-       DelegateClass   545.888k i/100ms
+             Forward   802.243k i/100ms
+            Delegate   751.834k i/100ms
+    Simple Delegator   293.331k i/100ms
+      Delegate Class   293.194k i/100ms
 Calculating -------------------------------------
-           .delegate      7.585M (± 0.6%) i/s -     38.531M in   5.080172s
-     SimpleDelegator      2.661M (± 1.3%) i/s -     13.401M in   5.036776s
-       DelegateClass      5.447M (± 0.6%) i/s -     27.294M in   5.011068s
+             Forward      9.589M (± 1.8%) i/s -     48.135M in   5.021311s
+            Delegate      9.028M (± 1.9%) i/s -     45.862M in   5.081941s
+    Simple Delegator      2.953M (± 1.1%) i/s -     14.960M in   5.067414s
+      Delegate Class      2.943M (± 1.1%) i/s -     14.953M in   5.080761s
 
 Comparison:
-           .delegate:  7584844.9 i/s
-       DelegateClass:  5447021.8 i/s - 1.39x  (± 0.00) slower
-     SimpleDelegator:  2661020.2 i/s - 2.85x  (± 0.00) slower
+             Forward:  9589223.5 i/s
+            Delegate:  9027672.8 i/s - 1.06x  slower
+    Simple Delegator:  2952504.1 i/s - 3.25x  slower
+      Delegate Class:  2943411.2 i/s - 3.26x  slower
