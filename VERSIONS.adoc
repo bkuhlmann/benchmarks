@@ -1,5 +1,13 @@
 = Versions
 
+== 2.2.1 (2023-04-30)
+
+* Fixed Ruby hash reduce benchmark terminology - Brooke Kuhlmann
+* Added hash map reduce benchmark - Brooke Kuhlmann
+* Updated Ruby delegates benchmark to include argument forwarding - Brooke Kuhlmann
+* Updated to Caliber 0.30.0 - Brooke Kuhlmann
+* Updated to Ruby 3.2.2 - Brooke Kuhlmann
+
 == 2.2.0 (2023-03-22)
 
 * Added Ruby constants lookup benchmark - Brooke Kuhlmann
