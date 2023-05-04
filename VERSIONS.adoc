@@ -1,5 +1,10 @@
 = Versions
 
+== 2.2.2 (2023-05-10)
+
+* Updated Caliber configuration - Brooke Kuhlmann
+* Updated to Debug 1.8.0 - Brooke Kuhlmann
+
 == 2.2.1 (2023-04-30)
 
 * Fixed Ruby hash reduce benchmark terminology - Brooke Kuhlmann
