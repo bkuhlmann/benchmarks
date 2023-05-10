@@ -1,15 +1,13 @@
 inherit_gem:
-  caliber:
-    - config/ruby.yml
-    - config/capybara.yml
-    - config/rake.yml
-    - config/rspec.yml
+  caliber: config/all.yml
 
 Layout/MultilineOperationIndentation:
   Enabled: false
 Lint/ImplicitStringConcatenation:
   Exclude:
     - "scripts/ruby/strings/concatenation"
+Performance:
+  Enabled: false
 Style/For:
   Exclude:
     - "scripts/ruby/loops"
