@@ -30,8 +30,10 @@ end
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report("Data") { DataExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
-  benchmark.report("Struct") { StructExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("Data (positional)") { DataExample[1, 2, 3, 4, 5] }
+  benchmark.report("Data (keyword)") { DataExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("Struct (positional)") { StructExample[1, 2, 3, 4, 5] }
+  benchmark.report("Struct (keyword)") { StructExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
   benchmark.report("OpenStruct") { OpenStruct.new a: 1, b: 2, c: 3, d: 4, e: 5 }
   benchmark.report("Dry Struct") { DryExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
 
@@ -41,20 +43,26 @@ end
 __END__
 
 Warming up --------------------------------------
-                Data   248.002k i/100ms
-              Struct   240.300k i/100ms
-          OpenStruct   783.000  i/100ms
-          Dry Struct    80.776k i/100ms
+   Data (positional)   245.731k i/100ms
+      Data (keyword)   247.313k i/100ms
+ Struct (positional)   667.020k i/100ms
+    Struct (keyword)   241.129k i/100ms
+          OpenStruct   770.000  i/100ms
+          Dry Struct    78.713k i/100ms
 Calculating -------------------------------------
-                Data      2.719M (± 3.9%) i/s -     13.640M in   5.023006s
-              Struct      2.622M (± 4.2%) i/s -     13.216M in   5.047768s
-          OpenStruct      2.642k (±24.9%) i/s -     13.311k in   5.344137s
-          Dry Struct    831.478k (± 3.2%) i/s -      4.200M in   5.056629s
+   Data (positional)      2.669M (± 3.8%) i/s -     13.515M in   5.070325s
+      Data (keyword)      2.706M (± 2.8%) i/s -     13.602M in   5.029642s
+ Struct (positional)      8.266M (± 5.0%) i/s -     41.355M in   5.014244s
+    Struct (keyword)      2.589M (± 4.2%) i/s -     13.021M in   5.036300s
+          OpenStruct      2.590k (±23.6%) i/s -     13.090k in   5.327237s
+          Dry Struct    816.512k (± 2.8%) i/s -      4.093M in   5.016803s
 
 Comparison:
-                Data:  2719168.3 i/s
-              Struct:  2622290.9 i/s - same-ish: difference falls within error
-          Dry Struct:   831477.8 i/s - 3.27x  slower
-          OpenStruct:     2641.7 i/s - 1029.33x  slower
+ Struct (positional):  8266410.4 i/s
+      Data (keyword):  2706421.6 i/s - 3.05x  slower
+   Data (positional):  2669040.6 i/s - 3.10x  slower
+    Struct (keyword):  2589348.0 i/s - 3.19x  slower
+          Dry Struct:   816512.4 i/s - 10.12x  slower
+          OpenStruct:     2589.8 i/s - 3191.89x  slower
 
-ℹ️ What's not shown above is that `Data` is fastest when members are small (i.e. three or less) but `Data` performance gets worse when more members are added (i.e. six or more).
+ℹ️ What's not shown above is that `Data` is fastest when members are small (i.e. three or less) but `Data` performance gets worse when more members are added (i.e. six or more). This is because `Data` always initializes with a `Hash` which is not the case with a `Struct`.
