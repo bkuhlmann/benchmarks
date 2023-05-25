@@ -7,33 +7,11 @@ gemfile true do
   source "https://rubygems.org"
 
   gem "benchmark-ips"
-  gem "dry-struct"
-  gem "values"
-  gem "value_semantics"
 end
 
 require "ostruct"
 
 StructExample = Struct.new :to, :from
-ValueExample = Value.new :to, :from
-
-module Types
-  include Dry.Types
-end
-
-DryExample = Class.new Dry::Struct do
-  attribute :to, Types::Strict::String
-  attribute :from, Types::Strict::String
-end
-
-ValueSemanticsExample = Class.new do
-  include(
-    ValueSemantics.for_attributes do
-      to String
-      from String
-    end
-  )
-end
 
 struct = StructExample[to: "Rick", from: "Morty"]
 open_struct = OpenStruct.new to: "Rick", from: "Morty"
@@ -41,18 +19,8 @@ open_struct = OpenStruct.new to: "Rick", from: "Morty"
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "Struct" do
-    struct.from = "Summer"
-  end
-
-  benchmark.report "OpenStruct" do
-    open_struct.from = "Summer"
-  end
-
-  # Not Supported
-  # - Dry Struct
-  # - Values
-  # - Value Semantics
+  benchmark.report("Struct") { struct.from = "Summer" }
+  benchmark.report("OpenStruct") { open_struct.from = "Summer" }
 
   benchmark.compare!
 end
