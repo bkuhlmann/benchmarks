@@ -1,5 +1,20 @@
 = Versions
 
+== 3.0.0 (2023-05-25)
+
+* Added read example for Data objects - Brooke Kuhlmann
+* Added render script - Brooke Kuhlmann
+* Added value construction benchmark for Data objects - Brooke Kuhlmann
+* Added write example for Data objects - Brooke Kuhlmann
+* Updated value construction as initialization - Brooke Kuhlmann
+* Updated value construction to include Data and Struct positionals - Brooke Kuhlmann
+* Removed Ruby script folder parent - Brooke Kuhlmann
+* Removed Values and Value Semantic gems - Brooke Kuhlmann
+* Removed struct construction - Brooke Kuhlmann
+* Refactored RuboCop Lint/UselessAssignment - Brooke Kuhlmann
+* Refactored benchmarks to use single line reports where appropriate - Brooke Kuhlmann
+* Refactored struct inheritance as value inheritance - Brooke Kuhlmann
+
 == 2.2.2 (2023-05-10)
 
 * Updated Caliber configuration - Brooke Kuhlmann

@@ -13,6 +13,7 @@ toc::[]
 == Features
 
 * Uses link:https://github.com/evanphx/benchmark-ips[Benchmark IPS] to calculate CPU/speed results.
+* Each script is independently executable.
 
 == Requirements
 
@@ -26,21 +27,1483 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 2.2.2
+git checkout 3.0.0
 bin/setup
 ----
 
 == Usage
 
-Every benchmark is executable and can be run via the file path. Example:
+All benchmark scripts are found within the `scripts` folder and you can run any benchmark using a relative or absolute file path. Example:
 
 [source,bash]
 ----
-scripts/ruby/strings/split
+scripts/strings/split
 ----
 
-You can also avoid running any of the benchmarks locally by browsing any of the scripts located in
-the `scripts` folder and looking for the benchmark results at the end of the file.
+The following is a list of all benchmarks (source + results). Again, you run these locally or study the results provided instead.
+
+=== scripts/arrays/concatenation
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+a = %w[one two three]
+b = %w[four five six]
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "#+" do
+    a + b
+  end
+
+  benchmark.report "#+=" do
+    duplicate = a.dup
+    duplicate += b
+  end
+
+  benchmark.report "#concat" do
+    a.dup.concat b
+  end
+
+  benchmark.report "#|" do
+    a | b
+  end
+
+  benchmark.report "#<< + #flatten" do
+    (a.dup << b).flatten
+  end
+
+  benchmark.report "splat + #flatten" do
+    [a, *b].flatten
+  end
+
+  benchmark.report "multi-splat" do
+    [*a, *b]
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                  #+   858.350k i/100ms
+                 #+=   648.534k i/100ms
+             #concat   442.292k i/100ms
+                  #|   350.340k i/100ms
+      #<< + #flatten   114.235k i/100ms
+    splat + #flatten   134.050k i/100ms
+         multi-splat   620.508k i/100ms
+Calculating -------------------------------------
+                  #+      8.618M (± 2.9%) i/s -     43.776M in   5.083425s
+                 #+=      6.564M (± 0.9%) i/s -     33.075M in   5.039315s
+             #concat      4.648M (± 5.0%) i/s -     23.441M in   5.055962s
+                  #|      3.444M (± 5.2%) i/s -     17.517M in   5.100569s
+      #<< + #flatten      1.283M (± 7.3%) i/s -      6.397M in   5.009864s
+    splat + #flatten      1.330M (± 4.8%) i/s -      6.702M in   5.050733s
+         multi-splat      6.058M (± 1.9%) i/s -     30.405M in   5.020268s
+
+Comparison:
+                  #+:  8618252.7 i/s
+                 #+=:  6563914.2 i/s - 1.31x  (± 0.00) slower
+         multi-splat:  6058493.9 i/s - 1.42x  (± 0.00) slower
+             #concat:  4647603.4 i/s - 1.85x  (± 0.00) slower
+                  #|:  3443510.5 i/s - 2.50x  (± 0.00) slower
+    splat + #flatten:  1329722.1 i/s - 6.48x  (± 0.00) slower
+      #<< + #flatten:  1282750.5 i/s - 6.72x  (± 0.00) slower
+....
+
+=== scripts/arrays/search
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+list = %w[one two three four five six seven eight nine ten]
+pattern = /t/
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("#grep") { list.grep pattern }
+  benchmark.report("#select") { list.select { |value| value.match? pattern } }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+               #grep   174.698k i/100ms
+             #select   146.806k i/100ms
+Calculating -------------------------------------
+               #grep      1.813M (± 2.9%) i/s -      9.084M in   5.015837s
+             #select      1.636M (± 2.4%) i/s -      8.221M in   5.026738s
+
+Comparison:
+               #grep:  1812522.2 i/s
+             #select:  1636400.1 i/s - 1.11x  slower
+....
+
+=== scripts/closures
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+Example = Class.new do
+  def echo_implicit text
+    yield
+    text
+  end
+
+  def echo_implicit_guard text
+    yield if block_given?
+    text
+  end
+
+  def echo_explicit text, &block
+    yield block
+    text
+  end
+
+  def echo_explicit_guard text, &block
+    yield block if block
+    text
+  end
+end
+
+block_example = Example.new
+lambda_example = -> text { text }
+proc_example = proc { |text| text }
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "Block (implicit)" do
+    block_example.echo_implicit("hi") { "test" }
+  end
+
+  benchmark.report "Block (implicit guard)" do
+    block_example.echo_implicit_guard("hi") { "test" }
+  end
+
+  benchmark.report "Block (explicit)" do
+    block_example.echo_explicit("hi") { "test" }
+  end
+
+  benchmark.report "Block (explicit guard)" do
+    block_example.echo_explicit_guard("hi") { "test" }
+  end
+
+  benchmark.report "Lambda" do
+    lambda_example.call "test"
+  end
+
+  benchmark.report "Proc" do
+    proc_example.call "test"
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+    Block (implicit)     1.445M i/100ms
+Block (implicit guard)
+                         1.208M i/100ms
+    Block (explicit)   402.677k i/100ms
+Block (explicit guard)
+                       394.207k i/100ms
+              Lambda     1.657M i/100ms
+                Proc     1.686M i/100ms
+Calculating -------------------------------------
+    Block (implicit)     14.320M (± 1.0%) i/s -     72.268M in   5.047006s
+Block (implicit guard)
+                         11.985M (± 0.5%) i/s -     60.393M in   5.039127s
+    Block (explicit)      3.996M (± 5.4%) i/s -     20.134M in   5.051219s
+Block (explicit guard)
+                          3.939M (± 5.2%) i/s -     19.710M in   5.015816s
+              Lambda     16.673M (± 0.4%) i/s -     84.509M in   5.068818s
+                Proc     16.589M (± 0.4%) i/s -     84.309M in   5.082291s
+
+Comparison:
+              Lambda: 16672549.1 i/s
+                Proc: 16589090.1 i/s - same-ish: difference falls within error
+    Block (implicit): 14320229.3 i/s - 1.16x  (± 0.00) slower
+Block (implicit guard): 11985042.8 i/s - 1.39x  (± 0.00) slower
+    Block (explicit):  3995551.0 i/s - 4.17x  (± 0.00) slower
+Block (explicit guard):  3938951.4 i/s - 4.23x  (± 0.00) slower
+....
+
+=== scripts/constants/lookup
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+CONSTANTS = Hash.new
+
+module Constants
+  1_000.times { |index| CONSTANTS["EXAMPLE_#{index}"] = const_set "EXAMPLE_#{index}", index }
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("#[]") { CONSTANTS["EXAMPLE_666"] }
+  benchmark.report("Module.get (symbol)") { Constants.const_get :EXAMPLE_666 }
+  benchmark.report("Module.get (string)") { Constants.const_get "EXAMPLE_666" }
+  benchmark.report("Object.get") { Object.const_get "Constants::EXAMPLE_666" }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                 #[]     1.549M i/100ms
+ Module.get (symbol)     1.708M i/100ms
+ Module.get (string)   939.672k i/100ms
+          Object.get   662.117k i/100ms
+Calculating -------------------------------------
+                 #[]     28.547M (± 0.9%) i/s -    144.026M in   5.045623s
+ Module.get (symbol)     30.476M (± 1.0%) i/s -    153.750M in   5.045483s
+ Module.get (string)     12.617M (± 1.0%) i/s -     63.898M in   5.065068s
+          Object.get      8.037M (± 0.9%) i/s -     40.389M in   5.025780s
+
+Comparison:
+ Module.get (symbol): 30475595.8 i/s
+                 #[]: 28546997.2 i/s - 1.07x  slower
+ Module.get (string): 12616676.3 i/s - 2.42x  slower
+          Object.get:  8037030.6 i/s - 3.79x  slower
+....
+
+=== scripts/delegates
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+require "delegate"
+require "forwardable"
+
+module Echo
+  def self.call(message) = message
+end
+
+class ForwardExample
+  def initialize operation
+    @operation = operation
+  end
+
+  def call(...) = operation.call(...)
+
+  private
+
+  attr_reader :operation
+end
+
+class DelegateExample
+  extend Forwardable
+
+  delegate %i[call] => :operation
+
+  def initialize operation
+    @operation = operation
+  end
+
+  private
+
+  attr_reader :operation
+end
+
+class SimpleExample < SimpleDelegator
+end
+
+class ClassExample < DelegateClass Echo
+end
+
+message = "A test."
+forward_example = ForwardExample.new Echo
+deletate_example = DelegateExample.new Echo
+simple_example = SimpleExample.new Echo
+class_example = ClassExample.new Echo
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Forward") { forward_example.call message }
+  benchmark.report("Delegate") { deletate_example.call message }
+  benchmark.report("Simple Delegator") { simple_example.call message }
+  benchmark.report("Delegate Class") { class_example.call message }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+             Forward   802.243k i/100ms
+            Delegate   751.834k i/100ms
+    Simple Delegator   293.331k i/100ms
+      Delegate Class   293.194k i/100ms
+Calculating -------------------------------------
+             Forward      9.589M (± 1.8%) i/s -     48.135M in   5.021311s
+            Delegate      9.028M (± 1.9%) i/s -     45.862M in   5.081941s
+    Simple Delegator      2.953M (± 1.1%) i/s -     14.960M in   5.067414s
+      Delegate Class      2.943M (± 1.1%) i/s -     14.953M in   5.080761s
+
+Comparison:
+             Forward:  9589223.5 i/s
+            Delegate:  9027672.8 i/s - 1.06x  slower
+    Simple Delegator:  2952504.1 i/s - 3.25x  slower
+      Delegate Class:  2943411.2 i/s - 3.26x  slower
+....
+
+=== scripts/hashes/lookup
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+example = {a: 1, b: 2, c: 3}
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("#[]") { example[:b] }
+  benchmark.report("#fetch") { example.fetch :b }
+  benchmark.report("#fetch (default)") { example.fetch :b, "default" }
+  benchmark.report("#fetch (block)") { example.fetch(:b) { "default" } }
+  benchmark.report("#dig") { example.dig :b }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                 #[]     1.467M i/100ms
+              #fetch     1.409M i/100ms
+    #fetch (default)     1.393M i/100ms
+      #fetch (block)     1.443M i/100ms
+                #dig     1.447M i/100ms
+Calculating -------------------------------------
+                 #[]     23.169M (± 0.3%) i/s -    115.922M in   5.003400s
+              #fetch     21.337M (± 0.8%) i/s -    107.114M in   5.020341s
+    #fetch (default)     21.248M (± 0.1%) i/s -    107.243M in   5.047117s
+      #fetch (block)     21.283M (± 1.4%) i/s -    106.767M in   5.017338s
+                #dig     21.887M (± 2.9%) i/s -    109.967M in   5.028344s
+
+Comparison:
+                 #[]: 23168775.5 i/s
+                #dig: 21886976.1 i/s - 1.06x  slower
+              #fetch: 21337292.3 i/s - 1.09x  slower
+      #fetch (block): 21283446.2 i/s - 1.09x  slower
+    #fetch (default): 21248416.1 i/s - 1.09x  slower
+....
+
+=== scripts/hashes/merge
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+extra = {b: 2}
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Splat") { {a: 1, **extra} }
+  benchmark.report("Merge") { {a: 1}.merge extra }
+  benchmark.report("Merge!") { {a: 1}.merge! extra }
+  benchmark.report("Dup Merge!") { {a: 1}.dup.merge! extra }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+               Splat   684.252k i/100ms
+               Merge   491.457k i/100ms
+              Merge!   716.081k i/100ms
+          Dup Merge!   389.841k i/100ms
+Calculating -------------------------------------
+               Splat      8.403M (± 4.4%) i/s -     42.424M in   5.057176s
+               Merge      5.742M (± 4.5%) i/s -     28.996M in   5.059486s
+              Merge!      9.011M (± 4.7%) i/s -     45.113M in   5.016544s
+          Dup Merge!      4.470M (± 4.4%) i/s -     22.611M in   5.067247s
+
+Comparison:
+              Merge!:  9010711.1 i/s
+               Splat:  8403118.6 i/s - same-ish: difference falls within error
+               Merge:  5742456.8 i/s - 1.57x  slower
+          Dup Merge!:  4470327.2 i/s - 2.02x  slower
+....
+
+=== scripts/hashes/reduce
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+numbers = {
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9,
+  ten: 10
+}
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "Reduce" do
+    numbers.reduce({}) { |collection, (key, value)| collection.merge! value => key }
+  end
+
+  benchmark.report "With Object" do
+    numbers.each.with_object({}) { |(key, value), collection| collection[value] = key }
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+              Reduce    33.867k i/100ms
+         With Object    66.805k i/100ms
+Calculating -------------------------------------
+              Reduce    352.792k (± 2.9%) i/s -      1.795M in   5.091711s
+         With Object    740.389k (± 2.7%) i/s -      3.741M in   5.056577s
+
+Comparison:
+         With Object:   740388.7 i/s
+              Reduce:   352791.7 i/s - 2.10x  slower
+....
+
+=== scripts/loops
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+collection = (1..1_000).to_a
+sum = 0
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "for" do
+    for number in collection do
+      sum += number
+    end
+  end
+
+  benchmark.report "#each" do
+    collection.each { |number| sum += number }
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                 for     3.326k i/100ms
+               #each     3.462k i/100ms
+Calculating -------------------------------------
+                 for     33.135k (± 0.1%) i/s -    166.300k in   5.018799s
+               #each     35.332k (± 0.6%) i/s -    180.024k in   5.095360s
+
+Comparison:
+               #each:    35332.2 i/s
+                 for:    33135.5 i/s - 1.07x  (± 0.00) slower
+....
+
+=== scripts/methods/define_method
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+require "forwardable"
+
+Person = Class.new do
+  def initialize first, last
+    @first = first
+    @last = last
+  end
+
+  def full_name
+    "#{first} #{last}"
+  end
+
+  private
+
+  attr_reader :first, :last
+end
+
+Example = Class.new Person do
+  extend Forwardable
+
+  define_method :unbound_full_name, Person.instance_method(:full_name)
+  delegate %i[full_name] => :person
+
+  def initialize first, last, person: Person.new(first, last)
+    super first, last
+    @person = person
+  end
+
+  def wrapped_full_name
+    person.full_name
+  end
+
+  private
+
+  attr_reader :first, :last, :person
+end
+
+example = Example.new "Jill", "Doe"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Wrapped") { example.wrapped_full_name }
+  benchmark.report("Defined") { example.unbound_full_name }
+  benchmark.report("Delegated") { example.full_name }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+             Wrapped   919.102k i/100ms
+             Defined   979.167k i/100ms
+           Delegated   561.812k i/100ms
+Calculating -------------------------------------
+             Wrapped     13.194M (± 2.6%) i/s -     66.175M in   5.018669s
+             Defined     13.608M (± 2.3%) i/s -     68.542M in   5.039359s
+           Delegated      6.535M (± 1.6%) i/s -     33.147M in   5.073785s
+
+Comparison:
+             Defined: 13608493.7 i/s
+             Wrapped: 13194426.2 i/s - same-ish: difference falls within error
+           Delegated:  6534500.5 i/s - 2.08x  slower
+....
+
+=== scripts/methods/method_proc
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+Example = Class.new do
+  def initialize words
+    @words = words
+    @first_word = words.first
+  end
+
+  def direct_single
+    say first_word
+  end
+
+  def direct_multiple
+    words.each { |word| say word }
+  end
+
+  def proc_single
+    method(:say).call first_word
+  end
+
+  def proc_multiple
+    words.each { |word| method(:say).call word }
+  end
+
+  def method_to_proc_single
+    first_word.then(&method(:say))
+  end
+
+  def method_to_proc_multiple
+    words.each(&method(:say))
+  end
+
+  private
+
+  attr_reader :words, :first_word
+
+  def say phrase
+    "You said: #{phrase}."
+  end
+end
+
+example = Example.new %w[one two three]
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Direct (s)") { example.direct_single }
+  benchmark.report("Direct (m)") { example.direct_multiple }
+  benchmark.report("Proc (s)") { example.proc_single }
+  benchmark.report("Proc (m)") { example.proc_multiple }
+  benchmark.report("Method To Proc (s)") { example.method_to_proc_single }
+  benchmark.report("Method To Proc (m)") { example.method_to_proc_multiple }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+          Direct (s)   640.887k i/100ms
+          Direct (m)   232.071k i/100ms
+            Proc (s)   345.925k i/100ms
+            Proc (m)   124.249k i/100ms
+  Method To Proc (s)   208.061k i/100ms
+  Method To Proc (m)   137.101k i/100ms
+Calculating -------------------------------------
+          Direct (s)      6.414M (± 0.5%) i/s -     32.685M in   5.096301s
+          Direct (m)      2.319M (± 0.3%) i/s -     11.604M in   5.003526s
+            Proc (s)      3.444M (± 1.3%) i/s -     17.296M in   5.022878s
+            Proc (m)      1.225M (± 2.0%) i/s -      6.212M in   5.074410s
+  Method To Proc (s)      2.042M (± 1.7%) i/s -     10.403M in   5.095877s
+  Method To Proc (m)      1.371M (± 1.5%) i/s -      6.855M in   4.999989s
+
+Comparison:
+          Direct (s):  6413657.8 i/s
+            Proc (s):  3444066.2 i/s - 1.86x  (± 0.00) slower
+          Direct (m):  2319091.6 i/s - 2.77x  (± 0.00) slower
+  Method To Proc (s):  2042021.8 i/s - 3.14x  (± 0.00) slower
+  Method To Proc (m):  1371322.2 i/s - 4.68x  (± 0.00) slower
+            Proc (m):  1224757.8 i/s - 5.24x  (± 0.00) slower
+....
+
+=== scripts/methods/send
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Static
+  def self.call = rand > 0.5 ? one : two
+
+  def self.one = 1
+
+  def self.two = 2
+end
+
+module Dynamic
+  def self.with_strings = public_send rand > 0.5 ? "one" : "two"
+
+  def self.with_symbols = public_send rand > 0.5 ? :one : :two
+
+  def self.one = 1
+
+  def self.two = 2
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+  max = 1_000_000
+
+  benchmark.report("Static") { max.times { Static.call } }
+  benchmark.report("Dynamic (strings)") { max.times { Dynamic.with_strings } }
+  benchmark.report("Dynamic (symbols)") { max.times { Dynamic.with_symbols } }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+              Static     1.000  i/100ms
+   Dynamic (strings)     1.000  i/100ms
+   Dynamic (symbols)     1.000  i/100ms
+Calculating -------------------------------------
+              Static     19.002  (± 0.0%) i/s -     96.000  in   5.052387s
+   Dynamic (strings)      8.659  (± 0.0%) i/s -     44.000  in   5.081770s
+   Dynamic (symbols)     11.590  (± 0.0%) i/s -     58.000  in   5.004985s
+
+Comparison:
+              Static:       19.0 i/s
+   Dynamic (symbols):       11.6 i/s - 1.64x  slower
+   Dynamic (strings):        8.7 i/s - 2.19x  slower
+....
+
+=== scripts/strings/concatenation
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+one = "One"
+two = "Two"
+three = "Three"
+four = "Four"
+five = "Five"
+six = "Six"
+seven = "Seven"
+eight = "Eight"
+nine = "Nine"
+ten = "Ten"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "Implicit (<)" do
+    "One" "Two"
+  end
+
+  benchmark.report "Implicit (>)" do
+    "One" "Two" "Three" "Four" "Five" "Six" "Seven" "Eight" "Nine" "Ten"
+  end
+
+  benchmark.report "Interpolation (<)" do
+    "#{one} #{two}"
+  end
+
+  benchmark.report "Interpolation (>)" do
+    "#{one} #{two} #{three} #{four} #{five} #{six} #{seven} #{eight} #{nine} #{ten}"
+  end
+
+  benchmark.report "#+ (<)" do
+    one + " " + two
+  end
+
+  benchmark.report "#+ (>)" do
+    one + " " + two + " " + three + " " + four + " " + five + " " + six + " " + seven + " " +
+    eight + " " + nine + " " + ten
+  end
+
+  # WARNING: Mutation.
+  benchmark.report "#concat (<)" do
+    one.dup.concat two
+  end
+
+  # WARNING: Mutation.
+  benchmark.report "#concat (>)" do
+    one.dup.concat two, three, four, five, six, seven, eight, nine, ten
+  end
+
+  # WARNING: Mutation.
+  benchmark.report "#<< (<)" do
+    one.dup << two
+  end
+
+  # WARNING: Mutation.
+  benchmark.report "#<< (>)" do
+    one.dup << two << three << four << five << six << seven << eight << nine << ten
+  end
+
+  benchmark.report "Array#join (<)" do
+    [one, two].join " "
+  end
+
+  benchmark.report "Array#join (>)" do
+    [one, two, three, four, five, six, seven, eight, nine, ten].join " "
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+        Implicit (<)     2.547M i/100ms
+        Implicit (>)     2.631M i/100ms
+   Interpolation (<)     1.029M i/100ms
+   Interpolation (>)   177.439k i/100ms
+              #+ (<)   832.046k i/100ms
+              #+ (>)    64.009k i/100ms
+         #concat (<)   655.630k i/100ms
+         #concat (>)   165.794k i/100ms
+             #<< (<)   694.881k i/100ms
+             #<< (>)   222.725k i/100ms
+      Array#join (<)   626.380k i/100ms
+      Array#join (>)   160.694k i/100ms
+Calculating -------------------------------------
+        Implicit (<)     26.270M (± 1.2%) i/s -    132.422M in   5.041494s
+        Implicit (>)     26.336M (± 1.6%) i/s -    134.170M in   5.095723s
+   Interpolation (<)     10.282M (± 0.6%) i/s -     51.460M in   5.005210s
+   Interpolation (>)      1.735M (± 3.1%) i/s -      8.695M in   5.016475s
+              #+ (<)      9.381M (± 1.0%) i/s -     47.427M in   5.055867s
+              #+ (>)    647.293k (± 3.5%) i/s -      3.264M in   5.048841s
+         #concat (<)      6.562M (± 0.6%) i/s -     33.437M in   5.095572s
+         #concat (>)      1.764M (± 4.0%) i/s -      8.953M in   5.082208s
+             #<< (<)      7.000M (± 0.6%) i/s -     35.439M in   5.062862s
+             #<< (>)      2.221M (± 2.9%) i/s -     11.136M in   5.017108s
+      Array#join (<)      6.252M (± 0.7%) i/s -     31.319M in   5.009523s
+      Array#join (>)      1.614M (± 2.2%) i/s -      8.195M in   5.080520s
+
+Comparison:
+        Implicit (>): 26336350.5 i/s
+        Implicit (<): 26270214.9 i/s - same-ish: difference falls within error
+   Interpolation (<): 10281710.4 i/s - 2.56x  (± 0.00) slower
+              #+ (<):  9381456.8 i/s - 2.81x  (± 0.00) slower
+             #<< (<):  7000016.4 i/s - 3.76x  (± 0.00) slower
+         #concat (<):  6562217.6 i/s - 4.01x  (± 0.00) slower
+      Array#join (<):  6252228.2 i/s - 4.21x  (± 0.00) slower
+             #<< (>):  2221388.2 i/s - 11.86x  (± 0.00) slower
+         #concat (>):  1764070.7 i/s - 14.93x  (± 0.00) slower
+   Interpolation (>):  1734732.3 i/s - 15.18x  (± 0.00) slower
+      Array#join (>):  1613872.9 i/s - 16.32x  (± 0.00) slower
+              #+ (>):   647292.9 i/s - 40.69x  (± 0.00) slower
+....
+
+=== scripts/strings/matching
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+require "securerandom"
+
+word = SecureRandom.alphanumeric 100
+string_matcher = "a"
+regex_matcher = /\Aa/
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("#match?") { word.match? regex_matcher }
+  benchmark.report("#=~") { word =~ regex_matcher }
+  benchmark.report("#start_with? (String)") { word.start_with? string_matcher }
+  benchmark.report("#start_with? (Regex)") { word.start_with? regex_matcher }
+  benchmark.report("#end_with?") { word.end_with? string_matcher }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+             #match?     1.446M i/100ms
+                 #=~   748.378k i/100ms
+#start_with? (String)
+                         1.521M i/100ms
+#start_with? (Regex)   672.990k i/100ms
+          #end_with?     1.473M i/100ms
+Calculating -------------------------------------
+             #match?     14.216M (± 0.5%) i/s -     72.314M in   5.086920s
+                 #=~      7.142M (± 2.4%) i/s -     35.922M in   5.032710s
+#start_with? (String)
+                         15.027M (± 0.3%) i/s -     76.067M in   5.062133s
+#start_with? (Regex)      6.322M (± 2.0%) i/s -     31.631M in   5.005092s
+          #end_with?     14.821M (± 0.6%) i/s -     75.143M in   5.070323s
+
+Comparison:
+#start_with? (String): 15026855.4 i/s
+          #end_with?: 14820633.2 i/s - 1.01x  (± 0.00) slower
+             #match?: 14216141.3 i/s - 1.06x  (± 0.00) slower
+                 #=~:  7141893.3 i/s - 2.10x  (± 0.00) slower
+#start_with? (Regex):  6322083.6 i/s - 2.38x  (± 0.00) slower
+....
+
+=== scripts/strings/split
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+require "securerandom"
+
+words = Array.new(100_000) { SecureRandom.alphanumeric 10 }
+delimiter = " "
+text = words.join delimiter
+pattern = /\Aa/
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "Without Block" do
+    text.split(delimiter).grep(pattern)
+  end
+
+  benchmark.report "With Block" do
+    selections = []
+    text.split(delimiter) { |word| selections << word if word.match? pattern }
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+       Without Block    14.000  i/100ms
+          With Block    11.000  i/100ms
+Calculating -------------------------------------
+       Without Block    141.248  (± 1.4%) i/s -    714.000  in   5.055685s
+          With Block    114.756  (± 0.9%) i/s -    583.000  in   5.080980s
+
+Comparison:
+       Without Block:      141.2 i/s
+          With Block:      114.8 i/s - 1.23x  (± 0.00) slower
+....
+
+=== scripts/strings/substrings
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+example = "example"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("#sub (string)") { example.sub "x", "b" }
+  benchmark.report("#sub (regex)") { example.sub(/x/, "b") }
+  benchmark.report("#gsub (string)") { example.gsub "x", "b" }
+  benchmark.report("#gsub (regex)") { example.gsub(/x/, "b") }
+  benchmark.report("#tr") { example.tr "x", "b" }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+       #sub (string)   543.195k i/100ms
+        #sub (regex)   490.182k i/100ms
+      #gsub (string)   275.943k i/100ms
+       #gsub (regex)   144.055k i/100ms
+                 #tr   850.367k i/100ms
+Calculating -------------------------------------
+       #sub (string)      5.358M (± 0.7%) i/s -     27.160M in   5.069344s
+        #sub (regex)      4.929M (± 0.6%) i/s -     24.999M in   5.072484s
+      #gsub (string)      2.823M (± 3.4%) i/s -     14.349M in   5.087555s
+       #gsub (regex)      1.496M (± 7.0%) i/s -      7.491M in   5.027838s
+                 #tr      8.531M (± 0.6%) i/s -     43.369M in   5.083958s
+
+Comparison:
+                 #tr:  8530843.4 i/s
+       #sub (string):  5357905.9 i/s - 1.59x  (± 0.00) slower
+        #sub (regex):  4928582.0 i/s - 1.73x  (± 0.00) slower
+      #gsub (string):  2823314.1 i/s - 3.02x  (± 0.00) slower
+       #gsub (regex):  1495808.3 i/s - 5.70x  (± 0.00) slower
+....
+
+=== scripts/thens
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "standard" do
+    one, two = "one two".split
+    "#{one} + #{two} = #{one + two}"
+  end
+
+  benchmark.report "then" do
+    "one two".split.then { |one, two| "#{one} + #{two} = #{one + two}" }
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+            standard   339.158k i/100ms
+                then   309.907k i/100ms
+Calculating -------------------------------------
+            standard      3.379M (± 0.9%) i/s -     16.958M in   5.018758s
+                then      3.084M (± 0.9%) i/s -     15.495M in   5.024083s
+
+Comparison:
+            standard:  3379176.5 i/s
+                then:  3084483.1 i/s - 1.10x  (± 0.00) slower
+....
+
+=== scripts/values/inheritance
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+PlotStruct = Struct.new :x, :y
+
+class PlotSubclass < Struct.new :x, :y
+end
+
+struct = -> { PlotStruct[x: 1, y: 2] }
+subclass = -> { PlotSubclass[x: 1, y: 2] }
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Struct") { struct.call }
+  benchmark.report("Subclass") { subclass.call }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+              Struct   342.290k i/100ms
+            Subclass   343.460k i/100ms
+Calculating -------------------------------------
+              Struct      3.929M (± 2.8%) i/s -     19.853M in   5.056112s
+            Subclass      3.914M (± 2.8%) i/s -     19.577M in   5.006162s
+
+Comparison:
+              Struct:  3929350.4 i/s
+            Subclass:  3913502.3 i/s - same-ish: difference falls within error
+....
+
+=== scripts/values/initialization
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+  gem "dry-struct"
+end
+
+require "ostruct"
+
+DataExample = Data.define :a, :b, :c, :d, :e
+StructExample = Struct.new :a, :b, :c, :d, :e
+
+module Types
+  include Dry.Types
+end
+
+DryExample = Class.new Dry::Struct do
+  attribute :a, Types::Strict::Integer
+  attribute :b, Types::Strict::Integer
+  attribute :c, Types::Strict::Integer
+  attribute :d, Types::Strict::Integer
+  attribute :e, Types::Strict::Integer
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Data (positional)") { DataExample[1, 2, 3, 4, 5] }
+  benchmark.report("Data (keyword)") { DataExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("Struct (positional)") { StructExample[1, 2, 3, 4, 5] }
+  benchmark.report("Struct (keyword)") { StructExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("OpenStruct") { OpenStruct.new a: 1, b: 2, c: 3, d: 4, e: 5 }
+  benchmark.report("Dry Struct") { DryExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+   Data (positional)   245.731k i/100ms
+      Data (keyword)   247.313k i/100ms
+ Struct (positional)   667.020k i/100ms
+    Struct (keyword)   241.129k i/100ms
+          OpenStruct   770.000  i/100ms
+          Dry Struct    78.713k i/100ms
+Calculating -------------------------------------
+   Data (positional)      2.669M (± 3.8%) i/s -     13.515M in   5.070325s
+      Data (keyword)      2.706M (± 2.8%) i/s -     13.602M in   5.029642s
+ Struct (positional)      8.266M (± 5.0%) i/s -     41.355M in   5.014244s
+    Struct (keyword)      2.589M (± 4.2%) i/s -     13.021M in   5.036300s
+          OpenStruct      2.590k (±23.6%) i/s -     13.090k in   5.327237s
+          Dry Struct    816.512k (± 2.8%) i/s -      4.093M in   5.016803s
+
+Comparison:
+ Struct (positional):  8266410.4 i/s
+      Data (keyword):  2706421.6 i/s - 3.05x  slower
+   Data (positional):  2669040.6 i/s - 3.10x  slower
+    Struct (keyword):  2589348.0 i/s - 3.19x  slower
+          Dry Struct:   816512.4 i/s - 10.12x  slower
+          OpenStruct:     2589.8 i/s - 3191.89x  slower
+
+ℹ️ What's not shown above is that `Data` is fastest when members are small (i.e. three or less) but `Data` performance gets worse when more members are added (i.e. six or more). This is because `Data` always initializes with a `Hash` which is not the case with a `Struct`.
+....
+
+=== scripts/values/reading
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+  gem "dry-struct"
+end
+
+require "ostruct"
+
+DataExample = Data.define :to, :from
+StructExample = Struct.new :to, :from
+
+module Types
+  include Dry.Types
+end
+
+DryExample = Class.new Dry::Struct do
+  attribute :to, Types::Strict::String
+  attribute :from, Types::Strict::String
+end
+
+data = DataExample[to: "Rick", from: "Morty"]
+struct = StructExample[to: "Rick", from: "Morty"]
+open_struct = OpenStruct.new to: "Rick", from: "Morty"
+dry_struct = DryExample[to: "Rick", from: "Morty"]
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Data") { data.to }
+  benchmark.report("Struct") { struct.to }
+  benchmark.report("OpenStruct") { open_struct.to }
+  benchmark.report("Dry Struct") { dry_struct.to }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                Data     2.207M i/100ms
+              Struct     2.208M i/100ms
+          OpenStruct     1.383M i/100ms
+          Dry Struct     1.392M i/100ms
+Calculating -------------------------------------
+                Data     44.542M (± 0.9%) i/s -    222.944M in   5.005729s
+              Struct     44.269M (± 0.9%) i/s -    222.980M in   5.037364s
+          OpenStruct     21.532M (± 0.1%) i/s -    107.905M in   5.011283s
+          Dry Struct     20.494M (± 0.2%) i/s -    103.024M in   5.027049s
+
+Comparison:
+                Data: 44541569.9 i/s
+              Struct: 44269100.2 i/s - same-ish: difference falls within error
+          OpenStruct: 21532484.9 i/s - 2.07x  slower
+          Dry Struct: 20494058.3 i/s - 2.17x  slower
+....
+
+=== scripts/values/writing
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+require "ostruct"
+
+DataExample = Data.define :to, :from
+StructExample = Struct.new :to, :from
+
+data = DataExample[to: "Rick", from: "Morty"]
+struct = StructExample[to: "Rick", from: "Morty"]
+open_struct = OpenStruct.new to: "Rick", from: "Morty"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Data") { data.with from: "Summer" }
+  benchmark.report("Struct") { struct.from = "Summer" }
+  benchmark.report("OpenStruct") { open_struct.from = "Summer" }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                Data   385.418k i/100ms
+              Struct     1.907M i/100ms
+          OpenStruct     1.438M i/100ms
+Calculating -------------------------------------
+                Data      4.360M (±12.2%) i/s -     21.583M in   5.083482s
+              Struct     35.102M (± 1.5%) i/s -    177.343M in   5.053482s
+          OpenStruct     23.705M (± 0.8%) i/s -    119.330M in   5.034346s
+
+Comparison:
+              Struct: 35102228.6 i/s
+          OpenStruct: 23704933.6 i/s - 1.48x  slower
+                Data:  4360085.0 i/s - 8.05x  slower
+....
 
 == Development
 
@@ -52,6 +1515,15 @@ git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
 bin/setup
 ----
+
+To render documentation for all benchmark scripts, run:
+
+[source,bash]
+----
+bin/render
+----
+
+This is the same script used to update the documentation within this README.
 
 == Tests
 
