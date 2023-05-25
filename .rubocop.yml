@@ -19,7 +19,7 @@ Style/SingleArgumentDig:
     - "scripts/ruby/hashes/lookup"
 Style/StructInheritance:
   Exclude:
-    - "scripts/ruby/structs/inheritance"
+    - "scripts/ruby/values/inheritance"
 Style/RedundantFetchBlock:
   Exclude:
     - "scripts/ruby/hashes/lookup"
