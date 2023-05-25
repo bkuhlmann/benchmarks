@@ -31,17 +31,9 @@ Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
   max = 1_000_000
 
-  benchmark.report "Static" do
-    max.times { Static.call }
-  end
-
-  benchmark.report "Dynamic (strings)" do
-    max.times { Dynamic.with_strings }
-  end
-
-  benchmark.report "Dynamic (symbols)" do
-    max.times { Dynamic.with_symbols }
-  end
+  benchmark.report("Static") { max.times { Static.call } }
+  benchmark.report("Dynamic (strings)") { max.times { Dynamic.with_strings } }
+  benchmark.report("Dynamic (symbols)") { max.times { Dynamic.with_symbols } }
 
   benchmark.compare!
 end

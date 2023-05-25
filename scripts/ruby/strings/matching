@@ -18,25 +18,11 @@ regex_matcher = /\Aa/
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "#match?" do
-    word.match? regex_matcher
-  end
-
-  benchmark.report "#=~" do
-    word =~ regex_matcher
-  end
-
-  benchmark.report "#start_with? (String)" do
-    word.start_with? string_matcher
-  end
-
-  benchmark.report "#start_with? (Regex)" do
-    word.start_with? regex_matcher
-  end
-
-  benchmark.report "#end_with?" do
-    word.end_with? string_matcher
-  end
+  benchmark.report("#match?") { word.match? regex_matcher }
+  benchmark.report("#=~") { word =~ regex_matcher }
+  benchmark.report("#start_with? (String)") { word.start_with? string_matcher }
+  benchmark.report("#start_with? (Regex)") { word.start_with? regex_matcher }
+  benchmark.report("#end_with?") { word.end_with? string_matcher }
 
   benchmark.compare!
 end

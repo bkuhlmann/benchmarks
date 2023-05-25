@@ -53,29 +53,12 @@ example = Example.new %w[one two three]
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "Direct (s)" do
-    example.direct_single
-  end
-
-  benchmark.report "Direct (m)" do
-    example.direct_multiple
-  end
-
-  benchmark.report "Proc (s)" do
-    example.proc_single
-  end
-
-  benchmark.report "Proc (m)" do
-    example.proc_multiple
-  end
-
-  benchmark.report "Method To Proc (s)" do
-    example.method_to_proc_single
-  end
-
-  benchmark.report "Method To Proc (m)" do
-    example.method_to_proc_multiple
-  end
+  benchmark.report("Direct (s)") { example.direct_single }
+  benchmark.report("Direct (m)") { example.direct_multiple }
+  benchmark.report("Proc (s)") { example.proc_single }
+  benchmark.report("Proc (m)") { example.proc_multiple }
+  benchmark.report("Method To Proc (s)") { example.method_to_proc_single }
+  benchmark.report("Method To Proc (m)") { example.method_to_proc_multiple }
 
   benchmark.compare!
 end

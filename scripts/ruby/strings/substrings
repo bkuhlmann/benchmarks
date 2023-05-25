@@ -14,25 +14,11 @@ example = "example"
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "#sub (string)" do
-    example.sub "x", "b"
-  end
-
-  benchmark.report "#sub (regex)" do
-    example.sub(/x/, "b")
-  end
-
-  benchmark.report "#gsub (string)" do
-    example.gsub "x", "b"
-  end
-
-  benchmark.report "#gsub (regex)" do
-    example.gsub(/x/, "b")
-  end
-
-  benchmark.report "#tr" do
-    example.tr "x", "b"
-  end
+  benchmark.report("#sub (string)") { example.sub "x", "b" }
+  benchmark.report("#sub (regex)") { example.sub(/x/, "b") }
+  benchmark.report("#gsub (string)") { example.gsub "x", "b" }
+  benchmark.report("#gsub (regex)") { example.gsub(/x/, "b") }
+  benchmark.report("#tr") { example.tr "x", "b" }
 
   benchmark.compare!
 end

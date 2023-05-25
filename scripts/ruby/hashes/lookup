@@ -14,25 +14,11 @@ example = {a: 1, b: 2, c: 3}
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "#[]" do
-    example[:b]
-  end
-
-  benchmark.report "#fetch" do
-    example.fetch :b
-  end
-
-  benchmark.report "#fetch (default)" do
-    example.fetch :b, "default"
-  end
-
-  benchmark.report "#fetch (block)" do
-    example.fetch(:b) { "default" }
-  end
-
-  benchmark.report "#dig" do
-    example.dig :b
-  end
+  benchmark.report("#[]") { example[:b] }
+  benchmark.report("#fetch") { example.fetch :b }
+  benchmark.report("#fetch (default)") { example.fetch :b, "default" }
+  benchmark.report("#fetch (block)") { example.fetch(:b) { "default" } }
+  benchmark.report("#dig") { example.dig :b }
 
   benchmark.compare!
 end
@@ -40,21 +26,21 @@ end
 __END__
 
 Warming up --------------------------------------
-                 #[]     2.244M i/100ms
-              #fetch     1.721M i/100ms
-    #fetch (default)     1.714M i/100ms
-      #fetch (block)     1.681M i/100ms
-                #dig     1.797M i/100ms
+                 #[]     1.467M i/100ms
+              #fetch     1.409M i/100ms
+    #fetch (default)     1.393M i/100ms
+      #fetch (block)     1.443M i/100ms
+                #dig     1.447M i/100ms
 Calculating -------------------------------------
-                 #[]     21.986M (± 1.0%) i/s -    109.980M in   5.002711s
-              #fetch     16.983M (± 0.7%) i/s -     86.044M in   5.066709s
-    #fetch (default)     16.893M (± 0.9%) i/s -     85.724M in   5.074970s
-      #fetch (block)     16.531M (± 1.1%) i/s -     84.047M in   5.084762s
-                #dig     17.941M (± 1.0%) i/s -     89.834M in   5.007847s
+                 #[]     23.169M (± 0.3%) i/s -    115.922M in   5.003400s
+              #fetch     21.337M (± 0.8%) i/s -    107.114M in   5.020341s
+    #fetch (default)     21.248M (± 0.1%) i/s -    107.243M in   5.047117s
+      #fetch (block)     21.283M (± 1.4%) i/s -    106.767M in   5.017338s
+                #dig     21.887M (± 2.9%) i/s -    109.967M in   5.028344s
 
 Comparison:
-                 #[]: 21986220.5 i/s
-                #dig: 17940603.8 i/s - 1.23x  (± 0.00) slower
-              #fetch: 16983133.0 i/s - 1.29x  (± 0.00) slower
-    #fetch (default): 16893042.1 i/s - 1.30x  (± 0.00) slower
-      #fetch (block): 16531200.1 i/s - 1.33x  (± 0.00) slower
+                 #[]: 23168775.5 i/s
+                #dig: 21886976.1 i/s - 1.06x  slower
+              #fetch: 21337292.3 i/s - 1.09x  slower
+      #fetch (block): 21283446.2 i/s - 1.09x  slower
+    #fetch (default): 21248416.1 i/s - 1.09x  slower

@@ -51,17 +51,9 @@ example = Example.new "Jill", "Doe"
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "Wrapped" do
-    example.wrapped_full_name
-  end
-
-  benchmark.report "Defined" do
-    example.unbound_full_name
-  end
-
-  benchmark.report "Delegated" do
-    example.full_name
-  end
+  benchmark.report("Wrapped") { example.wrapped_full_name }
+  benchmark.report("Defined") { example.unbound_full_name }
+  benchmark.report("Delegated") { example.full_name }
 
   benchmark.compare!
 end
@@ -69,15 +61,15 @@ end
 __END__
 
 Warming up --------------------------------------
-             Wrapped   662.226k i/100ms
-             Defined   769.532k i/100ms
-           Delegated   474.200k i/100ms
+             Wrapped   919.102k i/100ms
+             Defined   979.167k i/100ms
+           Delegated   561.812k i/100ms
 Calculating -------------------------------------
-             Wrapped      6.633M (± 1.1%) i/s -     33.774M in   5.092087s
-             Defined      7.741M (± 1.1%) i/s -     39.246M in   5.070731s
-           Delegated      4.732M (± 0.6%) i/s -     23.710M in   5.010734s
+             Wrapped     13.194M (± 2.6%) i/s -     66.175M in   5.018669s
+             Defined     13.608M (± 2.3%) i/s -     68.542M in   5.039359s
+           Delegated      6.535M (± 1.6%) i/s -     33.147M in   5.073785s
 
 Comparison:
-             Defined:  7740639.5 i/s
-             Wrapped:  6633351.8 i/s - 1.17x  (± 0.00) slower
-           Delegated:  4732020.7 i/s - 1.64x  (± 0.00) slower
+             Defined: 13608493.7 i/s
+             Wrapped: 13194426.2 i/s - same-ish: difference falls within error
+           Delegated:  6534500.5 i/s - 2.08x  slower
