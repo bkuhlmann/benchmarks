@@ -12,31 +12,28 @@ end
 
 require "ostruct"
 
-StructExample = Struct.new :to, :from
+DataExample = Data.define :a, :b, :c, :d, :e
+StructExample = Struct.new :a, :b, :c, :d, :e
 
 module Types
   include Dry.Types
 end
 
 DryExample = Class.new Dry::Struct do
-  attribute :to, Types::Strict::String
-  attribute :from, Types::Strict::String
+  attribute :a, Types::Strict::Integer
+  attribute :b, Types::Strict::Integer
+  attribute :c, Types::Strict::Integer
+  attribute :d, Types::Strict::Integer
+  attribute :e, Types::Strict::Integer
 end
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report "Struct" do
-    StructExample[to: "Rick", from: "Morty"]
-  end
-
-  benchmark.report "OpenStruct" do
-    OpenStruct.new to: "Rick", from: "Morty"
-  end
-
-  benchmark.report "Dry Struct" do
-    DryExample[to: "Rick", from: "Morty"]
-  end
+  benchmark.report("Data") { DataExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("Struct") { StructExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("OpenStruct") { OpenStruct.new a: 1, b: 2, c: 3, d: 4, e: 5 }
+  benchmark.report("Dry Struct") { DryExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
 
   benchmark.compare!
 end
@@ -44,15 +41,20 @@ end
 __END__
 
 Warming up --------------------------------------
-              Struct   365.528k i/100ms
-          OpenStruct     2.795k i/100ms
-          Dry Struct   140.753k i/100ms
+                Data   248.002k i/100ms
+              Struct   240.300k i/100ms
+          OpenStruct   783.000  i/100ms
+          Dry Struct    80.776k i/100ms
 Calculating -------------------------------------
-              Struct      4.323M (± 3.0%) i/s -     21.932M in   5.077534s
-          OpenStruct     10.600k (±24.2%) i/s -     53.105k in   5.290253s
-          Dry Struct      1.475M (± 3.3%) i/s -      7.460M in   5.062260s
+                Data      2.719M (± 3.9%) i/s -     13.640M in   5.023006s
+              Struct      2.622M (± 4.2%) i/s -     13.216M in   5.047768s
+          OpenStruct      2.642k (±24.9%) i/s -     13.311k in   5.344137s
+          Dry Struct    831.478k (± 3.2%) i/s -      4.200M in   5.056629s
 
 Comparison:
-              Struct:  4322945.3 i/s
-          Dry Struct:  1475101.5 i/s - 2.93x  slower
-          OpenStruct:    10599.9 i/s - 407.83x  slower
+                Data:  2719168.3 i/s
+              Struct:  2622290.9 i/s - same-ish: difference falls within error
+          Dry Struct:   831477.8 i/s - 3.27x  slower
+          OpenStruct:     2641.7 i/s - 1029.33x  slower
+
+ℹ️ What's not shown above is that `Data` is fastest when members are small (i.e. three or less) but `Data` performance gets worse when more members are added (i.e. six or more).
