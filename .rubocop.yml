@@ -6,6 +6,9 @@ Layout/MultilineOperationIndentation:
 Lint/ImplicitStringConcatenation:
   Exclude:
     - "scripts/ruby/strings/concatenation"
+Lint/UselessAssignment:
+  Exclude:
+    - "scripts/ruby/arrays/concatenation"
 Performance:
   Enabled: false
 Style/For:

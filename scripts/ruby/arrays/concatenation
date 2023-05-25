@@ -19,12 +19,10 @@ Benchmark.ips do |benchmark|
     a + b
   end
 
-  # rubocop:disable Lint/UselessAssignment
   benchmark.report "#+=" do
     duplicate = a.dup
     duplicate += b
   end
-  # rubocop:enable Lint/UselessAssignment
 
   benchmark.report "#concat" do
     a.dup.concat b
