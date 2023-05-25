@@ -5,29 +5,29 @@ Layout/MultilineOperationIndentation:
   Enabled: false
 Lint/ImplicitStringConcatenation:
   Exclude:
-    - "scripts/ruby/strings/concatenation"
+    - "scripts/strings/concatenation"
 Lint/UselessAssignment:
   Exclude:
-    - "scripts/ruby/arrays/concatenation"
+    - "scripts/arrays/concatenation"
 Performance:
   Enabled: false
 Style/For:
   Exclude:
-    - "scripts/ruby/loops"
+    - "scripts/loops"
 Style/SelectByRegexp:
   Exclude:
-    - "scripts/ruby/arrays/search"
+    - "scripts/arrays/search"
 Style/SingleArgumentDig:
   Exclude:
-    - "scripts/ruby/hashes/lookup"
+    - "scripts/hashes/lookup"
 Style/StructInheritance:
   Exclude:
-    - "scripts/ruby/values/inheritance"
+    - "scripts/values/inheritance"
 Style/RedundantFetchBlock:
   Exclude:
-    - "scripts/ruby/hashes/lookup"
+    - "scripts/hashes/lookup"
 Style/OpenStructUse:
   Exclude:
-    - "scripts/ruby/values/initialization"
-    - "scripts/ruby/values/reading"
-    - "scripts/ruby/values/writing"
+    - "scripts/values/initialization"
+    - "scripts/values/reading"
+    - "scripts/values/writing"
