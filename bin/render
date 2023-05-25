@@ -1,0 +1,34 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+Bundler.require :tools
+
+require "refinements/pathnames"
+
+using Refinements::Pathnames
+
+ROOT = Pathname "#{__dir__}/../scripts"
+
+ROOT.files("**/*").each do |path|
+  source, benchmark = path.read.split "__END__"
+  relative_path = path.relative_path_from Bundler.root
+
+  puts <<~CONTENT
+
+    === #{relative_path}
+
+    *Source*
+
+    [source,ruby]
+    ----
+    #{source.strip}
+    ----
+
+    *Benchmark*
+
+    ....
+    #{benchmark.strip}
+    ....
+  CONTENT
+end
