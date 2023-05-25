@@ -25,7 +25,6 @@ Style/RedundantFetchBlock:
     - "scripts/ruby/hashes/lookup"
 Style/OpenStructUse:
   Exclude:
-    - "scripts/ruby/structs/construction"
     - "scripts/ruby/values/initialization"
     - "scripts/ruby/values/reading"
     - "scripts/ruby/values/writing"
