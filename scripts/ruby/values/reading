@@ -12,6 +12,7 @@ end
 
 require "ostruct"
 
+DataExample = Data.define :to, :from
 StructExample = Struct.new :to, :from
 
 module Types
@@ -23,6 +24,7 @@ DryExample = Class.new Dry::Struct do
   attribute :from, Types::Strict::String
 end
 
+data = DataExample[to: "Rick", from: "Morty"]
 struct = StructExample[to: "Rick", from: "Morty"]
 open_struct = OpenStruct.new to: "Rick", from: "Morty"
 dry_struct = DryExample[to: "Rick", from: "Morty"]
@@ -30,6 +32,7 @@ dry_struct = DryExample[to: "Rick", from: "Morty"]
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
+  benchmark.report("Data") { data.to }
   benchmark.report("Struct") { struct.to }
   benchmark.report("OpenStruct") { open_struct.to }
   benchmark.report("Dry Struct") { dry_struct.to }
@@ -40,15 +43,18 @@ end
 __END__
 
 Warming up --------------------------------------
-              Struct     2.220M i/100ms
-          OpenStruct     1.377M i/100ms
+                Data     2.207M i/100ms
+              Struct     2.208M i/100ms
+          OpenStruct     1.383M i/100ms
           Dry Struct     1.392M i/100ms
 Calculating -------------------------------------
-              Struct     44.923M (± 0.8%) i/s -    226.404M in   5.040231s
-          OpenStruct     21.179M (± 1.2%) i/s -    106.020M in   5.006538s
-          Dry Struct     21.333M (± 0.7%) i/s -    107.200M in   5.025329s
+                Data     44.542M (± 0.9%) i/s -    222.944M in   5.005729s
+              Struct     44.269M (± 0.9%) i/s -    222.980M in   5.037364s
+          OpenStruct     21.532M (± 0.1%) i/s -    107.905M in   5.011283s
+          Dry Struct     20.494M (± 0.2%) i/s -    103.024M in   5.027049s
 
 Comparison:
-              Struct: 44922561.3 i/s
-          Dry Struct: 21333161.6 i/s - 2.11x  slower
-          OpenStruct: 21179377.3 i/s - 2.12x  slower
+                Data: 44541569.9 i/s
+              Struct: 44269100.2 i/s - same-ish: difference falls within error
+          OpenStruct: 21532484.9 i/s - 2.07x  slower
+          Dry Struct: 20494058.3 i/s - 2.17x  slower
