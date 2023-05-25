@@ -11,14 +11,17 @@ end
 
 require "ostruct"
 
+DataExample = Data.define :to, :from
 StructExample = Struct.new :to, :from
 
+data = DataExample[to: "Rick", from: "Morty"]
 struct = StructExample[to: "Rick", from: "Morty"]
 open_struct = OpenStruct.new to: "Rick", from: "Morty"
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
+  benchmark.report("Data") { data.with from: "Summer" }
   benchmark.report("Struct") { struct.from = "Summer" }
   benchmark.report("OpenStruct") { open_struct.from = "Summer" }
 
@@ -28,12 +31,15 @@ end
 __END__
 
 Warming up --------------------------------------
-              Struct     1.648M i/100ms
-          OpenStruct   996.676k i/100ms
+                Data   385.418k i/100ms
+              Struct     1.907M i/100ms
+          OpenStruct     1.438M i/100ms
 Calculating -------------------------------------
-              Struct     16.249M (± 0.9%) i/s -     82.412M in   5.072310s
-          OpenStruct     10.234M (± 0.6%) i/s -     51.827M in   5.064561s
+                Data      4.360M (±12.2%) i/s -     21.583M in   5.083482s
+              Struct     35.102M (± 1.5%) i/s -    177.343M in   5.053482s
+          OpenStruct     23.705M (± 0.8%) i/s -    119.330M in   5.034346s
 
 Comparison:
-              Struct: 16248681.6 i/s
-          OpenStruct: 10233668.4 i/s - 1.59x  (± 0.00) slower
+              Struct: 35102228.6 i/s
+          OpenStruct: 23704933.6 i/s - 1.48x  slower
+                Data:  4360085.0 i/s - 8.05x  slower
