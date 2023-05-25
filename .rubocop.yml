@@ -26,6 +26,6 @@ Style/RedundantFetchBlock:
 Style/OpenStructUse:
   Exclude:
     - "scripts/ruby/structs/construction"
-    - "scripts/ruby/values/construction"
+    - "scripts/ruby/values/initialization"
     - "scripts/ruby/values/reading"
     - "scripts/ruby/values/writing"
