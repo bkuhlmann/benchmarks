@@ -9,6 +9,9 @@ Lint/ImplicitStringConcatenation:
 Lint/UselessAssignment:
   Exclude:
     - "scripts/arrays/concatenation"
+Naming/MethodParameterName:
+  Exclude:
+    - "scripts/values/initialization"
 Performance:
   Enabled: false
 Style/For:
