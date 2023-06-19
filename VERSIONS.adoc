@@ -1,5 +1,12 @@
 = Versions
 
+== 3.0.1 (2023-06-19)
+
+* Updated to Caliber 0.35.0 - Brooke Kuhlmann
+* Updated to Git Lint 6.0.0 - Brooke Kuhlmann
+* Updated to Refinements 11.0.0 - Brooke Kuhlmann
+* Updated value initialization to include custom data and structs - Brooke Kuhlmann
+
 == 3.0.0 (2023-05-25)
 
 * Added read example for Data objects - Brooke Kuhlmann

@@ -2,9 +2,9 @@ cff-version: 1.2.0
 message: Please use the following metadata when citing this project in your work.
 title: Benchmarks
 abstract: A collection of micro benchmarks.
-version: 3.0.0
+version: 3.0.1
 license: Hippocratic-2.1
-date-released: 2023-05-25
+date-released: 2023-06-19
 authors:
   - family-names: Kuhlmann
     given-names: Brooke
