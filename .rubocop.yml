@@ -17,6 +17,9 @@ Performance:
 Style/For:
   Exclude:
     - "scripts/loops"
+Style/RedundantRegexpArgument:
+  Exclude:
+    - "scripts/strings/substrings"
 Style/SelectByRegexp:
   Exclude:
     - "scripts/arrays/search"
