@@ -27,7 +27,7 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 3.1.0
+git checkout 3.2.0
 bin/setup
 ----
 
@@ -898,6 +898,234 @@ Comparison:
    Dynamic (strings):        8.7 i/s - 2.19x  slower
 ....
 
+=== scripts/refinements/import
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Import
+  def dud = true
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "With" do
+    Module.new { refine(String) { import_methods Import } }
+  end
+
+  benchmark.report "Without" do
+    Module.new do
+      def dud = true
+    end
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                With     1.001k i/100ms
+             Without   298.259k i/100ms
+Calculating -------------------------------------
+                With     21.111k (±197.8%) i/s -     30.030k in   5.226342s
+             Without      3.295M (± 5.7%) i/s -     16.703M in   5.081423s
+
+Comparison:
+             Without:  3294526.3 i/s
+                With:    21111.2 i/s - 156.06x  slower
+....
+
+=== scripts/refinements/initialize
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Refines
+  refine String do
+    def dud = true
+  end
+end
+
+class With
+  using Refines
+
+  def initialize value = "demo"
+    @value = value
+  end
+end
+
+class Without
+  def initialize value = "demo"
+    @value = value
+  end
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("With") { With.new }
+  benchmark.report("Without") { Without.new }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                With   863.932k i/100ms
+             Without   864.485k i/100ms
+Calculating -------------------------------------
+                With     11.923M (± 2.2%) i/s -     59.611M in   5.002109s
+             Without     11.963M (± 2.2%) i/s -     60.514M in   5.060665s
+
+Comparison:
+             Without: 11963279.0 i/s
+                With: 11922826.8 i/s - same-ish: difference falls within error
+....
+
+=== scripts/refinements/message
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Refines
+  refine String do
+    def dud = true
+  end
+end
+
+module With
+  using Refines
+
+  def self.call(value) = value.dud
+end
+
+module Without
+  def self.call(value) = value
+end
+
+value = "demo"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("With") { With.call value }
+  benchmark.report("Without") { Without.call value }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                With     1.094M i/100ms
+             Without     1.975M i/100ms
+Calculating -------------------------------------
+                With     14.487M (± 0.6%) i/s -     73.267M in   5.057661s
+             Without     41.306M (± 0.6%) i/s -    207.340M in   5.019744s
+
+Comparison:
+             Without: 41306256.7 i/s
+                With: 14486926.3 i/s - 2.85x  slower
+....
+
+=== scripts/refinements/refine
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "With" do
+    Module.new do
+      refine String do
+        def dud = true
+      end
+    end
+  end
+
+  benchmark.report "Without" do
+    Module.new do
+      def dud = true
+    end
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+Warming up --------------------------------------
+                With   959.000  i/100ms
+             Without   297.091k i/100ms
+Calculating -------------------------------------
+                With     21.856k (±198.5%) i/s -     30.688k in   5.509103s
+             Without      3.281M (± 5.8%) i/s -     16.637M in   5.082246s
+
+Comparison:
+             Without:  3281310.6 i/s
+                With:    21856.1 i/s - 150.13x  slower
+....
+
 === scripts/strings/concatenation
 
 *Source*
@@ -1322,8 +1550,21 @@ end
 
 require "ostruct"
 
-DataExample = Data.define :a, :b, :c, :d, :e
-StructExample = Struct.new :a, :b, :c, :d, :e
+DataDefault = Data.define :a, :b, :c, :d, :e
+
+DataCustom = Data.define :a, :b, :c, :d, :e do
+  def initialize a: 1, b: 2, c: 3, d: 4, e: 5
+    super
+  end
+end
+
+StructDefault = Struct.new :a, :b, :c, :d, :e
+
+StructCustom = Struct.new :a, :b, :c, :d, :e do
+  def initialize a: 1, b: 2, c: 3, d: 4, e: 5
+    super
+  end
+end
 
 module Types
   include Dry.Types
@@ -1340,10 +1581,12 @@ end
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report("Data (positional)") { DataExample[1, 2, 3, 4, 5] }
-  benchmark.report("Data (keyword)") { DataExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
-  benchmark.report("Struct (positional)") { StructExample[1, 2, 3, 4, 5] }
-  benchmark.report("Struct (keyword)") { StructExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("Data (positional)") { DataDefault[1, 2, 3, 4, 5] }
+  benchmark.report("Data (keyword)") { DataDefault[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("Data (custom)") { DataCustom.new }
+  benchmark.report("Struct (positional)") { StructDefault[1, 2, 3, 4, 5] }
+  benchmark.report("Struct (keyword)") { StructDefault[a: 1, b: 2, c: 3, d: 4, e: 5] }
+  benchmark.report("Struct (custom)") { StructCustom.new }
   benchmark.report("OpenStruct") { OpenStruct.new a: 1, b: 2, c: 3, d: 4, e: 5 }
   benchmark.report("Dry Struct") { DryExample[a: 1, b: 2, c: 3, d: 4, e: 5] }
 
@@ -1355,29 +1598,35 @@ end
 
 ....
 Warming up --------------------------------------
-   Data (positional)   245.731k i/100ms
-      Data (keyword)   247.313k i/100ms
- Struct (positional)   667.020k i/100ms
-    Struct (keyword)   241.129k i/100ms
-          OpenStruct   770.000  i/100ms
-          Dry Struct    78.713k i/100ms
+   Data (positional)   244.204k i/100ms
+      Data (keyword)   250.725k i/100ms
+       Data (custom)   212.981k i/100ms
+ Struct (positional)   651.226k i/100ms
+    Struct (keyword)   235.496k i/100ms
+     Struct (custom)   227.346k i/100ms
+          OpenStruct   775.000  i/100ms
+          Dry Struct    80.619k i/100ms
 Calculating -------------------------------------
-   Data (positional)      2.669M (± 3.8%) i/s -     13.515M in   5.070325s
-      Data (keyword)      2.706M (± 2.8%) i/s -     13.602M in   5.029642s
- Struct (positional)      8.266M (± 5.0%) i/s -     41.355M in   5.014244s
-    Struct (keyword)      2.589M (± 4.2%) i/s -     13.021M in   5.036300s
-          OpenStruct      2.590k (±23.6%) i/s -     13.090k in   5.327237s
-          Dry Struct    816.512k (± 2.8%) i/s -      4.093M in   5.016803s
+   Data (positional)      2.688M (± 3.9%) i/s -     13.431M in   5.003434s
+      Data (keyword)      2.648M (± 4.4%) i/s -     13.288M in   5.027074s
+       Data (custom)      2.392M (± 2.7%) i/s -     12.140M in   5.079651s
+ Struct (positional)      8.277M (± 5.1%) i/s -     41.678M in   5.047248s
+    Struct (keyword)      2.611M (± 4.2%) i/s -     13.188M in   5.058964s
+     Struct (custom)      2.463M (± 4.1%) i/s -     12.504M in   5.084992s
+          OpenStruct      2.591k (±23.6%) i/s -     13.175k in   5.364353s
+          Dry Struct    826.845k (± 2.7%) i/s -      4.192M in   5.073777s
 
 Comparison:
- Struct (positional):  8266410.4 i/s
-      Data (keyword):  2706421.6 i/s - 3.05x  slower
-   Data (positional):  2669040.6 i/s - 3.10x  slower
-    Struct (keyword):  2589348.0 i/s - 3.19x  slower
-          Dry Struct:   816512.4 i/s - 10.12x  slower
-          OpenStruct:     2589.8 i/s - 3191.89x  slower
+ Struct (positional):  8276658.4 i/s
+   Data (positional):  2687981.7 i/s - 3.08x  slower
+      Data (keyword):  2648371.8 i/s - 3.13x  slower
+    Struct (keyword):  2610747.0 i/s - 3.17x  slower
+     Struct (custom):  2462808.2 i/s - 3.36x  slower
+       Data (custom):  2391614.9 i/s - 3.46x  slower
+          Dry Struct:   826844.7 i/s - 10.01x  slower
+          OpenStruct:     2590.9 i/s - 3194.56x  slower
 
-ℹ️ What's not shown above is that `Data` is fastest when members are small (i.e. three or less) but `Data` performance gets worse when more members are added (i.e. six or more). This is because `Data` always initializes with a `Hash` which is not the case with a `Struct`.
+ℹ️ `Data` is fastest when members are small (like three or less) but performance degrades when more members are added (like five or more). This is because `Data` always initializes with a `Hash` which is not the case with a `Struct`. Additionally, passing keyword arguments to/from Ruby to Ruby is optimized while to/from Ruby/C is not.
 ....
 
 === scripts/values/reading
