@@ -1,0 +1,50 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Refines
+  refine String do
+    def dud = true
+  end
+end
+
+module With
+  using Refines
+
+  def self.call(value) = value.dud
+end
+
+module Without
+  def self.call(value) = value
+end
+
+value = "demo"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("With") { With.call value }
+  benchmark.report("Without") { Without.call value }
+
+  benchmark.compare!
+end
+
+__END__
+
+Warming up --------------------------------------
+                With     1.094M i/100ms
+             Without     1.975M i/100ms
+Calculating -------------------------------------
+                With     14.487M (± 0.6%) i/s -     73.267M in   5.057661s
+             Without     41.306M (± 0.6%) i/s -    207.340M in   5.019744s
+
+Comparison:
+             Without: 41306256.7 i/s
+                With: 14486926.3 i/s - 2.85x  slower
