@@ -10,6 +10,8 @@ gemfile true do
   gem "dry-struct"
 end
 
+Warning[:performance] = false
+
 require "ostruct"
 
 DataDefault = Data.define :a, :b, :c, :d, :e
