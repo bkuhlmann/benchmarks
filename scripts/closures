@@ -67,29 +67,30 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-    Block (implicit)     1.445M i/100ms
+    Block (implicit)     2.399M i/100ms
 Block (implicit guard)
-                         1.208M i/100ms
-    Block (explicit)   402.677k i/100ms
+                         2.308M i/100ms
+    Block (explicit)   450.130k i/100ms
 Block (explicit guard)
-                       394.207k i/100ms
-              Lambda     1.657M i/100ms
-                Proc     1.686M i/100ms
+                       449.734k i/100ms
+              Lambda     1.669M i/100ms
+                Proc     1.645M i/100ms
 Calculating -------------------------------------
-    Block (implicit)     14.320M (± 1.0%) i/s -     72.268M in   5.047006s
+    Block (implicit)     46.862M (± 0.1%) i/s -    235.143M in   5.017800s
 Block (implicit guard)
-                         11.985M (± 0.5%) i/s -     60.393M in   5.039127s
-    Block (explicit)      3.996M (± 5.4%) i/s -     20.134M in   5.051219s
+                         45.439M (± 0.1%) i/s -    228.508M in   5.028862s
+    Block (explicit)      5.056M (± 5.3%) i/s -     25.657M in   5.087058s
 Block (explicit guard)
-                          3.939M (± 5.2%) i/s -     19.710M in   5.015816s
-              Lambda     16.673M (± 0.4%) i/s -     84.509M in   5.068818s
-                Proc     16.589M (± 0.4%) i/s -     84.309M in   5.082291s
+                          5.045M (± 5.4%) i/s -     25.185M in   5.004320s
+              Lambda     27.275M (± 0.1%) i/s -    136.832M in   5.016843s
+                Proc     27.075M (± 0.1%) i/s -    136.520M in   5.042320s
 
 Comparison:
-              Lambda: 16672549.1 i/s
-                Proc: 16589090.1 i/s - same-ish: difference falls within error
-    Block (implicit): 14320229.3 i/s - 1.16x  (± 0.00) slower
-Block (implicit guard): 11985042.8 i/s - 1.39x  (± 0.00) slower
-    Block (explicit):  3995551.0 i/s - 4.17x  (± 0.00) slower
-Block (explicit guard):  3938951.4 i/s - 4.23x  (± 0.00) slower
+    Block (implicit): 46861784.2 i/s
+Block (implicit guard): 45439260.8 i/s - 1.03x  slower
+              Lambda: 27274557.0 i/s - 1.72x  slower
+                Proc: 27074831.5 i/s - 1.73x  slower
+    Block (explicit):  5056252.9 i/s - 9.27x  slower
+Block (explicit guard):  5045448.0 i/s - 9.29x  slower

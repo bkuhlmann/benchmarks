@@ -30,13 +30,14 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-                 for     3.326k i/100ms
-               #each     3.462k i/100ms
+                 for     4.588k i/100ms
+               #each     4.641k i/100ms
 Calculating -------------------------------------
-                 for     33.135k (± 0.1%) i/s -    166.300k in   5.018799s
-               #each     35.332k (± 0.6%) i/s -    180.024k in   5.095360s
+                 for     45.152k (± 0.4%) i/s -    229.400k in   5.080724s
+               #each     46.210k (± 0.4%) i/s -    232.050k in   5.021756s
 
 Comparison:
-               #each:    35332.2 i/s
-                 for:    33135.5 i/s - 1.07x  (± 0.00) slower
+               #each:    46209.5 i/s
+                 for:    45151.9 i/s - 1.02x  slower

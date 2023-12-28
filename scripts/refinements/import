@@ -21,9 +21,7 @@ Benchmark.ips do |benchmark|
   end
 
   benchmark.report "Without" do
-    Module.new do
-      def dud = true
-    end
+    Module.new { def dud = true }
   end
 
   benchmark.compare!
@@ -31,13 +29,14 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-                With     1.001k i/100ms
-             Without   298.259k i/100ms
+                With     1.045k i/100ms
+             Without   276.674k i/100ms
 Calculating -------------------------------------
-                With     21.111k (±197.8%) i/s -     30.030k in   5.226342s
-             Without      3.295M (± 5.7%) i/s -     16.703M in   5.081423s
+                With     23.800k (±195.6%) i/s -     29.260k in   5.070785s
+             Without      2.779M (± 8.7%) i/s -     13.834M in   5.015788s
 
 Comparison:
-             Without:  3294526.3 i/s
-                With:    21111.2 i/s - 156.06x  slower
+             Without:  2778896.1 i/s
+                With:    23800.2 i/s - 116.76x  slower

@@ -42,19 +42,20 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-                Data     2.207M i/100ms
-              Struct     2.208M i/100ms
-          OpenStruct     1.383M i/100ms
-          Dry Struct     1.392M i/100ms
+                Data     2.543M i/100ms
+              Struct     2.558M i/100ms
+          OpenStruct     1.538M i/100ms
+          Dry Struct     1.571M i/100ms
 Calculating -------------------------------------
-                Data     44.542M (± 0.9%) i/s -    222.944M in   5.005729s
-              Struct     44.269M (± 0.9%) i/s -    222.980M in   5.037364s
-          OpenStruct     21.532M (± 0.1%) i/s -    107.905M in   5.011283s
-          Dry Struct     20.494M (± 0.2%) i/s -    103.024M in   5.027049s
+                Data     52.507M (± 3.1%) i/s -    264.489M in   5.043652s
+              Struct     51.870M (± 0.1%) i/s -    260.891M in   5.029669s
+          OpenStruct     23.023M (± 1.7%) i/s -    115.327M in   5.010693s
+          Dry Struct     24.352M (± 0.9%) i/s -    122.552M in   5.032876s
 
 Comparison:
-                Data: 44541569.9 i/s
-              Struct: 44269100.2 i/s - same-ish: difference falls within error
-          OpenStruct: 21532484.9 i/s - 2.07x  slower
-          Dry Struct: 20494058.3 i/s - 2.17x  slower
+                Data: 52506933.5 i/s
+              Struct: 51870432.9 i/s - same-ish: difference falls within error
+          Dry Struct: 24352307.9 i/s - 2.16x  slower
+          OpenStruct: 23022934.9 i/s - 2.28x  slower

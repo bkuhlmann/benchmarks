@@ -40,13 +40,14 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-                With   863.932k i/100ms
-             Without   864.485k i/100ms
+                With   833.953k i/100ms
+             Without   838.454k i/100ms
 Calculating -------------------------------------
-                With     11.923M (± 2.2%) i/s -     59.611M in   5.002109s
-             Without     11.963M (± 2.2%) i/s -     60.514M in   5.060665s
+                With     10.205M (± 7.3%) i/s -     50.871M in   5.008494s
+             Without     10.220M (± 7.2%) i/s -     51.146M in   5.027072s
 
 Comparison:
-             Without: 11963279.0 i/s
-                With: 11922826.8 i/s - same-ish: difference falls within error
+             Without: 10220488.8 i/s
+                With: 10205174.2 i/s - same-ish: difference falls within error

@@ -28,13 +28,14 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-              Struct   342.290k i/100ms
-            Subclass   343.460k i/100ms
+              Struct   347.644k i/100ms
+            Subclass   344.218k i/100ms
 Calculating -------------------------------------
-              Struct      3.929M (± 2.8%) i/s -     19.853M in   5.056112s
-            Subclass      3.914M (± 2.8%) i/s -     19.577M in   5.006162s
+              Struct      3.852M (± 6.1%) i/s -     19.468M in   5.072154s
+            Subclass      3.732M (± 8.5%) i/s -     18.588M in   5.015045s
 
 Comparison:
-              Struct:  3929350.4 i/s
-            Subclass:  3913502.3 i/s - same-ish: difference falls within error
+              Struct:  3851754.0 i/s
+            Subclass:  3732310.1 i/s - same-ish: difference falls within error

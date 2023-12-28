@@ -23,13 +23,14 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-               #grep   174.698k i/100ms
-             #select   146.806k i/100ms
+               #grep   136.641k i/100ms
+             #select   134.822k i/100ms
 Calculating -------------------------------------
-               #grep      1.813M (± 2.9%) i/s -      9.084M in   5.015837s
-             #select      1.636M (± 2.4%) i/s -      8.221M in   5.026738s
+               #grep      1.439M (± 7.5%) i/s -      7.242M in   5.061585s
+             #select      1.403M (± 7.0%) i/s -      7.011M in   5.021935s
 
 Comparison:
-               #grep:  1812522.2 i/s
-             #select:  1636400.1 i/s - 1.11x  slower
+               #grep:  1439047.5 i/s
+             #select:  1403449.3 i/s - same-ish: difference falls within error

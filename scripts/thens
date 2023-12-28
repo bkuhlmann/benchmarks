@@ -26,13 +26,14 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-            standard   339.158k i/100ms
-                then   309.907k i/100ms
+            standard   287.063k i/100ms
+                then   273.661k i/100ms
 Calculating -------------------------------------
-            standard      3.379M (± 0.9%) i/s -     16.958M in   5.018758s
-                then      3.084M (± 0.9%) i/s -     15.495M in   5.024083s
+            standard      3.066M (± 5.4%) i/s -     15.501M in   5.071976s
+                then      2.890M (± 4.6%) i/s -     14.504M in   5.029748s
 
 Comparison:
-            standard:  3379176.5 i/s
-                then:  3084483.1 i/s - 1.10x  (± 0.00) slower
+            standard:  3066216.7 i/s
+                then:  2890464.2 i/s - same-ish: difference falls within error

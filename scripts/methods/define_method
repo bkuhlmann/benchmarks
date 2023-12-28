@@ -60,16 +60,17 @@ end
 
 __END__
 
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
 Warming up --------------------------------------
-             Wrapped   919.102k i/100ms
-             Defined   979.167k i/100ms
-           Delegated   561.812k i/100ms
+             Wrapped   837.082k i/100ms
+             Defined   855.620k i/100ms
+           Delegated   515.199k i/100ms
 Calculating -------------------------------------
-             Wrapped     13.194M (± 2.6%) i/s -     66.175M in   5.018669s
-             Defined     13.608M (± 2.3%) i/s -     68.542M in   5.039359s
-           Delegated      6.535M (± 1.6%) i/s -     33.147M in   5.073785s
+             Wrapped     10.248M (± 7.0%) i/s -     51.062M in   5.004285s
+             Defined     10.529M (± 6.6%) i/s -     53.048M in   5.058176s
+           Delegated      5.821M (± 2.0%) i/s -     29.366M in   5.046785s
 
 Comparison:
-             Defined: 13608493.7 i/s
-             Wrapped: 13194426.2 i/s - same-ish: difference falls within error
-           Delegated:  6534500.5 i/s - 2.08x  slower
+             Defined: 10528678.8 i/s
+             Wrapped: 10248218.8 i/s - same-ish: difference falls within error
+           Delegated:  5821154.3 i/s - 1.81x  slower
