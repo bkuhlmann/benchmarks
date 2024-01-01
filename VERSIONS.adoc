@@ -1,5 +1,16 @@
 = Versions
 
+== 4.0.0 (2024-01-01)
+
+* Added version release notes - Brooke Kuhlmann
+* Updated Circle CI step names - Brooke Kuhlmann
+* Updated benchmarks with Ruby 3.3.0 results - Brooke Kuhlmann
+* Updated gem dependencies - Brooke Kuhlmann
+* Updated to Ruby 3.3.0 - Brooke Kuhlmann
+* Updated values initialization benchmark to ignore performance warnings - Brooke Kuhlmann
+* Removed Gemfile code prefix from quality group - Brooke Kuhlmann
+* Removed Rakefile code prefix from quality task - Brooke Kuhlmann
+
 == 3.2.0 (2023-11-04)
 
 * Added refinement import benchmark - Brooke Kuhlmann
