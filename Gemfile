@@ -8,7 +8,7 @@ gem "refinements", "~> 12.0"
 
 group :quality do
   gem "caliber", "~> 0.51"
-  gem "git-lint", "~> 7.0"
+  gem "git-lint", "~> 7.1"
   gem "reek", "~> 6.3", require: false
   gem "simplecov", "~> 0.22", require: false
 end
