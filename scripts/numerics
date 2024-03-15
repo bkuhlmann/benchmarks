@@ -1,0 +1,44 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "bigdecimal"
+  gem "benchmark-ips"
+end
+
+require "bigdecimal"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Integer") { 1 + 0 }
+  benchmark.report("Float") { 0.0001 + 0 }
+  benchmark.report("Rational") { (1 / 1000r) + 0 }
+  benchmark.report("BigDecimal") { BigDecimal("0.0001") + 0 }
+
+  benchmark.compare!
+end
+
+__END__
+
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+Warming up --------------------------------------
+             Integer     4.945M i/100ms
+               Float     3.898M i/100ms
+            Rational   957.175k i/100ms
+          BigDecimal   226.746k i/100ms
+Calculating -------------------------------------
+             Integer     75.084M (± 4.5%) i/s -    375.824M in   5.021257s
+               Float     60.640M (± 0.6%) i/s -    304.039M in   5.013994s
+            Rational     10.254M (± 0.6%) i/s -     51.687M in   5.040700s
+          BigDecimal      2.332M (± 4.5%) i/s -     11.791M in   5.066520s
+
+Comparison:
+             Integer: 75083686.6 i/s
+               Float: 60640359.1 i/s - 1.24x  slower
+            Rational: 10254439.4 i/s - 7.32x  slower
+          BigDecimal:  2332151.1 i/s - 32.20x  slower
