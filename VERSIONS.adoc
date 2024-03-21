@@ -1,5 +1,11 @@
 = Versions
 
+== 4.2.0 (2024-03-21)
+
+* 🟢 Added numerics benchmark - Brooke Kuhlmann
+* 🔼 Updated benchmark measurements for an M3 machine - Brooke Kuhlmann
+* 🔼 Updated to Amazing Print 1.6.0 - Brooke Kuhlmann
+
 == 4.1.0 (2024-03-03)
 
 * 🟢 Added repl_type_completor gem - Brooke Kuhlmann

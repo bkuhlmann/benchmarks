@@ -27,7 +27,7 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 4.1.0
+git checkout 4.2.0
 bin/setup
 ----
 
@@ -101,32 +101,32 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                  #+   845.131k i/100ms
-                 #+=   521.126k i/100ms
-             #concat   452.571k i/100ms
-                  #|   341.623k i/100ms
-      #<< + #flatten   149.466k i/100ms
-    splat + #flatten   149.001k i/100ms
-         multi-splat   434.644k i/100ms
+                  #+     1.109M i/100ms
+                 #+=   642.208k i/100ms
+             #concat   640.592k i/100ms
+                  #|   462.891k i/100ms
+      #<< + #flatten   190.264k i/100ms
+    splat + #flatten   191.960k i/100ms
+         multi-splat   595.693k i/100ms
 Calculating -------------------------------------
-                  #+     10.475M (± 9.5%) i/s -     52.398M in   5.050961s
-                 #+=      5.929M (± 7.8%) i/s -     29.704M in   5.037287s
-             #concat      5.003M (± 9.8%) i/s -     24.891M in   5.023014s
-                  #|      3.695M (± 8.7%) i/s -     18.448M in   5.032592s
-      #<< + #flatten      1.519M (± 8.9%) i/s -      7.623M in   5.058189s
-    splat + #flatten      1.531M (± 9.0%) i/s -      7.599M in   5.004145s
-         multi-splat      4.701M (± 6.3%) i/s -     23.471M in   5.011116s
+                  #+     11.380M (± 6.3%) i/s -     57.673M in   5.088056s
+                 #+=      7.020M (± 7.5%) i/s -     35.321M in   5.060801s
+             #concat      6.757M (± 4.3%) i/s -     33.951M in   5.033526s
+                  #|      4.589M (± 7.1%) i/s -     23.145M in   5.069256s
+      #<< + #flatten      1.995M (± 7.8%) i/s -     10.084M in   5.083410s
+    splat + #flatten      1.987M (± 7.7%) i/s -      9.982M in   5.053069s
+         multi-splat      6.018M (± 5.4%) i/s -     30.380M in   5.063797s
 
 Comparison:
-                  #+: 10474576.2 i/s
-                 #+=:  5929151.0 i/s - 1.77x  slower
-             #concat:  5002661.4 i/s - 2.09x  slower
-         multi-splat:  4700795.0 i/s - 2.23x  slower
-                  #|:  3694672.1 i/s - 2.84x  slower
-    splat + #flatten:  1530591.1 i/s - 6.84x  slower
-      #<< + #flatten:  1518887.3 i/s - 6.90x  slower
+                  #+: 11379928.4 i/s
+                 #+=:  7020046.0 i/s - 1.62x  slower
+             #concat:  6757373.6 i/s - 1.68x  slower
+         multi-splat:  6017673.7 i/s - 1.89x  slower
+                  #|:  4588614.9 i/s - 2.48x  slower
+      #<< + #flatten:  1995390.6 i/s - 5.70x  slower
+    splat + #flatten:  1986837.6 i/s - 5.73x  slower
 ....
 
 === scripts/arrays/search
@@ -162,17 +162,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-               #grep   136.641k i/100ms
-             #select   134.822k i/100ms
+               #grep   173.406k i/100ms
+             #select   185.779k i/100ms
 Calculating -------------------------------------
-               #grep      1.439M (± 7.5%) i/s -      7.242M in   5.061585s
-             #select      1.403M (± 7.0%) i/s -      7.011M in   5.021935s
+               #grep      1.771M (± 6.7%) i/s -      8.844M in   5.016015s
+             #select      1.912M (± 5.5%) i/s -      9.661M in   5.067631s
 
 Comparison:
-               #grep:  1439047.5 i/s
-             #select:  1403449.3 i/s - same-ish: difference falls within error
+             #select:  1912344.1 i/s
+               #grep:  1770866.9 i/s - same-ish: difference falls within error
 ....
 
 === scripts/closures
@@ -252,33 +252,33 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-    Block (implicit)     2.399M i/100ms
+    Block (implicit)     3.719M i/100ms
 Block (implicit guard)
-                         2.308M i/100ms
-    Block (explicit)   450.130k i/100ms
+                         3.997M i/100ms
+    Block (explicit)   595.448k i/100ms
 Block (explicit guard)
-                       449.734k i/100ms
-              Lambda     1.669M i/100ms
-                Proc     1.645M i/100ms
+                       597.963k i/100ms
+              Lambda     2.428M i/100ms
+                Proc     2.563M i/100ms
 Calculating -------------------------------------
-    Block (implicit)     46.862M (± 0.1%) i/s -    235.143M in   5.017800s
+    Block (implicit)     59.804M (± 1.0%) i/s -    301.203M in   5.037053s
 Block (implicit guard)
-                         45.439M (± 0.1%) i/s -    228.508M in   5.028862s
-    Block (explicit)      5.056M (± 5.3%) i/s -     25.657M in   5.087058s
+                         59.083M (± 1.2%) i/s -    295.765M in   5.006599s
+    Block (explicit)      6.377M (± 6.6%) i/s -     32.154M in   5.065513s
 Block (explicit guard)
-                          5.045M (± 5.4%) i/s -     25.185M in   5.004320s
-              Lambda     27.275M (± 0.1%) i/s -    136.832M in   5.016843s
-                Proc     27.075M (± 0.1%) i/s -    136.520M in   5.042320s
+                          6.365M (± 5.7%) i/s -     32.290M in   5.090170s
+              Lambda     34.880M (± 1.2%) i/s -    174.833M in   5.013192s
+                Proc     35.295M (± 1.9%) i/s -    176.865M in   5.012838s
 
 Comparison:
-    Block (implicit): 46861784.2 i/s
-Block (implicit guard): 45439260.8 i/s - 1.03x  slower
-              Lambda: 27274557.0 i/s - 1.72x  slower
-                Proc: 27074831.5 i/s - 1.73x  slower
-    Block (explicit):  5056252.9 i/s - 9.27x  slower
-Block (explicit guard):  5045448.0 i/s - 9.29x  slower
+    Block (implicit): 59803662.6 i/s
+Block (implicit guard): 59083369.8 i/s - same-ish: difference falls within error
+                Proc: 35294734.0 i/s - 1.69x  slower
+              Lambda: 34879827.8 i/s - 1.71x  slower
+    Block (explicit):  6377470.8 i/s - 9.38x  slower
+Block (explicit guard):  6365264.1 i/s - 9.40x  slower
 ....
 
 === scripts/constants/lookup
@@ -319,23 +319,23 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                 #[]     1.813M i/100ms
- Module.get (symbol)     1.961M i/100ms
- Module.get (string)     1.068M i/100ms
-          Object.get   734.137k i/100ms
+                 #[]     3.380M i/100ms
+ Module.get (symbol)     3.491M i/100ms
+ Module.get (string)     1.706M i/100ms
+          Object.get     1.068M i/100ms
 Calculating -------------------------------------
-                 #[]     32.213M (± 1.8%) i/s -    161.350M in   5.010440s
- Module.get (symbol)     32.696M (± 1.4%) i/s -    164.717M in   5.038892s
- Module.get (string)     14.125M (± 2.0%) i/s -     71.568M in   5.068803s
-          Object.get      8.708M (± 0.9%) i/s -     44.048M in   5.058943s
+                 #[]     44.355M (± 0.2%) i/s -    223.075M in   5.029360s
+ Module.get (symbol)     44.370M (± 0.1%) i/s -    223.435M in   5.035747s
+ Module.get (string)     18.818M (± 0.5%) i/s -     95.510M in   5.075490s
+          Object.get     11.076M (± 0.3%) i/s -     55.527M in   5.013445s
 
 Comparison:
- Module.get (symbol): 32695695.0 i/s
-                 #[]: 32213332.8 i/s - same-ish: difference falls within error
- Module.get (string): 14124876.2 i/s - 2.31x  slower
-          Object.get:  8707737.9 i/s - 3.75x  slower
+ Module.get (symbol): 44369850.1 i/s
+                 #[]: 44354632.8 i/s - same-ish: difference falls within error
+ Module.get (string): 18818346.2 i/s - 2.36x  slower
+          Object.get: 11075724.0 i/s - 4.01x  slower
 ....
 
 === scripts/delegates
@@ -415,23 +415,23 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-             Forward   870.104k i/100ms
-            Delegate   804.894k i/100ms
-    Simple Delegator   312.778k i/100ms
-      Delegate Class   311.149k i/100ms
+             Forward     1.132M i/100ms
+            Delegate     1.017M i/100ms
+    Simple Delegator   385.198k i/100ms
+      Delegate Class   381.099k i/100ms
 Calculating -------------------------------------
-             Forward     10.839M (± 6.5%) i/s -     54.817M in   5.076450s
-            Delegate      9.873M (± 7.4%) i/s -     49.903M in   5.079844s
-    Simple Delegator      3.395M (± 7.8%) i/s -     16.890M in   5.004405s
-      Delegate Class      3.389M (± 8.1%) i/s -     17.113M in   5.080799s
+             Forward     13.380M (± 5.3%) i/s -     66.769M in   5.005398s
+            Delegate     12.486M (± 3.0%) i/s -     63.053M in   5.054667s
+    Simple Delegator      4.191M (± 7.0%) i/s -     21.186M in   5.077130s
+      Delegate Class      4.174M (± 6.5%) i/s -     20.960M in   5.041277s
 
 Comparison:
-             Forward: 10838784.1 i/s
-            Delegate:  9872509.4 i/s - same-ish: difference falls within error
-    Simple Delegator:  3395064.5 i/s - 3.19x  slower
-      Delegate Class:  3389384.7 i/s - 3.20x  slower
+             Forward: 13380268.0 i/s
+            Delegate: 12486453.4 i/s - same-ish: difference falls within error
+    Simple Delegator:  4191347.1 i/s - 3.19x  slower
+      Delegate Class:  4174068.4 i/s - 3.21x  slower
 ....
 
 === scripts/hashes/lookup
@@ -469,26 +469,26 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                 #[]     1.648M i/100ms
-              #fetch     1.547M i/100ms
-    #fetch (default)     1.562M i/100ms
-      #fetch (block)     1.547M i/100ms
-                #dig     1.553M i/100ms
+                 #[]     4.035M i/100ms
+              #fetch     3.642M i/100ms
+    #fetch (default)     3.661M i/100ms
+      #fetch (block)     3.639M i/100ms
+                #dig     3.747M i/100ms
 Calculating -------------------------------------
-                 #[]     26.018M (± 3.4%) i/s -    130.197M in   5.009925s
-              #fetch     23.729M (± 2.5%) i/s -    119.086M in   5.021739s
-    #fetch (default)     23.330M (± 3.4%) i/s -    117.134M in   5.026454s
-      #fetch (block)     23.443M (± 2.8%) i/s -    117.567M in   5.018956s
-                #dig     24.126M (± 1.2%) i/s -    121.144M in   5.021949s
+                 #[]     53.886M (± 0.1%) i/s -    270.328M in   5.016651s
+              #fetch     45.478M (± 0.1%) i/s -    229.440M in   5.045124s
+    #fetch (default)     45.677M (± 0.4%) i/s -    230.660M in   5.049861s
+      #fetch (block)     44.675M (± 0.2%) i/s -    225.636M in   5.050641s
+                #dig     50.390M (± 0.5%) i/s -    254.823M in   5.057135s
 
 Comparison:
-                 #[]: 26018263.6 i/s
-                #dig: 24126491.2 i/s - 1.08x  slower
-              #fetch: 23729385.7 i/s - 1.10x  slower
-      #fetch (block): 23443014.5 i/s - 1.11x  slower
-    #fetch (default): 23329743.0 i/s - 1.12x  slower
+                 #[]: 53886256.9 i/s
+                #dig: 50390168.1 i/s - 1.07x  slower
+    #fetch (default): 45677292.4 i/s - 1.18x  slower
+              #fetch: 45477689.6 i/s - 1.18x  slower
+      #fetch (block): 44674922.3 i/s - 1.21x  slower
 ....
 
 === scripts/hashes/merge
@@ -525,23 +525,23 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-               Splat   643.576k i/100ms
-               Merge   446.875k i/100ms
-              Merge!   679.384k i/100ms
-          Dup Merge!   365.838k i/100ms
+               Splat   977.474k i/100ms
+               Merge   651.230k i/100ms
+              Merge!   979.604k i/100ms
+          Dup Merge!   525.213k i/100ms
 Calculating -------------------------------------
-               Splat      7.591M (± 6.1%) i/s -     37.971M in   5.022702s
-               Merge      5.217M (± 8.3%) i/s -     26.366M in   5.086572s
-              Merge!      8.265M (± 7.6%) i/s -     41.442M in   5.045815s
-          Dup Merge!      4.122M (± 8.1%) i/s -     20.487M in   5.004504s
+               Splat     10.458M (± 7.0%) i/s -     52.784M in   5.072085s
+               Merge      6.637M (± 2.2%) i/s -     33.213M in   5.006663s
+              Merge!     10.624M (± 6.7%) i/s -     53.878M in   5.093783s
+          Dup Merge!      5.400M (± 7.0%) i/s -     27.311M in   5.081979s
 
 Comparison:
-              Merge!:  8264520.5 i/s
-               Splat:  7590619.9 i/s - same-ish: difference falls within error
-               Merge:  5216873.4 i/s - 1.58x  slower
-          Dup Merge!:  4122009.8 i/s - 2.00x  slower
+              Merge!: 10624192.6 i/s
+               Splat: 10457715.9 i/s - same-ish: difference falls within error
+               Merge:  6636870.8 i/s - 1.60x  slower
+          Dup Merge!:  5399502.4 i/s - 1.97x  slower
 ....
 
 === scripts/hashes/reduce
@@ -592,17 +592,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-              Reduce    33.619k i/100ms
-         With Object    69.397k i/100ms
+              Reduce    46.696k i/100ms
+         With Object    86.950k i/100ms
 Calculating -------------------------------------
-              Reduce    349.372k (± 6.8%) i/s -      1.748M in   5.028721s
-         With Object    703.163k (± 7.1%) i/s -      3.539M in   5.057035s
+              Reduce    469.369k (± 7.1%) i/s -      2.381M in   5.099251s
+         With Object    893.855k (± 0.5%) i/s -      4.521M in   5.058420s
 
 Comparison:
-         With Object:   703162.6 i/s
-              Reduce:   349371.9 i/s - 2.01x  slower
+         With Object:   893855.0 i/s
+              Reduce:   469368.6 i/s - 1.90x  slower
 ....
 
 === scripts/loops
@@ -645,17 +645,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                 for     4.588k i/100ms
-               #each     4.641k i/100ms
+                 for     6.369k i/100ms
+               #each     6.583k i/100ms
 Calculating -------------------------------------
-                 for     45.152k (± 0.4%) i/s -    229.400k in   5.080724s
-               #each     46.210k (± 0.4%) i/s -    232.050k in   5.021756s
+                 for     63.745k (± 0.1%) i/s -    324.819k in   5.095574s
+               #each     65.617k (± 0.5%) i/s -    329.150k in   5.016325s
 
 Comparison:
-               #each:    46209.5 i/s
-                 for:    45151.9 i/s - 1.02x  slower
+               #each:    65617.4 i/s
+                 for:    63745.4 i/s - 1.03x  slower
 ....
 
 === scripts/methods/define_method
@@ -728,20 +728,20 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-             Wrapped   837.082k i/100ms
-             Defined   855.620k i/100ms
-           Delegated   515.199k i/100ms
+             Wrapped     1.128M i/100ms
+             Defined     1.153M i/100ms
+           Delegated   626.507k i/100ms
 Calculating -------------------------------------
-             Wrapped     10.248M (± 7.0%) i/s -     51.062M in   5.004285s
-             Defined     10.529M (± 6.6%) i/s -     53.048M in   5.058176s
-           Delegated      5.821M (± 2.0%) i/s -     29.366M in   5.046785s
+             Wrapped     12.039M (± 4.8%) i/s -     60.917M in   5.072433s
+             Defined     12.270M (± 3.9%) i/s -     62.244M in   5.080966s
+           Delegated      6.912M (± 6.2%) i/s -     34.458M in   5.005586s
 
 Comparison:
-             Defined: 10528678.8 i/s
-             Wrapped: 10248218.8 i/s - same-ish: difference falls within error
-           Delegated:  5821154.3 i/s - 1.81x  slower
+             Defined: 12269954.3 i/s
+             Wrapped: 12039424.1 i/s - same-ish: difference falls within error
+           Delegated:  6912331.3 i/s - 1.78x  slower
 ....
 
 === scripts/methods/method_proc
@@ -819,29 +819,29 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-          Direct (s)   860.200k i/100ms
-          Direct (m)   314.512k i/100ms
-            Proc (s)   470.304k i/100ms
-            Proc (m)   148.096k i/100ms
-  Method To Proc (s)   212.521k i/100ms
-  Method To Proc (m)   144.383k i/100ms
+          Direct (s)     1.154M i/100ms
+          Direct (m)   391.284k i/100ms
+            Proc (s)   547.383k i/100ms
+            Proc (m)   167.519k i/100ms
+  Method To Proc (s)   260.729k i/100ms
+  Method To Proc (m)   176.733k i/100ms
 Calculating -------------------------------------
-          Direct (s)     10.554M (± 6.7%) i/s -     53.332M in   5.073432s
-          Direct (m)      3.396M (± 8.4%) i/s -     16.984M in   5.034861s
-            Proc (s)      5.246M (± 5.8%) i/s -     26.337M in   5.035817s
-            Proc (m)      1.507M (± 4.1%) i/s -      7.553M in   5.021176s
-  Method To Proc (s)      2.259M (± 6.2%) i/s -     11.264M in   5.003937s
-  Method To Proc (m)      1.549M (± 8.2%) i/s -      7.797M in   5.065793s
+          Direct (s)     12.832M (± 4.1%) i/s -     64.611M in   5.043941s
+          Direct (m)      4.159M (± 4.2%) i/s -     21.129M in   5.088977s
+            Proc (s)      6.454M (± 6.0%) i/s -     32.296M in   5.023367s
+            Proc (m)      1.830M (± 3.9%) i/s -      9.214M in   5.043206s
+  Method To Proc (s)      2.874M (± 3.4%) i/s -     14.601M in   5.086253s
+  Method To Proc (m)      1.962M (± 3.3%) i/s -      9.897M in   5.048962s
 
 Comparison:
-          Direct (s): 10554191.6 i/s
-            Proc (s):  5245716.2 i/s - 2.01x  slower
-          Direct (m):  3396117.4 i/s - 3.11x  slower
-  Method To Proc (s):  2258835.4 i/s - 4.67x  slower
-  Method To Proc (m):  1548501.1 i/s - 6.82x  slower
-            Proc (m):  1506850.9 i/s - 7.00x  slower
+          Direct (s): 12831929.9 i/s
+            Proc (s):  6453824.9 i/s - 1.99x  slower
+          Direct (m):  4158707.8 i/s - 3.09x  slower
+  Method To Proc (s):  2874279.1 i/s - 4.46x  slower
+  Method To Proc (m):  1962181.8 i/s - 6.54x  slower
+            Proc (m):  1829728.8 i/s - 7.01x  slower
 ....
 
 === scripts/methods/send
@@ -894,20 +894,74 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-              Static     1.000 i/100ms
+              Static     2.000 i/100ms
    Dynamic (strings)     1.000 i/100ms
    Dynamic (symbols)     1.000 i/100ms
 Calculating -------------------------------------
-              Static     20.047 (± 0.0%) i/s -    101.000 in   5.039175s
-   Dynamic (strings)      8.973 (± 0.0%) i/s -     45.000 in   5.015272s
-   Dynamic (symbols)     11.698 (± 0.0%) i/s -     59.000 in   5.043676s
+              Static     27.041 (± 0.0%) i/s -    136.000 in   5.029371s
+   Dynamic (strings)     11.600 (± 0.0%) i/s -     59.000 in   5.086066s
+   Dynamic (symbols)     15.589 (± 0.0%) i/s -     78.000 in   5.003651s
 
 Comparison:
-              Static:       20.0 i/s
-   Dynamic (symbols):       11.7 i/s - 1.71x  slower
-   Dynamic (strings):        9.0 i/s - 2.23x  slower
+              Static:       27.0 i/s
+   Dynamic (symbols):       15.6 i/s - 1.73x  slower
+   Dynamic (strings):       11.6 i/s - 2.33x  slower
+....
+
+=== scripts/numerics
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "bigdecimal"
+  gem "benchmark-ips"
+end
+
+require "bigdecimal"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Integer") { 1 + 0 }
+  benchmark.report("Float") { 0.0001 + 0 }
+  benchmark.report("Rational") { (1 / 1000r) + 0 }
+  benchmark.report("BigDecimal") { BigDecimal("0.0001") + 0 }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+Warming up --------------------------------------
+             Integer     4.945M i/100ms
+               Float     3.898M i/100ms
+            Rational   957.175k i/100ms
+          BigDecimal   226.746k i/100ms
+Calculating -------------------------------------
+             Integer     75.084M (± 4.5%) i/s -    375.824M in   5.021257s
+               Float     60.640M (± 0.6%) i/s -    304.039M in   5.013994s
+            Rational     10.254M (± 0.6%) i/s -     51.687M in   5.040700s
+          BigDecimal      2.332M (± 4.5%) i/s -     11.791M in   5.066520s
+
+Comparison:
+             Integer: 75083686.6 i/s
+               Float: 60640359.1 i/s - 1.24x  slower
+            Rational: 10254439.4 i/s - 7.32x  slower
+          BigDecimal:  2332151.1 i/s - 32.20x  slower
 ....
 
 === scripts/refinements/import
@@ -949,17 +1003,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                With     1.045k i/100ms
-             Without   276.674k i/100ms
+                With     1.438k i/100ms
+             Without   365.822k i/100ms
 Calculating -------------------------------------
-                With     23.800k (±195.6%) i/s -     29.260k in   5.070785s
-             Without      2.779M (± 8.7%) i/s -     13.834M in   5.015788s
+                With     21.970k (±190.8%) i/s -     43.140k in   5.067653s
+             Without      3.636M (± 7.1%) i/s -     18.291M in   5.054830s
 
 Comparison:
-             Without:  2778896.1 i/s
-                With:    23800.2 i/s - 116.76x  slower
+             Without:  3635623.1 i/s
+                With:    21969.9 i/s - 165.48x  slower
 ....
 
 === scripts/refinements/initialize
@@ -1012,17 +1066,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                With   833.953k i/100ms
-             Without   838.454k i/100ms
+                With     1.118M i/100ms
+             Without     1.067M i/100ms
 Calculating -------------------------------------
-                With     10.205M (± 7.3%) i/s -     50.871M in   5.008494s
-             Without     10.220M (± 7.2%) i/s -     51.146M in   5.027072s
+                With     12.286M (± 5.5%) i/s -     61.467M in   5.019067s
+             Without     11.971M (± 5.7%) i/s -     59.775M in   5.010076s
 
 Comparison:
-             Without: 10220488.8 i/s
-                With: 10205174.2 i/s - same-ish: difference falls within error
+                With: 12285927.1 i/s
+             Without: 11970917.9 i/s - same-ish: difference falls within error
 ....
 
 === scripts/refinements/message
@@ -1073,17 +1127,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                With     1.770M i/100ms
-             Without     2.381M i/100ms
+                With     2.681M i/100ms
+             Without     3.796M i/100ms
 Calculating -------------------------------------
-                With     29.563M (± 0.1%) i/s -    148.702M in   5.029938s
-             Without     49.776M (± 0.1%) i/s -    250.041M in   5.023309s
+                With     37.893M (± 1.2%) i/s -    190.353M in   5.024141s
+             Without     59.787M (± 4.2%) i/s -    299.874M in   5.024598s
 
 Comparison:
-             Without: 49776136.7 i/s
-                With: 29563375.3 i/s - 1.68x  slower
+             Without: 59786895.6 i/s
+                With: 37893449.5 i/s - 1.58x  slower
 ....
 
 === scripts/refinements/refine
@@ -1127,17 +1181,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                With     1.071k i/100ms
-             Without   273.359k i/100ms
+                With     1.497k i/100ms
+             Without   337.437k i/100ms
 Calculating -------------------------------------
-                With     23.009k (±190.6%) i/s -     28.917k in   5.110875s
-             Without      2.765M (± 8.4%) i/s -     13.941M in   5.077013s
+                With     21.225k (±192.4%) i/s -     35.928k in   5.093624s
+             Without      3.284M (± 8.5%) i/s -     16.534M in   5.067713s
 
 Comparison:
-             Without:  2765329.2 i/s
-                With:    23009.3 i/s - 120.18x  slower
+             Without:  3284418.0 i/s
+                With:    21224.8 i/s - 154.74x  slower
 ....
 
 === scripts/strings/concatenation
@@ -1231,47 +1285,47 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-        Implicit (<)     2.601M i/100ms
-        Implicit (>)     2.640M i/100ms
-   Interpolation (<)   898.911k i/100ms
-   Interpolation (>)   303.153k i/100ms
-              #+ (<)   640.087k i/100ms
-              #+ (>)    73.694k i/100ms
-         #concat (<)     1.003M i/100ms
-         #concat (>)   241.868k i/100ms
-             #<< (<)     1.076M i/100ms
-             #<< (>)   374.733k i/100ms
-      Array#join (<)   557.003k i/100ms
-      Array#join (>)   262.493k i/100ms
+        Implicit (<)     4.372M i/100ms
+        Implicit (>)     4.448M i/100ms
+   Interpolation (<)     1.208M i/100ms
+   Interpolation (>)   367.925k i/100ms
+              #+ (<)   823.216k i/100ms
+              #+ (>)    80.833k i/100ms
+         #concat (<)     1.369M i/100ms
+         #concat (>)   291.617k i/100ms
+             #<< (<)     1.479M i/100ms
+             #<< (>)   459.494k i/100ms
+      Array#join (<)   722.879k i/100ms
+      Array#join (>)   307.222k i/100ms
 Calculating -------------------------------------
-        Implicit (<)     54.132M (± 2.5%) i/s -    273.116M in   5.048673s
-        Implicit (>)     54.714M (± 0.3%) i/s -    274.602M in   5.018882s
-   Interpolation (<)     11.071M (± 5.6%) i/s -     55.732M in   5.047673s
-   Interpolation (>)      3.267M (± 7.4%) i/s -     16.370M in   5.037346s
-              #+ (<)      7.464M (± 7.0%) i/s -     37.765M in   5.086482s
-              #+ (>)    742.417k (± 1.1%) i/s -      3.758M in   5.063044s
-         #concat (<)     12.788M (± 0.9%) i/s -     64.219M in   5.022186s
-         #concat (>)      2.551M (± 7.9%) i/s -     12.819M in   5.056076s
-             #<< (<)     13.776M (± 3.9%) i/s -     68.860M in   5.006536s
-             #<< (>)      4.105M (± 7.6%) i/s -     20.610M in   5.050318s
-      Array#join (<)      6.393M (± 4.5%) i/s -     32.306M in   5.064649s
-      Array#join (>)      2.790M (± 9.0%) i/s -     13.912M in   5.025822s
+        Implicit (<)     75.685M (± 1.7%) i/s -    380.338M in   5.026812s
+        Implicit (>)     75.105M (± 1.8%) i/s -    378.120M in   5.036297s
+   Interpolation (<)     12.722M (± 5.7%) i/s -     64.005M in   5.047960s
+   Interpolation (>)      3.868M (± 5.9%) i/s -     19.500M in   5.057509s
+              #+ (<)      8.701M (± 7.1%) i/s -     43.630M in   5.038462s
+              #+ (>)    837.724k (± 7.7%) i/s -      4.203M in   5.048670s
+         #concat (<)     14.496M (± 8.5%) i/s -     72.583M in   5.045357s
+         #concat (>)      2.959M (± 8.8%) i/s -     14.872M in   5.063294s
+             #<< (<)     15.944M (± 8.0%) i/s -     79.888M in   5.043131s
+             #<< (>)      4.739M (± 9.0%) i/s -     23.894M in   5.082877s
+      Array#join (<)      7.392M (± 7.9%) i/s -     36.867M in   5.018258s
+      Array#join (>)      3.275M (± 7.8%) i/s -     16.283M in   5.000238s
 
 Comparison:
-        Implicit (>): 54714264.9 i/s
-        Implicit (<): 54131866.0 i/s - same-ish: difference falls within error
-             #<< (<): 13775992.5 i/s - 3.97x  slower
-         #concat (<): 12788273.5 i/s - 4.28x  slower
-   Interpolation (<): 11071433.5 i/s - 4.94x  slower
-              #+ (<):  7464136.7 i/s - 7.33x  slower
-      Array#join (<):  6392876.9 i/s - 8.56x  slower
-             #<< (>):  4105202.5 i/s - 13.33x  slower
-   Interpolation (>):  3267084.5 i/s - 16.75x  slower
-      Array#join (>):  2790078.5 i/s - 19.61x  slower
-         #concat (>):  2551103.4 i/s - 21.45x  slower
-              #+ (>):   742417.5 i/s - 73.70x  slower
+        Implicit (<): 75684765.3 i/s
+        Implicit (>): 75104861.7 i/s - same-ish: difference falls within error
+             #<< (<): 15944068.0 i/s - 4.75x  slower
+         #concat (<): 14496048.1 i/s - 5.22x  slower
+   Interpolation (<): 12722385.9 i/s - 5.95x  slower
+              #+ (<):  8700892.4 i/s - 8.70x  slower
+      Array#join (<):  7392065.5 i/s - 10.24x  slower
+             #<< (>):  4738942.8 i/s - 15.97x  slower
+   Interpolation (>):  3867990.4 i/s - 19.57x  slower
+      Array#join (>):  3274997.2 i/s - 23.11x  slower
+         #concat (>):  2959275.8 i/s - 25.58x  slower
+              #+ (>):   837724.4 i/s - 90.35x  slower
 ....
 
 === scripts/strings/matching
@@ -1313,28 +1367,28 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-             #match?     1.557M i/100ms
-                 #=~   640.701k i/100ms
+             #match?     2.422M i/100ms
+                 #=~   742.580k i/100ms
 #start_with? (String)
-                         1.805M i/100ms
-#start_with? (Regex)   592.021k i/100ms
-          #end_with?     1.812M i/100ms
+                         2.965M i/100ms
+#start_with? (Regex)   679.369k i/100ms
+          #end_with?     3.069M i/100ms
 Calculating -------------------------------------
-             #match?     23.231M (± 0.5%) i/s -    116.739M in   5.025282s
-                 #=~      7.508M (± 0.5%) i/s -     37.801M in   5.035199s
+             #match?     28.797M (± 5.0%) i/s -    145.346M in   5.060238s
+                 #=~      7.620M (± 9.1%) i/s -     37.872M in   5.008839s
 #start_with? (String)
-                         28.097M (± 0.4%) i/s -    140.817M in   5.011989s
-#start_with? (Regex)      6.710M (± 3.2%) i/s -     33.745M in   5.033979s
-          #end_with?     28.779M (± 0.7%) i/s -    144.964M in   5.037311s
+                         34.312M (± 5.0%) i/s -    171.982M in   5.024675s
+#start_with? (Regex)      7.464M (± 7.4%) i/s -     37.365M in   5.034025s
+          #end_with?     37.141M (± 0.5%) i/s -    187.219M in   5.040811s
 
 Comparison:
-          #end_with?: 28779396.2 i/s
-#start_with? (String): 28096504.9 i/s - 1.02x  slower
-             #match?: 23230938.9 i/s - 1.24x  slower
-                 #=~:  7507625.8 i/s - 3.83x  slower
-#start_with? (Regex):  6709898.5 i/s - 4.29x  slower
+          #end_with?: 37141486.2 i/s
+#start_with? (String): 34312493.3 i/s - 1.08x  slower
+             #match?: 28797216.7 i/s - 1.29x  slower
+                 #=~:  7620209.0 i/s - 4.87x  slower
+#start_with? (Regex):  7463669.2 i/s - 4.98x  slower
 ....
 
 === scripts/strings/split
@@ -1380,17 +1434,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-       Without Block    11.000 i/100ms
-          With Block    11.000 i/100ms
+       Without Block    13.000 i/100ms
+          With Block    13.000 i/100ms
 Calculating -------------------------------------
-       Without Block    117.849 (± 0.8%) i/s -    594.000 in   5.041144s
-          With Block    113.401 (± 0.9%) i/s -    572.000 in   5.044469s
+       Without Block    136.799 (± 2.2%) i/s -    689.000 in   5.039420s
+          With Block    134.538 (± 2.2%) i/s -    676.000 in   5.026808s
 
 Comparison:
-       Without Block:      117.8 i/s
-          With Block:      113.4 i/s - 1.04x  slower
+       Without Block:      136.8 i/s
+          With Block:      134.5 i/s - same-ish: difference falls within error
 ....
 
 === scripts/strings/substrings
@@ -1428,26 +1482,26 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-       #sub (string)   439.628k i/100ms
-        #sub (regex)   307.022k i/100ms
-      #gsub (string)   362.211k i/100ms
-       #gsub (regex)   155.869k i/100ms
-                 #tr   747.200k i/100ms
+       #sub (string)   484.505k i/100ms
+        #sub (regex)   344.692k i/100ms
+      #gsub (string)   414.555k i/100ms
+       #gsub (regex)   170.417k i/100ms
+                 #tr     1.007M i/100ms
 Calculating -------------------------------------
-       #sub (string)      4.667M (± 4.8%) i/s -     23.740M in   5.096768s
-        #sub (regex)      3.324M (± 8.4%) i/s -     16.579M in   5.022002s
-      #gsub (string)      4.024M (± 8.7%) i/s -     20.284M in   5.078637s
-       #gsub (regex)      1.593M (± 2.5%) i/s -      8.105M in   5.089611s
-                 #tr      8.839M (± 9.2%) i/s -     44.085M in   5.025958s
+       #sub (string)      5.449M (± 3.0%) i/s -     27.617M in   5.073218s
+        #sub (regex)      4.021M (± 6.1%) i/s -     20.337M in   5.074883s
+      #gsub (string)      4.463M (± 3.4%) i/s -     22.386M in   5.021307s
+       #gsub (regex)      1.710M (± 8.6%) i/s -      8.521M in   5.018878s
+                 #tr     10.693M (± 2.8%) i/s -     54.352M in   5.087263s
 
 Comparison:
-                 #tr:  8838997.2 i/s
-       #sub (string):  4667446.9 i/s - 1.89x  slower
-      #gsub (string):  4023935.7 i/s - 2.20x  slower
-        #sub (regex):  3323612.6 i/s - 2.66x  slower
-       #gsub (regex):  1593427.3 i/s - 5.55x  slower
+                 #tr: 10692642.6 i/s
+       #sub (string):  5448640.0 i/s - 1.96x  slower
+      #gsub (string):  4463049.2 i/s - 2.40x  slower
+        #sub (regex):  4020798.1 i/s - 2.66x  slower
+       #gsub (regex):  1710379.3 i/s - 6.25x  slower
 ....
 
 === scripts/thens
@@ -1486,17 +1540,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-            standard   287.063k i/100ms
-                then   273.661k i/100ms
+            standard   361.533k i/100ms
+                then   340.568k i/100ms
 Calculating -------------------------------------
-            standard      3.066M (± 5.4%) i/s -     15.501M in   5.071976s
-                then      2.890M (± 4.6%) i/s -     14.504M in   5.029748s
+            standard      3.566M (± 7.3%) i/s -     18.077M in   5.096489s
+                then      3.366M (± 7.6%) i/s -     17.028M in   5.088830s
 
 Comparison:
-            standard:  3066216.7 i/s
-                then:  2890464.2 i/s - same-ish: difference falls within error
+            standard:  3566064.8 i/s
+                then:  3365922.3 i/s - same-ish: difference falls within error
 ....
 
 === scripts/values/inheritance
@@ -1537,17 +1591,17 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-              Struct   347.644k i/100ms
-            Subclass   344.218k i/100ms
+              Struct   446.439k i/100ms
+            Subclass   438.472k i/100ms
 Calculating -------------------------------------
-              Struct      3.852M (± 6.1%) i/s -     19.468M in   5.072154s
-            Subclass      3.732M (± 8.5%) i/s -     18.588M in   5.015045s
+              Struct      4.925M (± 7.6%) i/s -     24.554M in   5.013174s
+            Subclass      4.736M (± 7.8%) i/s -     23.677M in   5.027862s
 
 Comparison:
-              Struct:  3851754.0 i/s
-            Subclass:  3732310.1 i/s - same-ish: difference falls within error
+              Struct:  4924540.0 i/s
+            Subclass:  4736109.1 i/s - same-ish: difference falls within error
 ....
 
 === scripts/values/initialization
@@ -1619,35 +1673,35 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-   Data (positional)   263.219k i/100ms
-      Data (keyword)   268.831k i/100ms
-       Data (custom)   180.464k i/100ms
- Struct (positional)   613.904k i/100ms
-    Struct (keyword)   253.435k i/100ms
-     Struct (custom)   248.250k i/100ms
-          OpenStruct   513.000 i/100ms
-          Dry Struct    87.480k i/100ms
+   Data (positional)   304.848k i/100ms
+      Data (keyword)   317.019k i/100ms
+       Data (custom)   224.669k i/100ms
+ Struct (positional)   722.167k i/100ms
+    Struct (keyword)   302.062k i/100ms
+     Struct (custom)   292.850k i/100ms
+          OpenStruct   743.000 i/100ms
+          Dry Struct   111.304k i/100ms
 Calculating -------------------------------------
-   Data (positional)      2.752M (±10.4%) i/s -     13.687M in   5.027436s
-      Data (keyword)      2.780M (±10.4%) i/s -     13.979M in   5.082351s
-       Data (custom)      1.774M (± 2.4%) i/s -      9.023M in   5.088151s
- Struct (positional)      6.830M (± 1.7%) i/s -     34.379M in   5.035416s
-    Struct (keyword)      2.662M (±10.2%) i/s -     13.432M in   5.099726s
-     Struct (custom)      2.588M (±10.1%) i/s -     12.909M in   5.040115s
-          OpenStruct      1.631k (±19.3%) i/s -      8.208k in   5.213960s
-          Dry Struct    886.556k (±10.9%) i/s -      4.461M in   5.097822s
+   Data (positional)      3.120M (± 9.7%) i/s -     15.547M in   5.025792s
+      Data (keyword)      3.191M (± 9.7%) i/s -     15.851M in   5.008582s
+       Data (custom)      2.226M (± 3.6%) i/s -     11.233M in   5.054091s
+ Struct (positional)      6.869M (±10.4%) i/s -     34.664M in   5.098769s
+    Struct (keyword)      3.059M (± 9.6%) i/s -     15.405M in   5.077727s
+     Struct (custom)      2.945M (±11.4%) i/s -     14.642M in   5.031281s
+          OpenStruct      1.856k (±24.0%) i/s -      9.659k in   5.485483s
+          Dry Struct      1.123M (±11.8%) i/s -      5.565M in   5.029750s
 
 Comparison:
- Struct (positional):  6829526.2 i/s
-      Data (keyword):  2780207.2 i/s - 2.46x  slower
-   Data (positional):  2751887.0 i/s - 2.48x  slower
-    Struct (keyword):  2661762.5 i/s - 2.57x  slower
-     Struct (custom):  2587550.8 i/s - 2.64x  slower
-       Data (custom):  1774425.0 i/s - 3.85x  slower
-          Dry Struct:   886556.5 i/s - 7.70x  slower
-          OpenStruct:     1630.7 i/s - 4188.06x  slower
+ Struct (positional):  6868838.9 i/s
+      Data (keyword):  3191343.7 i/s - 2.15x  slower
+   Data (positional):  3120155.8 i/s - 2.20x  slower
+    Struct (keyword):  3059412.6 i/s - 2.25x  slower
+     Struct (custom):  2945238.4 i/s - 2.33x  slower
+       Data (custom):  2225751.7 i/s - 3.09x  slower
+          Dry Struct:  1123063.3 i/s - 6.12x  slower
+          OpenStruct:     1855.9 i/s - 3701.01x  slower
 
 ℹ️ `Data` is fastest when members are small (like three or less) but performance degrades when more members are added (like five or more). This is because `Data` always initializes with a `Hash` which is not the case with a `Struct`. Additionally, passing keyword arguments to/from Ruby to Ruby is optimized while to/from Ruby/C is not.
 ....
@@ -1704,23 +1758,23 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                Data     2.543M i/100ms
-              Struct     2.558M i/100ms
-          OpenStruct     1.538M i/100ms
-          Dry Struct     1.571M i/100ms
+                Data     4.313M i/100ms
+              Struct     3.960M i/100ms
+          OpenStruct     3.419M i/100ms
+          Dry Struct     3.646M i/100ms
 Calculating -------------------------------------
-                Data     52.507M (± 3.1%) i/s -    264.489M in   5.043652s
-              Struct     51.870M (± 0.1%) i/s -    260.891M in   5.029669s
-          OpenStruct     23.023M (± 1.7%) i/s -    115.327M in   5.010693s
-          Dry Struct     24.352M (± 0.9%) i/s -    122.552M in   5.032876s
+                Data     72.832M (± 0.1%) i/s -    366.637M in   5.034027s
+              Struct     68.730M (± 0.4%) i/s -    344.554M in   5.013242s
+          OpenStruct     49.555M (± 0.1%) i/s -    249.580M in   5.036400s
+          Dry Struct     49.635M (± 0.1%) i/s -    251.578M in   5.068604s
 
 Comparison:
-                Data: 52506933.5 i/s
-              Struct: 51870432.9 i/s - same-ish: difference falls within error
-          Dry Struct: 24352307.9 i/s - 2.16x  slower
-          OpenStruct: 23022934.9 i/s - 2.28x  slower
+                Data: 72831756.3 i/s
+              Struct: 68729971.7 i/s - 1.06x  slower
+          Dry Struct: 49634683.0 i/s - 1.47x  slower
+          OpenStruct: 49555343.3 i/s - 1.47x  slower
 ....
 
 === scripts/values/writing
@@ -1763,20 +1817,20 @@ end
 *Benchmark*
 
 ....
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                Data   213.507k i/100ms
-              Struct     2.237M i/100ms
-          OpenStruct     1.663M i/100ms
+                Data   265.287k i/100ms
+              Struct     4.274M i/100ms
+          OpenStruct     2.870M i/100ms
 Calculating -------------------------------------
-                Data      2.296M (± 6.5%) i/s -     11.529M in   5.044563s
-              Struct     42.364M (± 0.1%) i/s -    212.555M in   5.017318s
-          OpenStruct     26.183M (± 0.1%) i/s -    131.343M in   5.016276s
+                Data      2.721M (± 8.0%) i/s -     13.530M in   5.002940s
+              Struct     55.482M (± 1.5%) i/s -    277.793M in   5.008024s
+          OpenStruct     34.810M (± 0.2%) i/s -    175.090M in   5.029864s
 
 Comparison:
-              Struct: 42364299.0 i/s
-          OpenStruct: 26183309.3 i/s - 1.62x  slower
-                Data:  2295988.5 i/s - 18.45x  slower
+              Struct: 55482353.9 i/s
+          OpenStruct: 34810159.3 i/s - 1.59x  slower
+                Data:  2721426.3 i/s - 20.39x  slower
 ....
 
 == Development
