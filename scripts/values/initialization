@@ -59,34 +59,34 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-   Data (positional)   263.219k i/100ms
-      Data (keyword)   268.831k i/100ms
-       Data (custom)   180.464k i/100ms
- Struct (positional)   613.904k i/100ms
-    Struct (keyword)   253.435k i/100ms
-     Struct (custom)   248.250k i/100ms
-          OpenStruct   513.000 i/100ms
-          Dry Struct    87.480k i/100ms
+   Data (positional)   304.848k i/100ms
+      Data (keyword)   317.019k i/100ms
+       Data (custom)   224.669k i/100ms
+ Struct (positional)   722.167k i/100ms
+    Struct (keyword)   302.062k i/100ms
+     Struct (custom)   292.850k i/100ms
+          OpenStruct   743.000 i/100ms
+          Dry Struct   111.304k i/100ms
 Calculating -------------------------------------
-   Data (positional)      2.752M (±10.4%) i/s -     13.687M in   5.027436s
-      Data (keyword)      2.780M (±10.4%) i/s -     13.979M in   5.082351s
-       Data (custom)      1.774M (± 2.4%) i/s -      9.023M in   5.088151s
- Struct (positional)      6.830M (± 1.7%) i/s -     34.379M in   5.035416s
-    Struct (keyword)      2.662M (±10.2%) i/s -     13.432M in   5.099726s
-     Struct (custom)      2.588M (±10.1%) i/s -     12.909M in   5.040115s
-          OpenStruct      1.631k (±19.3%) i/s -      8.208k in   5.213960s
-          Dry Struct    886.556k (±10.9%) i/s -      4.461M in   5.097822s
+   Data (positional)      3.120M (± 9.7%) i/s -     15.547M in   5.025792s
+      Data (keyword)      3.191M (± 9.7%) i/s -     15.851M in   5.008582s
+       Data (custom)      2.226M (± 3.6%) i/s -     11.233M in   5.054091s
+ Struct (positional)      6.869M (±10.4%) i/s -     34.664M in   5.098769s
+    Struct (keyword)      3.059M (± 9.6%) i/s -     15.405M in   5.077727s
+     Struct (custom)      2.945M (±11.4%) i/s -     14.642M in   5.031281s
+          OpenStruct      1.856k (±24.0%) i/s -      9.659k in   5.485483s
+          Dry Struct      1.123M (±11.8%) i/s -      5.565M in   5.029750s
 
 Comparison:
- Struct (positional):  6829526.2 i/s
-      Data (keyword):  2780207.2 i/s - 2.46x  slower
-   Data (positional):  2751887.0 i/s - 2.48x  slower
-    Struct (keyword):  2661762.5 i/s - 2.57x  slower
-     Struct (custom):  2587550.8 i/s - 2.64x  slower
-       Data (custom):  1774425.0 i/s - 3.85x  slower
-          Dry Struct:   886556.5 i/s - 7.70x  slower
-          OpenStruct:     1630.7 i/s - 4188.06x  slower
+ Struct (positional):  6868838.9 i/s
+      Data (keyword):  3191343.7 i/s - 2.15x  slower
+   Data (positional):  3120155.8 i/s - 2.20x  slower
+    Struct (keyword):  3059412.6 i/s - 2.25x  slower
+     Struct (custom):  2945238.4 i/s - 2.33x  slower
+       Data (custom):  2225751.7 i/s - 3.09x  slower
+          Dry Struct:  1123063.3 i/s - 6.12x  slower
+          OpenStruct:     1855.9 i/s - 3701.01x  slower
 
 ℹ️ `Data` is fastest when members are small (like three or less) but performance degrades when more members are added (like five or more). This is because `Data` always initializes with a `Hash` which is not the case with a `Struct`. Additionally, passing keyword arguments to/from Ruby to Ruby is optimized while to/from Ruby/C is not.

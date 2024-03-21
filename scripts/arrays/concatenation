@@ -49,29 +49,29 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                  #+   845.131k i/100ms
-                 #+=   521.126k i/100ms
-             #concat   452.571k i/100ms
-                  #|   341.623k i/100ms
-      #<< + #flatten   149.466k i/100ms
-    splat + #flatten   149.001k i/100ms
-         multi-splat   434.644k i/100ms
+                  #+     1.109M i/100ms
+                 #+=   642.208k i/100ms
+             #concat   640.592k i/100ms
+                  #|   462.891k i/100ms
+      #<< + #flatten   190.264k i/100ms
+    splat + #flatten   191.960k i/100ms
+         multi-splat   595.693k i/100ms
 Calculating -------------------------------------
-                  #+     10.475M (± 9.5%) i/s -     52.398M in   5.050961s
-                 #+=      5.929M (± 7.8%) i/s -     29.704M in   5.037287s
-             #concat      5.003M (± 9.8%) i/s -     24.891M in   5.023014s
-                  #|      3.695M (± 8.7%) i/s -     18.448M in   5.032592s
-      #<< + #flatten      1.519M (± 8.9%) i/s -      7.623M in   5.058189s
-    splat + #flatten      1.531M (± 9.0%) i/s -      7.599M in   5.004145s
-         multi-splat      4.701M (± 6.3%) i/s -     23.471M in   5.011116s
+                  #+     11.380M (± 6.3%) i/s -     57.673M in   5.088056s
+                 #+=      7.020M (± 7.5%) i/s -     35.321M in   5.060801s
+             #concat      6.757M (± 4.3%) i/s -     33.951M in   5.033526s
+                  #|      4.589M (± 7.1%) i/s -     23.145M in   5.069256s
+      #<< + #flatten      1.995M (± 7.8%) i/s -     10.084M in   5.083410s
+    splat + #flatten      1.987M (± 7.7%) i/s -      9.982M in   5.053069s
+         multi-splat      6.018M (± 5.4%) i/s -     30.380M in   5.063797s
 
 Comparison:
-                  #+: 10474576.2 i/s
-                 #+=:  5929151.0 i/s - 1.77x  slower
-             #concat:  5002661.4 i/s - 2.09x  slower
-         multi-splat:  4700795.0 i/s - 2.23x  slower
-                  #|:  3694672.1 i/s - 2.84x  slower
-    splat + #flatten:  1530591.1 i/s - 6.84x  slower
-      #<< + #flatten:  1518887.3 i/s - 6.90x  slower
+                  #+: 11379928.4 i/s
+                 #+=:  7020046.0 i/s - 1.62x  slower
+             #concat:  6757373.6 i/s - 1.68x  slower
+         multi-splat:  6017673.7 i/s - 1.89x  slower
+                  #|:  4588614.9 i/s - 2.48x  slower
+      #<< + #flatten:  1995390.6 i/s - 5.70x  slower
+    splat + #flatten:  1986837.6 i/s - 5.73x  slower

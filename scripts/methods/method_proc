@@ -65,26 +65,26 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-          Direct (s)   860.200k i/100ms
-          Direct (m)   314.512k i/100ms
-            Proc (s)   470.304k i/100ms
-            Proc (m)   148.096k i/100ms
-  Method To Proc (s)   212.521k i/100ms
-  Method To Proc (m)   144.383k i/100ms
+          Direct (s)     1.154M i/100ms
+          Direct (m)   391.284k i/100ms
+            Proc (s)   547.383k i/100ms
+            Proc (m)   167.519k i/100ms
+  Method To Proc (s)   260.729k i/100ms
+  Method To Proc (m)   176.733k i/100ms
 Calculating -------------------------------------
-          Direct (s)     10.554M (± 6.7%) i/s -     53.332M in   5.073432s
-          Direct (m)      3.396M (± 8.4%) i/s -     16.984M in   5.034861s
-            Proc (s)      5.246M (± 5.8%) i/s -     26.337M in   5.035817s
-            Proc (m)      1.507M (± 4.1%) i/s -      7.553M in   5.021176s
-  Method To Proc (s)      2.259M (± 6.2%) i/s -     11.264M in   5.003937s
-  Method To Proc (m)      1.549M (± 8.2%) i/s -      7.797M in   5.065793s
+          Direct (s)     12.832M (± 4.1%) i/s -     64.611M in   5.043941s
+          Direct (m)      4.159M (± 4.2%) i/s -     21.129M in   5.088977s
+            Proc (s)      6.454M (± 6.0%) i/s -     32.296M in   5.023367s
+            Proc (m)      1.830M (± 3.9%) i/s -      9.214M in   5.043206s
+  Method To Proc (s)      2.874M (± 3.4%) i/s -     14.601M in   5.086253s
+  Method To Proc (m)      1.962M (± 3.3%) i/s -      9.897M in   5.048962s
 
 Comparison:
-          Direct (s): 10554191.6 i/s
-            Proc (s):  5245716.2 i/s - 2.01x  slower
-          Direct (m):  3396117.4 i/s - 3.11x  slower
-  Method To Proc (s):  2258835.4 i/s - 4.67x  slower
-  Method To Proc (m):  1548501.1 i/s - 6.82x  slower
-            Proc (m):  1506850.9 i/s - 7.00x  slower
+          Direct (s): 12831929.9 i/s
+            Proc (s):  6453824.9 i/s - 1.99x  slower
+          Direct (m):  4158707.8 i/s - 3.09x  slower
+  Method To Proc (s):  2874279.1 i/s - 4.46x  slower
+  Method To Proc (m):  1962181.8 i/s - 6.54x  slower
+            Proc (m):  1829728.8 i/s - 7.01x  slower

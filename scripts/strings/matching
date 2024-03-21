@@ -29,25 +29,25 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-             #match?     1.557M i/100ms
-                 #=~   640.701k i/100ms
+             #match?     2.422M i/100ms
+                 #=~   742.580k i/100ms
 #start_with? (String)
-                         1.805M i/100ms
-#start_with? (Regex)   592.021k i/100ms
-          #end_with?     1.812M i/100ms
+                         2.965M i/100ms
+#start_with? (Regex)   679.369k i/100ms
+          #end_with?     3.069M i/100ms
 Calculating -------------------------------------
-             #match?     23.231M (± 0.5%) i/s -    116.739M in   5.025282s
-                 #=~      7.508M (± 0.5%) i/s -     37.801M in   5.035199s
+             #match?     28.797M (± 5.0%) i/s -    145.346M in   5.060238s
+                 #=~      7.620M (± 9.1%) i/s -     37.872M in   5.008839s
 #start_with? (String)
-                         28.097M (± 0.4%) i/s -    140.817M in   5.011989s
-#start_with? (Regex)      6.710M (± 3.2%) i/s -     33.745M in   5.033979s
-          #end_with?     28.779M (± 0.7%) i/s -    144.964M in   5.037311s
+                         34.312M (± 5.0%) i/s -    171.982M in   5.024675s
+#start_with? (Regex)      7.464M (± 7.4%) i/s -     37.365M in   5.034025s
+          #end_with?     37.141M (± 0.5%) i/s -    187.219M in   5.040811s
 
 Comparison:
-          #end_with?: 28779396.2 i/s
-#start_with? (String): 28096504.9 i/s - 1.02x  slower
-             #match?: 23230938.9 i/s - 1.24x  slower
-                 #=~:  7507625.8 i/s - 3.83x  slower
-#start_with? (Regex):  6709898.5 i/s - 4.29x  slower
+          #end_with?: 37141486.2 i/s
+#start_with? (String): 34312493.3 i/s - 1.08x  slower
+             #match?: 28797216.7 i/s - 1.29x  slower
+                 #=~:  7620209.0 i/s - 4.87x  slower
+#start_with? (Regex):  7463669.2 i/s - 4.98x  slower

@@ -33,14 +33,14 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-       Without Block    11.000 i/100ms
-          With Block    11.000 i/100ms
+       Without Block    13.000 i/100ms
+          With Block    13.000 i/100ms
 Calculating -------------------------------------
-       Without Block    117.849 (± 0.8%) i/s -    594.000 in   5.041144s
-          With Block    113.401 (± 0.9%) i/s -    572.000 in   5.044469s
+       Without Block    136.799 (± 2.2%) i/s -    689.000 in   5.039420s
+          With Block    134.538 (± 2.2%) i/s -    676.000 in   5.026808s
 
 Comparison:
-       Without Block:      117.8 i/s
-          With Block:      113.4 i/s - 1.04x  slower
+       Without Block:      136.8 i/s
+          With Block:      134.5 i/s - same-ish: difference falls within error

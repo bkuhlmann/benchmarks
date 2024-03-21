@@ -67,20 +67,20 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-             Forward   870.104k i/100ms
-            Delegate   804.894k i/100ms
-    Simple Delegator   312.778k i/100ms
-      Delegate Class   311.149k i/100ms
+             Forward     1.132M i/100ms
+            Delegate     1.017M i/100ms
+    Simple Delegator   385.198k i/100ms
+      Delegate Class   381.099k i/100ms
 Calculating -------------------------------------
-             Forward     10.839M (± 6.5%) i/s -     54.817M in   5.076450s
-            Delegate      9.873M (± 7.4%) i/s -     49.903M in   5.079844s
-    Simple Delegator      3.395M (± 7.8%) i/s -     16.890M in   5.004405s
-      Delegate Class      3.389M (± 8.1%) i/s -     17.113M in   5.080799s
+             Forward     13.380M (± 5.3%) i/s -     66.769M in   5.005398s
+            Delegate     12.486M (± 3.0%) i/s -     63.053M in   5.054667s
+    Simple Delegator      4.191M (± 7.0%) i/s -     21.186M in   5.077130s
+      Delegate Class      4.174M (± 6.5%) i/s -     20.960M in   5.041277s
 
 Comparison:
-             Forward: 10838784.1 i/s
-            Delegate:  9872509.4 i/s - same-ish: difference falls within error
-    Simple Delegator:  3395064.5 i/s - 3.19x  slower
-      Delegate Class:  3389384.7 i/s - 3.20x  slower
+             Forward: 13380268.0 i/s
+            Delegate: 12486453.4 i/s - same-ish: difference falls within error
+    Simple Delegator:  4191347.1 i/s - 3.19x  slower
+      Delegate Class:  4174068.4 i/s - 3.21x  slower

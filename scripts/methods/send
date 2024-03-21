@@ -40,17 +40,17 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-              Static     1.000 i/100ms
+              Static     2.000 i/100ms
    Dynamic (strings)     1.000 i/100ms
    Dynamic (symbols)     1.000 i/100ms
 Calculating -------------------------------------
-              Static     20.047 (± 0.0%) i/s -    101.000 in   5.039175s
-   Dynamic (strings)      8.973 (± 0.0%) i/s -     45.000 in   5.015272s
-   Dynamic (symbols)     11.698 (± 0.0%) i/s -     59.000 in   5.043676s
+              Static     27.041 (± 0.0%) i/s -    136.000 in   5.029371s
+   Dynamic (strings)     11.600 (± 0.0%) i/s -     59.000 in   5.086066s
+   Dynamic (symbols)     15.589 (± 0.0%) i/s -     78.000 in   5.003651s
 
 Comparison:
-              Static:       20.0 i/s
-   Dynamic (symbols):       11.7 i/s - 1.71x  slower
-   Dynamic (strings):        9.0 i/s - 2.23x  slower
+              Static:       27.0 i/s
+   Dynamic (symbols):       15.6 i/s - 1.73x  slower
+   Dynamic (strings):       11.6 i/s - 2.33x  slower

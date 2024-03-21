@@ -25,23 +25,23 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-                 #[]     1.648M i/100ms
-              #fetch     1.547M i/100ms
-    #fetch (default)     1.562M i/100ms
-      #fetch (block)     1.547M i/100ms
-                #dig     1.553M i/100ms
+                 #[]     4.035M i/100ms
+              #fetch     3.642M i/100ms
+    #fetch (default)     3.661M i/100ms
+      #fetch (block)     3.639M i/100ms
+                #dig     3.747M i/100ms
 Calculating -------------------------------------
-                 #[]     26.018M (± 3.4%) i/s -    130.197M in   5.009925s
-              #fetch     23.729M (± 2.5%) i/s -    119.086M in   5.021739s
-    #fetch (default)     23.330M (± 3.4%) i/s -    117.134M in   5.026454s
-      #fetch (block)     23.443M (± 2.8%) i/s -    117.567M in   5.018956s
-                #dig     24.126M (± 1.2%) i/s -    121.144M in   5.021949s
+                 #[]     53.886M (± 0.1%) i/s -    270.328M in   5.016651s
+              #fetch     45.478M (± 0.1%) i/s -    229.440M in   5.045124s
+    #fetch (default)     45.677M (± 0.4%) i/s -    230.660M in   5.049861s
+      #fetch (block)     44.675M (± 0.2%) i/s -    225.636M in   5.050641s
+                #dig     50.390M (± 0.5%) i/s -    254.823M in   5.057135s
 
 Comparison:
-                 #[]: 26018263.6 i/s
-                #dig: 24126491.2 i/s - 1.08x  slower
-              #fetch: 23729385.7 i/s - 1.10x  slower
-      #fetch (block): 23443014.5 i/s - 1.11x  slower
-    #fetch (default): 23329743.0 i/s - 1.12x  slower
+                 #[]: 53886256.9 i/s
+                #dig: 50390168.1 i/s - 1.07x  slower
+    #fetch (default): 45677292.4 i/s - 1.18x  slower
+              #fetch: 45477689.6 i/s - 1.18x  slower
+      #fetch (block): 44674922.3 i/s - 1.21x  slower

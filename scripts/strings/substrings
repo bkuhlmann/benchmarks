@@ -25,23 +25,23 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin22.6.0]
+ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
 Warming up --------------------------------------
-       #sub (string)   439.628k i/100ms
-        #sub (regex)   307.022k i/100ms
-      #gsub (string)   362.211k i/100ms
-       #gsub (regex)   155.869k i/100ms
-                 #tr   747.200k i/100ms
+       #sub (string)   484.505k i/100ms
+        #sub (regex)   344.692k i/100ms
+      #gsub (string)   414.555k i/100ms
+       #gsub (regex)   170.417k i/100ms
+                 #tr     1.007M i/100ms
 Calculating -------------------------------------
-       #sub (string)      4.667M (± 4.8%) i/s -     23.740M in   5.096768s
-        #sub (regex)      3.324M (± 8.4%) i/s -     16.579M in   5.022002s
-      #gsub (string)      4.024M (± 8.7%) i/s -     20.284M in   5.078637s
-       #gsub (regex)      1.593M (± 2.5%) i/s -      8.105M in   5.089611s
-                 #tr      8.839M (± 9.2%) i/s -     44.085M in   5.025958s
+       #sub (string)      5.449M (± 3.0%) i/s -     27.617M in   5.073218s
+        #sub (regex)      4.021M (± 6.1%) i/s -     20.337M in   5.074883s
+      #gsub (string)      4.463M (± 3.4%) i/s -     22.386M in   5.021307s
+       #gsub (regex)      1.710M (± 8.6%) i/s -      8.521M in   5.018878s
+                 #tr     10.693M (± 2.8%) i/s -     54.352M in   5.087263s
 
 Comparison:
-                 #tr:  8838997.2 i/s
-       #sub (string):  4667446.9 i/s - 1.89x  slower
-      #gsub (string):  4023935.7 i/s - 2.20x  slower
-        #sub (regex):  3323612.6 i/s - 2.66x  slower
-       #gsub (regex):  1593427.3 i/s - 5.55x  slower
+                 #tr: 10692642.6 i/s
+       #sub (string):  5448640.0 i/s - 1.96x  slower
+      #gsub (string):  4463049.2 i/s - 2.40x  slower
+        #sub (regex):  4020798.1 i/s - 2.66x  slower
+       #gsub (regex):  1710379.3 i/s - 6.25x  slower
