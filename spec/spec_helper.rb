@@ -27,6 +27,7 @@ RSpec.configure do |config|
   config.formatter = ENV.fetch("CI", false) == "true" ? :progress : :documentation
   config.mock_with(:rspec) { |mocks| mocks.verify_partial_doubles = true }
   config.order = "random"
+  config.pending_failure_output = :no_backtrace
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.warnings = true
 
