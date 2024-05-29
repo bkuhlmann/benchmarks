@@ -14,6 +14,6 @@ keywords:
  - ruby
  - benchmarks
  - performance
-  repository-code: https://github.com/bkuhlmann/benchmarks
-  repository-artifact: https://alchemists.io/projects/benchmarks
-  url: https://alchemists.io/projects/benchmarks
+repository-code: https://github.com/bkuhlmann/benchmarks
+repository-artifact: https://alchemists.io/projects/benchmarks
+url: https://alchemists.io/projects/benchmarks
