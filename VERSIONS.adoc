@@ -1,5 +1,10 @@
 = Versions
 
+== 4.7.0 (2024-09-01)
+
+* 🟢 Added README Developer Certificate of Origin documentation - Brooke Kuhlmann
+* 🔼 Updated to Refinements 12.8.0 - Brooke Kuhlmann
+
 == 4.6.0 (2024-07-25)
 
 * 🟢 Added binding benchmark - Brooke Kuhlmann
