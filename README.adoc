@@ -27,20 +27,13 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 4.7.1
+git checkout 4.8.0
 bin/setup
 ----
 
 == Usage
 
 All benchmark scripts are found within the `scripts` folder and you can run any benchmark using a relative or absolute file path. Example:
-
-[source,bash]
-----
-scripts/strings/split
-----
-
-The following is a list of all benchmarks (source + results). Again, you run these locally or study the results provided instead.
 
 === scripts/arrays/concatenation
 
@@ -1010,6 +1003,90 @@ Comparison:
                Float: 60640359.1 i/s - 1.24x  slower
             Rational: 10254439.4 i/s - 7.32x  slower
           BigDecimal:  2332151.1 i/s - 32.20x  slower
+....
+
+=== scripts/pattern_matching/multiple_type_check
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+  gem "benchmark-ips"
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("include?") { [String, Symbol].include? :test.class }
+  benchmark.report("in") { :test in String | Symbol }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+ruby 3.3.5 (2024-09-03 revision ef084cc8f4) +YJIT [arm64-darwin23.6.0]
+Warming up --------------------------------------
+            include?     2.133M i/100ms
+                  in     2.125M i/100ms
+Calculating -------------------------------------
+            include?     24.603M (± 1.5%) i/s   (40.65 ns/i) -    123.710M in   5.029399s
+                  in     26.547M (± 1.7%) i/s   (37.67 ns/i) -    133.855M in   5.043962s
+
+Comparison:
+                  in: 26546608.0 i/s
+            include?: 24602944.9 i/s - 1.08x  slower
+....
+
+=== scripts/pattern_matching/single_type_check
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+  gem "benchmark-ips"
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("is_a?") { :test.is_a? Symbol }
+  benchmark.report("in") { :test in Symbol }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+ruby 3.3.5 (2024-09-03 revision ef084cc8f4) +YJIT [arm64-darwin23.6.0]
+Warming up --------------------------------------
+               is_a?     4.544M i/100ms
+                  in     3.022M i/100ms
+Calculating -------------------------------------
+               is_a?     72.453M (± 0.5%) i/s   (13.80 ns/i) -    363.542M in   5.017741s
+                  in     39.524M (± 2.1%) i/s   (25.30 ns/i) -    199.473M in   5.049727s
+
+Comparison:
+               is_a?: 72453047.7 i/s
+                  in: 39523743.1 i/s - 1.83x  slower
 ....
 
 === scripts/refinements/import
