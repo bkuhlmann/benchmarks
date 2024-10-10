@@ -1,0 +1,32 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+  gem "benchmark-ips"
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("is_a?") { :test.is_a? Symbol }
+  benchmark.report("in") { :test in Symbol }
+
+  benchmark.compare!
+end
+
+__END__
+
+ruby 3.3.5 (2024-09-03 revision ef084cc8f4) +YJIT [arm64-darwin23.6.0]
+Warming up --------------------------------------
+               is_a?     4.544M i/100ms
+                  in     3.022M i/100ms
+Calculating -------------------------------------
+               is_a?     72.453M (± 0.5%) i/s   (13.80 ns/i) -    363.542M in   5.017741s
+                  in     39.524M (± 2.1%) i/s   (25.30 ns/i) -    199.473M in   5.049727s
+
+Comparison:
+               is_a?: 72453047.7 i/s
+                  in: 39523743.1 i/s - 1.83x  slower
