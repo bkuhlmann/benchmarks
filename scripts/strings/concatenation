@@ -48,22 +48,22 @@ Benchmark.ips do |benchmark|
     eight + " " + nine + " " + ten
   end
 
-  # WARNING: Mutation.
+  # Mutation.
   benchmark.report "#concat (<)" do
     one.dup.concat two
   end
 
-  # WARNING: Mutation.
+  # Mutation.
   benchmark.report "#concat (>)" do
     one.dup.concat two, three, four, five, six, seven, eight, nine, ten
   end
 
-  # WARNING: Mutation.
+  # Mutation.
   benchmark.report "#<< (<)" do
     one.dup << two
   end
 
-  # WARNING: Mutation.
+  # Mutation.
   benchmark.report "#<< (>)" do
     one.dup << two << three << four << five << six << seven << eight << nine << ten
   end
@@ -81,44 +81,44 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-        Implicit (<)     4.372M i/100ms
-        Implicit (>)     4.448M i/100ms
-   Interpolation (<)     1.208M i/100ms
-   Interpolation (>)   367.925k i/100ms
-              #+ (<)   823.216k i/100ms
-              #+ (>)    80.833k i/100ms
-         #concat (<)     1.369M i/100ms
-         #concat (>)   291.617k i/100ms
-             #<< (<)     1.479M i/100ms
-             #<< (>)   459.494k i/100ms
-      Array#join (<)   722.879k i/100ms
-      Array#join (>)   307.222k i/100ms
+        Implicit (<)     4.799M i/100ms
+        Implicit (>)     4.553M i/100ms
+   Interpolation (<)     1.758M i/100ms
+   Interpolation (>)   453.241k i/100ms
+              #+ (<)     1.306M i/100ms
+              #+ (>)   166.101k i/100ms
+         #concat (<)   523.312k i/100ms
+         #concat (>)   234.069k i/100ms
+             #<< (<)   556.835k i/100ms
+             #<< (>)   302.248k i/100ms
+      Array#join (<)     1.065M i/100ms
+      Array#join (>)   384.393k i/100ms
 Calculating -------------------------------------
-        Implicit (<)     75.685M (± 1.7%) i/s -    380.338M in   5.026812s
-        Implicit (>)     75.105M (± 1.8%) i/s -    378.120M in   5.036297s
-   Interpolation (<)     12.722M (± 5.7%) i/s -     64.005M in   5.047960s
-   Interpolation (>)      3.868M (± 5.9%) i/s -     19.500M in   5.057509s
-              #+ (<)      8.701M (± 7.1%) i/s -     43.630M in   5.038462s
-              #+ (>)    837.724k (± 7.7%) i/s -      4.203M in   5.048670s
-         #concat (<)     14.496M (± 8.5%) i/s -     72.583M in   5.045357s
-         #concat (>)      2.959M (± 8.8%) i/s -     14.872M in   5.063294s
-             #<< (<)     15.944M (± 8.0%) i/s -     79.888M in   5.043131s
-             #<< (>)      4.739M (± 9.0%) i/s -     23.894M in   5.082877s
-      Array#join (<)      7.392M (± 7.9%) i/s -     36.867M in   5.018258s
-      Array#join (>)      3.275M (± 7.8%) i/s -     16.283M in   5.000238s
+        Implicit (<)     73.295M (± 0.1%) i/s   (13.64 ns/i) -    369.501M in   5.041267s
+        Implicit (>)     73.267M (± 0.3%) i/s   (13.65 ns/i) -    368.762M in   5.033156s
+   Interpolation (<)     18.250M (± 2.0%) i/s   (54.79 ns/i) -     91.404M in   5.010379s
+   Interpolation (>)      4.844M (± 0.9%) i/s  (206.44 ns/i) -     24.475M in   5.053113s
+              #+ (<)     13.587M (± 1.9%) i/s   (73.60 ns/i) -     67.921M in   5.000883s
+              #+ (>)      1.544M (± 2.3%) i/s  (647.82 ns/i) -      7.807M in   5.060098s
+         #concat (<)      5.635M (± 3.1%) i/s  (177.45 ns/i) -     28.259M in   5.019545s
+         #concat (>)      2.375M (± 2.7%) i/s  (421.10 ns/i) -     11.938M in   5.030584s
+             #<< (<)      5.943M (± 3.4%) i/s  (168.27 ns/i) -     30.069M in   5.065748s
+             #<< (>)      3.099M (± 2.8%) i/s  (322.66 ns/i) -     15.717M in   5.075307s
+      Array#join (<)     11.232M (± 0.9%) i/s   (89.03 ns/i) -     56.421M in   5.023741s
+      Array#join (>)      4.172M (± 1.6%) i/s  (239.70 ns/i) -     21.142M in   5.068889s
 
 Comparison:
-        Implicit (<): 75684765.3 i/s
-        Implicit (>): 75104861.7 i/s - same-ish: difference falls within error
-             #<< (<): 15944068.0 i/s - 4.75x  slower
-         #concat (<): 14496048.1 i/s - 5.22x  slower
-   Interpolation (<): 12722385.9 i/s - 5.95x  slower
-              #+ (<):  8700892.4 i/s - 8.70x  slower
-      Array#join (<):  7392065.5 i/s - 10.24x  slower
-             #<< (>):  4738942.8 i/s - 15.97x  slower
-   Interpolation (>):  3867990.4 i/s - 19.57x  slower
-      Array#join (>):  3274997.2 i/s - 23.11x  slower
-         #concat (>):  2959275.8 i/s - 25.58x  slower
-              #+ (>):   837724.4 i/s - 90.35x  slower
+        Implicit (<): 73295358.8 i/s
+        Implicit (>): 73267016.7 i/s - same-ish: difference falls within error
+   Interpolation (<): 18250066.2 i/s - 4.02x  slower
+              #+ (<): 13586594.1 i/s - 5.39x  slower
+      Array#join (<): 11231833.8 i/s - 6.53x  slower
+             #<< (<):  5942722.8 i/s - 12.33x  slower
+         #concat (<):  5635299.8 i/s - 13.01x  slower
+   Interpolation (>):  4843906.9 i/s - 15.13x  slower
+      Array#join (>):  4171886.7 i/s - 17.57x  slower
+             #<< (>):  3099282.3 i/s - 23.65x  slower
+         #concat (>):  2374759.3 i/s - 30.86x  slower
+              #+ (>):  1543630.9 i/s - 47.48x  slower

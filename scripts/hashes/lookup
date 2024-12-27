@@ -25,23 +25,23 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-                 #[]     4.035M i/100ms
-              #fetch     3.642M i/100ms
-    #fetch (default)     3.661M i/100ms
-      #fetch (block)     3.639M i/100ms
-                #dig     3.747M i/100ms
+                 #[]     4.108M i/100ms
+              #fetch     3.613M i/100ms
+    #fetch (default)     3.746M i/100ms
+      #fetch (block)     3.709M i/100ms
+                #dig     4.047M i/100ms
 Calculating -------------------------------------
-                 #[]     53.886M (± 0.1%) i/s -    270.328M in   5.016651s
-              #fetch     45.478M (± 0.1%) i/s -    229.440M in   5.045124s
-    #fetch (default)     45.677M (± 0.4%) i/s -    230.660M in   5.049861s
-      #fetch (block)     44.675M (± 0.2%) i/s -    225.636M in   5.050641s
-                #dig     50.390M (± 0.5%) i/s -    254.823M in   5.057135s
+                 #[]     51.006M (± 0.3%) i/s   (19.61 ns/i) -    258.811M in   5.074111s
+              #fetch     44.278M (± 0.6%) i/s   (22.58 ns/i) -    224.011M in   5.059357s
+    #fetch (default)     44.317M (± 0.3%) i/s   (22.56 ns/i) -    224.757M in   5.071557s
+      #fetch (block)     43.807M (± 0.4%) i/s   (22.83 ns/i) -    222.555M in   5.080432s
+                #dig     48.337M (± 0.1%) i/s   (20.69 ns/i) -    242.803M in   5.023111s
 
 Comparison:
-                 #[]: 53886256.9 i/s
-                #dig: 50390168.1 i/s - 1.07x  slower
-    #fetch (default): 45677292.4 i/s - 1.18x  slower
-              #fetch: 45477689.6 i/s - 1.18x  slower
-      #fetch (block): 44674922.3 i/s - 1.21x  slower
+                 #[]: 51006430.3 i/s
+                #dig: 48337145.4 i/s - 1.06x  slower
+    #fetch (default): 44317430.9 i/s - 1.15x  slower
+              #fetch: 44278312.1 i/s - 1.15x  slower
+      #fetch (block): 43807023.1 i/s - 1.16x  slower

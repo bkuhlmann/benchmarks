@@ -28,20 +28,20 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-                 #[]     3.380M i/100ms
- Module.get (symbol)     3.491M i/100ms
- Module.get (string)     1.706M i/100ms
-          Object.get     1.068M i/100ms
+                 #[]     2.897M i/100ms
+ Module.get (symbol)     3.406M i/100ms
+ Module.get (string)     1.669M i/100ms
+          Object.get     1.011M i/100ms
 Calculating -------------------------------------
-                 #[]     44.355M (± 0.2%) i/s -    223.075M in   5.029360s
- Module.get (symbol)     44.370M (± 0.1%) i/s -    223.435M in   5.035747s
- Module.get (string)     18.818M (± 0.5%) i/s -     95.510M in   5.075490s
-          Object.get     11.076M (± 0.3%) i/s -     55.527M in   5.013445s
+                 #[]     33.548M (± 0.9%) i/s   (29.81 ns/i) -    168.050M in   5.009641s
+ Module.get (symbol)     42.820M (± 0.1%) i/s   (23.35 ns/i) -    214.596M in   5.011591s
+ Module.get (string)     18.319M (± 0.3%) i/s   (54.59 ns/i) -     91.822M in   5.012443s
+          Object.get     11.053M (± 0.2%) i/s   (90.48 ns/i) -     55.582M in   5.028808s
 
 Comparison:
- Module.get (symbol): 44369850.1 i/s
-                 #[]: 44354632.8 i/s - same-ish: difference falls within error
- Module.get (string): 18818346.2 i/s - 2.36x  slower
-          Object.get: 11075724.0 i/s - 4.01x  slower
+ Module.get (symbol): 42820077.0 i/s
+                 #[]: 33548240.7 i/s - 1.28x  slower
+ Module.get (string): 18319033.6 i/s - 2.34x  slower
+          Object.get: 11052680.4 i/s - 3.87x  slower

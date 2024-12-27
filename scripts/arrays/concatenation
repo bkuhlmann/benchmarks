@@ -49,29 +49,29 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-                  #+     1.109M i/100ms
-                 #+=   642.208k i/100ms
-             #concat   640.592k i/100ms
-                  #|   462.891k i/100ms
-      #<< + #flatten   190.264k i/100ms
-    splat + #flatten   191.960k i/100ms
-         multi-splat   595.693k i/100ms
+                  #+     2.130M i/100ms
+                 #+=   927.861k i/100ms
+             #concat   691.057k i/100ms
+                  #|   483.602k i/100ms
+      #<< + #flatten   203.055k i/100ms
+    splat + #flatten   212.664k i/100ms
+         multi-splat   903.880k i/100ms
 Calculating -------------------------------------
-                  #+     11.380M (± 6.3%) i/s -     57.673M in   5.088056s
-                 #+=      7.020M (± 7.5%) i/s -     35.321M in   5.060801s
-             #concat      6.757M (± 4.3%) i/s -     33.951M in   5.033526s
-                  #|      4.589M (± 7.1%) i/s -     23.145M in   5.069256s
-      #<< + #flatten      1.995M (± 7.8%) i/s -     10.084M in   5.083410s
-    splat + #flatten      1.987M (± 7.7%) i/s -      9.982M in   5.053069s
-         multi-splat      6.018M (± 5.4%) i/s -     30.380M in   5.063797s
+                  #+     23.159M (± 0.7%) i/s   (43.18 ns/i) -    117.130M in   5.057953s
+                 #+=      9.970M (± 0.8%) i/s  (100.30 ns/i) -     50.104M in   5.025637s
+             #concat      7.333M (± 1.6%) i/s  (136.37 ns/i) -     37.317M in   5.090383s
+                  #|      4.824M (± 1.8%) i/s  (207.30 ns/i) -     24.180M in   5.014471s
+      #<< + #flatten      2.101M (± 1.1%) i/s  (475.99 ns/i) -     10.559M in   5.026496s
+    splat + #flatten      2.156M (± 1.2%) i/s  (463.80 ns/i) -     10.846M in   5.031006s
+         multi-splat      9.786M (± 2.0%) i/s  (102.19 ns/i) -     49.713M in   5.082000s
 
 Comparison:
-                  #+: 11379928.4 i/s
-                 #+=:  7020046.0 i/s - 1.62x  slower
-             #concat:  6757373.6 i/s - 1.68x  slower
-         multi-splat:  6017673.7 i/s - 1.89x  slower
-                  #|:  4588614.9 i/s - 2.48x  slower
-      #<< + #flatten:  1995390.6 i/s - 5.70x  slower
-    splat + #flatten:  1986837.6 i/s - 5.73x  slower
+                  #+: 23158921.5 i/s
+                 #+=:  9970346.4 i/s - 2.32x  slower
+         multi-splat:  9786149.7 i/s - 2.37x  slower
+             #concat:  7332786.6 i/s - 3.16x  slower
+                  #|:  4823810.9 i/s - 4.80x  slower
+    splat + #flatten:  2156124.7 i/s - 10.74x  slower
+      #<< + #flatten:  2100889.3 i/s - 11.02x  slower

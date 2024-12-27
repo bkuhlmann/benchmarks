@@ -38,14 +38,14 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-              Reduce    46.696k i/100ms
-         With Object    86.950k i/100ms
+              Reduce    64.415k i/100ms
+         With Object   100.991k i/100ms
 Calculating -------------------------------------
-              Reduce    469.369k (± 7.1%) i/s -      2.381M in   5.099251s
-         With Object    893.855k (± 0.5%) i/s -      4.521M in   5.058420s
+              Reduce    656.529k (± 1.0%) i/s    (1.52 μs/i) -      3.285M in   5.004376s
+         With Object      1.032M (± 0.8%) i/s  (969.23 ns/i) -      5.252M in   5.090269s
 
 Comparison:
-         With Object:   893855.0 i/s
-              Reduce:   469368.6 i/s - 1.90x  slower
+         With Object:  1031743.5 i/s
+              Reduce:   656529.5 i/s - 1.57x  slower

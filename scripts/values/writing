@@ -30,17 +30,17 @@ end
 
 __END__
 
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [arm64-darwin23.4.0]
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-                Data   265.287k i/100ms
-              Struct     4.274M i/100ms
-          OpenStruct     2.870M i/100ms
+                Data   365.681k i/100ms
+              Struct     4.017M i/100ms
+          OpenStruct     1.970M i/100ms
 Calculating -------------------------------------
-                Data      2.721M (± 8.0%) i/s -     13.530M in   5.002940s
-              Struct     55.482M (± 1.5%) i/s -    277.793M in   5.008024s
-          OpenStruct     34.810M (± 0.2%) i/s -    175.090M in   5.029864s
+                Data      3.818M (± 1.0%) i/s  (261.92 ns/i) -     19.381M in   5.076819s
+              Struct     53.012M (± 0.3%) i/s   (18.86 ns/i) -    265.090M in   5.000654s
+          OpenStruct     24.920M (± 0.2%) i/s   (40.13 ns/i) -    126.093M in   5.059884s
 
 Comparison:
-              Struct: 55482353.9 i/s
-          OpenStruct: 34810159.3 i/s - 1.59x  slower
-                Data:  2721426.3 i/s - 20.39x  slower
+              Struct: 53011585.3 i/s
+          OpenStruct: 24920314.7 i/s - 2.13x  slower
+                Data:  3817956.9 i/s - 13.88x  slower
