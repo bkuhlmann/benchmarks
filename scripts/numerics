@@ -16,9 +16,9 @@ Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
   benchmark.report("Integer") { 1 + 0 }
-  benchmark.report("Float") { 0.0001 + 0 }
-  benchmark.report("Rational") { (1 / 1000r) + 0 }
-  benchmark.report("BigDecimal") { BigDecimal("0.0001") + 0 }
+  benchmark.report("Float") { 0.1 + 0 }
+  benchmark.report("Rational") { (1 / 1r) + 0 }
+  benchmark.report("BigDecimal") { BigDecimal("0.1") + 0 }
 
   benchmark.compare!
 end
@@ -27,18 +27,18 @@ __END__
 
 ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-             Integer     4.476M i/100ms
-               Float     4.239M i/100ms
-            Rational     1.376M i/100ms
-          BigDecimal   261.083k i/100ms
+             Integer     4.818M i/100ms
+               Float     4.688M i/100ms
+            Rational     1.440M i/100ms
+          BigDecimal   285.130k i/100ms
 Calculating -------------------------------------
-             Integer     71.943M (± 4.2%) i/s   (13.90 ns/i) -    362.588M in   5.053248s
-               Float     62.880M (± 0.3%) i/s   (15.90 ns/i) -    317.942M in   5.056431s
-            Rational     14.864M (± 0.4%) i/s   (67.28 ns/i) -     75.665M in   5.090593s
-          BigDecimal      2.747M (± 0.9%) i/s  (364.04 ns/i) -     13.837M in   5.037755s
+             Integer     72.057M (± 2.9%) i/s   (13.88 ns/i) -    361.327M in   5.019619s
+               Float     62.474M (± 0.7%) i/s   (16.01 ns/i) -    314.066M in   5.027353s
+            Rational     15.063M (± 0.3%) i/s   (66.39 ns/i) -     76.338M in   5.067855s
+          BigDecimal      2.871M (± 0.9%) i/s  (348.31 ns/i) -     14.542M in   5.065332s
 
 Comparison:
-             Integer: 71942566.4 i/s
-               Float: 62879502.5 i/s - 1.14x  slower
-            Rational: 14863984.7 i/s - 4.84x  slower
-          BigDecimal:  2746988.6 i/s - 26.19x  slower
+             Integer: 72057483.7 i/s
+               Float: 62474330.5 i/s - 1.15x  slower
+            Rational: 15063323.3 i/s - 4.78x  slower
+          BigDecimal:  2871025.0 i/s - 25.10x  slower
