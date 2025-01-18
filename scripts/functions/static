@@ -1,0 +1,49 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+class_example = Class.new do
+  def self.call(first, second) = first + second
+end
+
+module_example = Module.new do
+  module_function
+
+  def call(first, second) = first + second
+end
+
+function_example = -> first, second { first + second }
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Class") { class_example.call 10, 20 }
+  benchmark.report("Module") { module_example.call 10, 20 }
+  benchmark.report("Function") { function_example.call 10, 20 }
+
+  benchmark.compare!
+end
+
+__END__
+
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+Warming up --------------------------------------
+               Class     4.586M i/100ms
+              Module     4.072M i/100ms
+            Function     2.714M i/100ms
+Calculating -------------------------------------
+               Class     62.525M (± 0.4%) i/s   (15.99 ns/i) -    316.450M in   5.061239s
+              Module     62.654M (± 0.2%) i/s   (15.96 ns/i) -    313.576M in   5.004938s
+            Function     31.392M (± 2.1%) i/s   (31.86 ns/i) -    157.390M in   5.015900s
+
+Comparison:
+              Module: 62653616.0 i/s
+               Class: 62525065.5 i/s - same-ish: difference falls within error
+            Function: 31391523.8 i/s - 2.00x  slower
