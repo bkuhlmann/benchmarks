@@ -1,5 +1,15 @@
 = Versions
 
+== 5.1.0 (2025-01-18)
+
+* 🟢 Added functions static benchmark - Brooke Kuhlmann
+* 🔼 Updated to Amazing Print 1.7.0 - Brooke Kuhlmann
+* 🔼 Updated to Debug 1.10.0 - Brooke Kuhlmann
+* 🔼 Updated to Reek 6.4.0 - Brooke Kuhlmann
+* ✅ Fixed gem dependency spacing - Brooke Kuhlmann
+* ✅ Fixed numeric start - Brooke Kuhlmann
+* 🔁 Refactored closures as function blocks - Brooke Kuhlmann
+
 == 5.0.0 (2024-12-27)
 
 * 🔼 Updated to Caliber 0.68.0 - Brooke Kuhlmann

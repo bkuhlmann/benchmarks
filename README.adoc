@@ -27,14 +27,13 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 5.0.0
+git checkout 5.1.0
 bin/setup
 ----
 
 == Usage
 
 All benchmark scripts are found within the `scripts` folder and you can run any benchmark using a relative or absolute file path. Example:
-
 
 === scripts/arrays/concatenation
 
@@ -182,6 +181,7 @@ require "bundler/inline"
 
 gemfile true do
   source "https://rubygems.org"
+
   gem "benchmark-ips"
 end
 
@@ -215,112 +215,6 @@ Calculating -------------------------------------
 Comparison:
              Pinning: 20890279.6 i/s
              Binding:  7415714.9 i/s - 2.82x  slower
-....
-
-=== scripts/closures
-
-*Source*
-
-[source,ruby]
-----
-#! /usr/bin/env ruby
-# frozen_string_literal: true
-
-require "bundler/inline"
-
-gemfile true do
-  source "https://rubygems.org"
-
-  gem "benchmark-ips"
-end
-
-Example = Class.new do
-  def echo_implicit text
-    yield
-    text
-  end
-
-  def echo_implicit_guard text
-    yield if block_given?
-    text
-  end
-
-  def echo_explicit text, &block
-    yield block
-    text
-  end
-
-  def echo_explicit_guard text, &block
-    yield block if block
-    text
-  end
-end
-
-block_example = Example.new
-lambda_example = -> text { text }
-proc_example = proc { |text| text }
-
-Benchmark.ips do |benchmark|
-  benchmark.config time: 5, warmup: 2
-
-  benchmark.report "Block (implicit)" do
-    block_example.echo_implicit("hi") { "test" }
-  end
-
-  benchmark.report "Block (implicit guard)" do
-    block_example.echo_implicit_guard("hi") { "test" }
-  end
-
-  benchmark.report "Block (explicit)" do
-    block_example.echo_explicit("hi") { "test" }
-  end
-
-  benchmark.report "Block (explicit guard)" do
-    block_example.echo_explicit_guard("hi") { "test" }
-  end
-
-  benchmark.report "Lambda" do
-    lambda_example.call "test"
-  end
-
-  benchmark.report "Proc" do
-    proc_example.call "test"
-  end
-
-  benchmark.compare!
-end
-----
-
-*Benchmark*
-
-....
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
-Warming up --------------------------------------
-    Block (implicit)     4.215M i/100ms
-Block (implicit guard)
-                         3.820M i/100ms
-    Block (explicit)   787.233k i/100ms
-Block (explicit guard)
-                       783.153k i/100ms
-              Lambda     2.806M i/100ms
-                Proc     2.983M i/100ms
-Calculating -------------------------------------
-    Block (implicit)     59.814M (± 0.2%) i/s   (16.72 ns/i) -    299.269M in   5.003373s
-Block (implicit guard)
-                         56.952M (± 0.4%) i/s   (17.56 ns/i) -    286.516M in   5.030941s
-    Block (explicit)      8.892M (± 1.0%) i/s  (112.46 ns/i) -     44.872M in   5.046771s
-Block (explicit guard)
-                          8.804M (± 1.0%) i/s  (113.59 ns/i) -     44.640M in   5.070946s
-              Lambda     34.991M (± 0.9%) i/s   (28.58 ns/i) -    176.772M in   5.052370s
-                Proc     35.366M (± 0.9%) i/s   (28.28 ns/i) -    178.993M in   5.061491s
-
-Comparison:
-    Block (implicit): 59813544.8 i/s
-Block (implicit guard): 56951704.4 i/s - 1.05x  slower
-                Proc: 35366437.5 i/s - 1.69x  slower
-              Lambda: 34990583.2 i/s - 1.71x  slower
-    Block (explicit):  8892108.2 i/s - 6.73x  slower
-Block (explicit guard):  8803962.5 i/s - 6.79x  slower
 ....
 
 === scripts/constants/lookup
@@ -474,6 +368,171 @@ Comparison:
             Delegate: 23553279.8 i/s - 1.12x  slower
       Delegate Class:  5404232.5 i/s - 4.89x  slower
     Simple Delegator:  5398560.6 i/s - 4.89x  slower
+....
+
+=== scripts/functions/blocks
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+Example = Class.new do
+  def echo_implicit text
+    yield
+    text
+  end
+
+  def echo_implicit_guard text
+    yield if block_given?
+    text
+  end
+
+  def echo_explicit text, &block
+    yield block
+    text
+  end
+
+  def echo_explicit_guard text, &block
+    yield block if block
+    text
+  end
+end
+
+block_example = Example.new
+lambda_example = -> text { text }
+proc_example = proc { |text| text }
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report "Block (implicit)" do
+    block_example.echo_implicit("hi") { "test" }
+  end
+
+  benchmark.report "Block (implicit guard)" do
+    block_example.echo_implicit_guard("hi") { "test" }
+  end
+
+  benchmark.report "Block (explicit)" do
+    block_example.echo_explicit("hi") { "test" }
+  end
+
+  benchmark.report "Block (explicit guard)" do
+    block_example.echo_explicit_guard("hi") { "test" }
+  end
+
+  benchmark.report "Lambda" do
+    lambda_example.call "test"
+  end
+
+  benchmark.report "Proc" do
+    proc_example.call "test"
+  end
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+Warming up --------------------------------------
+    Block (implicit)     4.215M i/100ms
+Block (implicit guard)
+                         3.820M i/100ms
+    Block (explicit)   787.233k i/100ms
+Block (explicit guard)
+                       783.153k i/100ms
+              Lambda     2.806M i/100ms
+                Proc     2.983M i/100ms
+Calculating -------------------------------------
+    Block (implicit)     59.814M (± 0.2%) i/s   (16.72 ns/i) -    299.269M in   5.003373s
+Block (implicit guard)
+                         56.952M (± 0.4%) i/s   (17.56 ns/i) -    286.516M in   5.030941s
+    Block (explicit)      8.892M (± 1.0%) i/s  (112.46 ns/i) -     44.872M in   5.046771s
+Block (explicit guard)
+                          8.804M (± 1.0%) i/s  (113.59 ns/i) -     44.640M in   5.070946s
+              Lambda     34.991M (± 0.9%) i/s   (28.58 ns/i) -    176.772M in   5.052370s
+                Proc     35.366M (± 0.9%) i/s   (28.28 ns/i) -    178.993M in   5.061491s
+
+Comparison:
+    Block (implicit): 59813544.8 i/s
+Block (implicit guard): 56951704.4 i/s - 1.05x  slower
+                Proc: 35366437.5 i/s - 1.69x  slower
+              Lambda: 34990583.2 i/s - 1.71x  slower
+    Block (explicit):  8892108.2 i/s - 6.73x  slower
+Block (explicit guard):  8803962.5 i/s - 6.79x  slower
+....
+
+=== scripts/functions/static
+
+*Source*
+
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+class_example = Class.new do
+  def self.call(first, second) = first + second
+end
+
+module_example = Module.new do
+  module_function
+
+  def call(first, second) = first + second
+end
+
+function_example = -> first, second { first + second }
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Class") { class_example.call 10, 20 }
+  benchmark.report("Module") { module_example.call 10, 20 }
+  benchmark.report("Function") { function_example.call 10, 20 }
+
+  benchmark.compare!
+end
+----
+
+*Benchmark*
+
+....
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+Warming up --------------------------------------
+               Class     4.586M i/100ms
+              Module     4.072M i/100ms
+            Function     2.714M i/100ms
+Calculating -------------------------------------
+               Class     62.525M (± 0.4%) i/s   (15.99 ns/i) -    316.450M in   5.061239s
+              Module     62.654M (± 0.2%) i/s   (15.96 ns/i) -    313.576M in   5.004938s
+            Function     31.392M (± 2.1%) i/s   (31.86 ns/i) -    157.390M in   5.015900s
+
+Comparison:
+              Module: 62653616.0 i/s
+               Class: 62525065.5 i/s - same-ish: difference falls within error
+            Function: 31391523.8 i/s - 2.00x  slower
 ....
 
 === scripts/hashes/lookup
@@ -976,9 +1035,9 @@ Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
   benchmark.report("Integer") { 1 + 0 }
-  benchmark.report("Float") { 0.0001 + 0 }
-  benchmark.report("Rational") { (1 / 1000r) + 0 }
-  benchmark.report("BigDecimal") { BigDecimal("0.0001") + 0 }
+  benchmark.report("Float") { 0.1 + 0 }
+  benchmark.report("Rational") { (1 / 1r) + 0 }
+  benchmark.report("BigDecimal") { BigDecimal("0.1") + 0 }
 
   benchmark.compare!
 end
@@ -989,21 +1048,21 @@ end
 ....
 ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-             Integer     4.476M i/100ms
-               Float     4.239M i/100ms
-            Rational     1.376M i/100ms
-          BigDecimal   261.083k i/100ms
+             Integer     4.818M i/100ms
+               Float     4.688M i/100ms
+            Rational     1.440M i/100ms
+          BigDecimal   285.130k i/100ms
 Calculating -------------------------------------
-             Integer     71.943M (± 4.2%) i/s   (13.90 ns/i) -    362.588M in   5.053248s
-               Float     62.880M (± 0.3%) i/s   (15.90 ns/i) -    317.942M in   5.056431s
-            Rational     14.864M (± 0.4%) i/s   (67.28 ns/i) -     75.665M in   5.090593s
-          BigDecimal      2.747M (± 0.9%) i/s  (364.04 ns/i) -     13.837M in   5.037755s
+             Integer     72.057M (± 2.9%) i/s   (13.88 ns/i) -    361.327M in   5.019619s
+               Float     62.474M (± 0.7%) i/s   (16.01 ns/i) -    314.066M in   5.027353s
+            Rational     15.063M (± 0.3%) i/s   (66.39 ns/i) -     76.338M in   5.067855s
+          BigDecimal      2.871M (± 0.9%) i/s  (348.31 ns/i) -     14.542M in   5.065332s
 
 Comparison:
-             Integer: 71942566.4 i/s
-               Float: 62879502.5 i/s - 1.14x  slower
-            Rational: 14863984.7 i/s - 4.84x  slower
-          BigDecimal:  2746988.6 i/s - 26.19x  slower
+             Integer: 72057483.7 i/s
+               Float: 62474330.5 i/s - 1.15x  slower
+            Rational: 15063323.3 i/s - 4.78x  slower
+          BigDecimal:  2871025.0 i/s - 25.10x  slower
 ....
 
 === scripts/pattern_matching/multiple_type_check
@@ -1019,6 +1078,7 @@ require "bundler/inline"
 
 gemfile true do
   source "https://rubygems.org"
+
   gem "benchmark-ips"
 end
 
@@ -1061,6 +1121,7 @@ require "bundler/inline"
 
 gemfile true do
   source "https://rubygems.org"
+
   gem "benchmark-ips"
 end
 
