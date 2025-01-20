@@ -1,0 +1,39 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Example
+  module_function
+
+  def add(first = 1, second = 2) = first + second
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Public") { Example.public_send :add }
+  benchmark.report("Private") { Example.__send__ :add }
+
+  benchmark.compare!
+end
+
+__END__
+
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+Warming up --------------------------------------
+              Public     2.011M i/100ms
+             Private     4.220M i/100ms
+Calculating -------------------------------------
+              Public     23.979M (± 1.1%) i/s   (41.70 ns/i) -    120.645M in   5.031991s
+             Private     61.137M (± 0.4%) i/s   (16.36 ns/i) -    308.063M in   5.038936s
+
+Comparison:
+             Private: 61137450.6 i/s
+              Public: 23978548.9 i/s - 2.55x  slower

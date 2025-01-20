@@ -23,6 +23,9 @@ Style/RedundantRegexpArgument:
 Style/SelectByRegexp:
   Exclude:
     - "scripts/arrays/search"
+Style/SendWithLiteralMethodName:
+  Exclude:
+    - "scripts/methods/scoped_send"
 Style/SingleArgumentDig:
   Exclude:
     - "scripts/hashes/lookup"
