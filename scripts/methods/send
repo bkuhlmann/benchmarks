@@ -29,11 +29,10 @@ end
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
-  max = 1_000_000
 
-  benchmark.report("Static") { max.times { Static.call } }
-  benchmark.report("Dynamic (strings)") { max.times { Dynamic.with_strings } }
-  benchmark.report("Dynamic (symbols)") { max.times { Dynamic.with_symbols } }
+  benchmark.report("Static") { Static.call }
+  benchmark.report("Dynamic (strings)") { Dynamic.with_strings }
+  benchmark.report("Dynamic (symbols)") { Dynamic.with_symbols }
 
   benchmark.compare!
 end
@@ -42,15 +41,15 @@ __END__
 
 ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-              Static     2.000 i/100ms
-   Dynamic (strings)     1.000 i/100ms
-   Dynamic (symbols)     1.000 i/100ms
+              Static     2.126M i/100ms
+   Dynamic (strings)   973.273k i/100ms
+   Dynamic (symbols)     1.256M i/100ms
 Calculating -------------------------------------
-              Static     40.608 (± 4.9%) i/s   (24.63 ms/i) -    204.000 in   5.036193s
-   Dynamic (strings)     14.238 (± 0.0%) i/s   (70.23 ms/i) -     72.000 in   5.063863s
-   Dynamic (symbols)     19.861 (± 0.0%) i/s   (50.35 ms/i) -    100.000 in   5.035113s
+              Static     26.137M (± 5.6%) i/s   (38.26 ns/i) -    131.819M in   5.058540s
+   Dynamic (strings)     11.631M (± 0.9%) i/s   (85.98 ns/i) -     58.396M in   5.021134s
+   Dynamic (symbols)     16.000M (± 1.7%) i/s   (62.50 ns/i) -     80.395M in   5.026229s
 
 Comparison:
-              Static:       40.6 i/s
-   Dynamic (symbols):       19.9 i/s - 2.04x  slower
-   Dynamic (strings):       14.2 i/s - 2.85x  slower
+              Static: 26137140.5 i/s
+   Dynamic (symbols): 16000110.8 i/s - 1.63x  slower
+   Dynamic (strings): 11631159.4 i/s - 2.25x  slower
