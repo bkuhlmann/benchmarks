@@ -27,7 +27,7 @@ To install, run:
 ----
 git clone https://github.com/bkuhlmann/benchmarks.git
 cd benchmarks
-git checkout 5.1.0
+git checkout 5.2.0
 bin/setup
 ----
 
@@ -37,8 +37,9 @@ All benchmark scripts are found within the `scripts` folder and you can run any 
 
 === scripts/arrays/concatenation
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -90,6 +91,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -124,8 +126,9 @@ Comparison:
 
 === scripts/arrays/search
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -151,6 +154,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -170,8 +174,9 @@ Comparison:
 
 === scripts/bindings
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -200,6 +205,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -219,8 +225,9 @@ Comparison:
 
 === scripts/constants/lookup
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -251,6 +258,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -276,8 +284,9 @@ Comparison:
 
 === scripts/delegates
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -347,6 +356,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -372,8 +382,9 @@ Comparison:
 
 === scripts/functions/blocks
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -443,6 +454,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -478,8 +490,9 @@ Block (explicit guard):  8803962.5 i/s - 6.79x  slower
 
 === scripts/functions/static
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -515,6 +528,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -537,8 +551,9 @@ Comparison:
 
 === scripts/hashes/lookup
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -566,6 +581,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -594,8 +610,9 @@ Comparison:
 
 === scripts/hashes/merge
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -622,6 +639,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -647,8 +665,9 @@ Comparison:
 
 === scripts/hashes/reduce
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -689,6 +708,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -708,8 +728,9 @@ Comparison:
 
 === scripts/loops
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -742,6 +763,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -761,8 +783,9 @@ Comparison:
 
 === scripts/methods/define_method
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -825,6 +848,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -847,8 +871,9 @@ Comparison:
 
 === scripts/methods/method_proc
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -916,6 +941,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -945,10 +971,62 @@ Comparison:
   Method To Proc (m):  2297978.5 i/s - 8.05x  slower
 ....
 
+=== scripts/methods/scoped_send
+
+.*Source*
+[%collapsible]
+====
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+module Example
+  module_function
+
+  def add(first = 1, second = 2) = first + second
+end
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Public") { Example.public_send :add }
+  benchmark.report("Private") { Example.__send__ :add }
+
+  benchmark.compare!
+end
+----
+====
+
+*Benchmark*
+
+....
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+Warming up --------------------------------------
+              Public     2.011M i/100ms
+             Private     4.220M i/100ms
+Calculating -------------------------------------
+              Public     23.979M (± 1.1%) i/s   (41.70 ns/i) -    120.645M in   5.031991s
+             Private     61.137M (± 0.4%) i/s   (16.36 ns/i) -    308.063M in   5.038936s
+
+Comparison:
+             Private: 61137450.6 i/s
+              Public: 23978548.9 i/s - 2.55x  slower
+....
+
 === scripts/methods/send
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -982,39 +1060,40 @@ end
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
-  max = 1_000_000
 
-  benchmark.report("Static") { max.times { Static.call } }
-  benchmark.report("Dynamic (strings)") { max.times { Dynamic.with_strings } }
-  benchmark.report("Dynamic (symbols)") { max.times { Dynamic.with_symbols } }
+  benchmark.report("Static") { Static.call }
+  benchmark.report("Dynamic (strings)") { Dynamic.with_strings }
+  benchmark.report("Dynamic (symbols)") { Dynamic.with_symbols }
 
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
 ....
 ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
 Warming up --------------------------------------
-              Static     2.000 i/100ms
-   Dynamic (strings)     1.000 i/100ms
-   Dynamic (symbols)     1.000 i/100ms
+              Static     2.126M i/100ms
+   Dynamic (strings)   973.273k i/100ms
+   Dynamic (symbols)     1.256M i/100ms
 Calculating -------------------------------------
-              Static     40.608 (± 4.9%) i/s   (24.63 ms/i) -    204.000 in   5.036193s
-   Dynamic (strings)     14.238 (± 0.0%) i/s   (70.23 ms/i) -     72.000 in   5.063863s
-   Dynamic (symbols)     19.861 (± 0.0%) i/s   (50.35 ms/i) -    100.000 in   5.035113s
+              Static     26.137M (± 5.6%) i/s   (38.26 ns/i) -    131.819M in   5.058540s
+   Dynamic (strings)     11.631M (± 0.9%) i/s   (85.98 ns/i) -     58.396M in   5.021134s
+   Dynamic (symbols)     16.000M (± 1.7%) i/s   (62.50 ns/i) -     80.395M in   5.026229s
 
 Comparison:
-              Static:       40.6 i/s
-   Dynamic (symbols):       19.9 i/s - 2.04x  slower
-   Dynamic (strings):       14.2 i/s - 2.85x  slower
+              Static: 26137140.5 i/s
+   Dynamic (symbols): 16000110.8 i/s - 1.63x  slower
+   Dynamic (strings): 11631159.4 i/s - 2.25x  slower
 ....
 
 === scripts/numerics
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1042,6 +1121,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1067,8 +1147,9 @@ Comparison:
 
 === scripts/pattern_matching/multiple_type_check
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1091,6 +1172,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1110,8 +1192,9 @@ Comparison:
 
 === scripts/pattern_matching/single_type_check
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1134,6 +1217,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1153,8 +1237,9 @@ Comparison:
 
 === scripts/refinements/import
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1186,6 +1271,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1205,8 +1291,9 @@ Comparison:
 
 === scripts/refinements/initialize
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1249,6 +1336,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1268,8 +1356,9 @@ Comparison:
 
 === scripts/refinements/message
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1310,6 +1399,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1329,8 +1419,9 @@ Comparison:
 
 === scripts/refinements/refine
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1364,6 +1455,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1383,8 +1475,9 @@ Comparison:
 
 === scripts/strings/concatenation
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1468,6 +1561,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1517,8 +1611,9 @@ Comparison:
 
 === scripts/strings/matching
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1550,6 +1645,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1580,8 +1676,9 @@ Comparison:
 
 === scripts/strings/split
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1617,6 +1714,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1636,8 +1734,9 @@ Comparison:
 
 === scripts/strings/substrings
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1665,6 +1764,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1693,8 +1793,9 @@ Comparison:
 
 === scripts/thens
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1723,6 +1824,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1742,8 +1844,9 @@ Comparison:
 
 === scripts/values/inheritance
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1774,6 +1877,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1793,8 +1897,9 @@ Comparison:
 
 === scripts/values/initialization
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1856,6 +1961,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1895,8 +2001,9 @@ Comparison:
 
 === scripts/values/reading
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -1941,6 +2048,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
@@ -1966,8 +2074,9 @@ Comparison:
 
 === scripts/values/writing
 
-*Source*
-
+.*Source*
+[%collapsible]
+====
 [source,ruby]
 ----
 #! /usr/bin/env ruby
@@ -2000,6 +2109,7 @@ Benchmark.ips do |benchmark|
   benchmark.compare!
 end
 ----
+====
 
 *Benchmark*
 
