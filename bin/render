@@ -18,12 +18,14 @@ ROOT.files("**/*").each do |path|
 
     === #{relative_path}
 
-    *Source*
-
+    .*Source*
+    [%collapsible]
+    ====
     [source,ruby]
     ----
     #{source.strip}
     ----
+    ====
 
     *Benchmark*
 
