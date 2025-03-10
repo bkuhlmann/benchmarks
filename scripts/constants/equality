@@ -1,0 +1,35 @@
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+TEST = "test"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Constant First") { TEST == "test" }
+  benchmark.report("Value First") { "test" == TEST }
+
+  benchmark.compare!
+end
+
+__END__
+
+ruby 3.4.2 (2025-02-15 revision d2930f8e7a) +YJIT +PRISM [arm64-darwin24.3.0]
+Warming up --------------------------------------
+      Constant First     3.998M i/100ms
+         Value First     4.196M i/100ms
+Calculating -------------------------------------
+      Constant First     55.766M (± 0.1%) i/s   (17.93 ns/i) -    279.893M in   5.019049s
+         Value First     55.614M (± 2.1%) i/s   (17.98 ns/i) -    281.108M in   5.057363s
+
+Comparison:
+      Constant First: 55766326.8 i/s
+         Value First: 55613741.4 i/s - same-ish: difference falls within error
