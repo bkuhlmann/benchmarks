@@ -11,7 +11,7 @@ end
 
 module Refines
   refine String do
-    def dud = true
+    def dud? = true
   end
 end
 

@@ -15,14 +15,14 @@ Benchmark.ips do |benchmark|
   benchmark.report "With" do
     Module.new do
       refine String do
-        def dud = true
+        def dud? = true
       end
     end
   end
 
   benchmark.report "Without" do
     Module.new do
-      def dud = true
+      def dud? = true
     end
   end
 

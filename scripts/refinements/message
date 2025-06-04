@@ -11,14 +11,14 @@ end
 
 module Refines
   refine String do
-    def dud = true
+    def dud? = true
   end
 end
 
 module With
   using Refines
 
-  def self.call(value) = value.dud
+  def self.call(value) = value.dud?
 end
 
 module Without

@@ -10,7 +10,7 @@ gemfile true do
 end
 
 module Import
-  def dud = true
+  def dud? = true
 end
 
 Benchmark.ips do |benchmark|
@@ -21,7 +21,7 @@ Benchmark.ips do |benchmark|
   end
 
   benchmark.report "Without" do
-    Module.new { def dud = true }
+    Module.new { def dud? = true }
   end
 
   benchmark.compare!
