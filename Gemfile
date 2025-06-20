@@ -4,7 +4,7 @@ ruby file: ".ruby-version"
 
 source "https://rubygems.org"
 
-gem "refinements", "~> 13.0"
+gem "refinements", "~> 13.3"
 
 group :quality do
   gem "caliber", "~> 0.79"
