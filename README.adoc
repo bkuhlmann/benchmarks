@@ -223,6 +223,53 @@ Comparison:
              Binding:  7415714.9 i/s - 2.82x  slower
 ....
 
+=== scripts/constants/equality
+
+.*Source*
+[%collapsible]
+====
+[source,ruby]
+----
+#! /usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/inline"
+
+gemfile true do
+  source "https://rubygems.org"
+
+  gem "benchmark-ips"
+end
+
+TEST = "test"
+
+Benchmark.ips do |benchmark|
+  benchmark.config time: 5, warmup: 2
+
+  benchmark.report("Constant First") { TEST == "test" }
+  benchmark.report("Value First") { "test" == TEST }
+
+  benchmark.compare!
+end
+----
+====
+
+*Benchmark*
+
+....
+ruby 3.4.2 (2025-02-15 revision d2930f8e7a) +YJIT +PRISM [arm64-darwin24.3.0]
+Warming up --------------------------------------
+      Constant First     3.998M i/100ms
+         Value First     4.196M i/100ms
+Calculating -------------------------------------
+      Constant First     55.766M (± 0.1%) i/s   (17.93 ns/i) -    279.893M in   5.019049s
+         Value First     55.614M (± 2.1%) i/s   (17.98 ns/i) -    281.108M in   5.057363s
+
+Comparison:
+      Constant First: 55766326.8 i/s
+         Value First: 55613741.4 i/s - same-ish: difference falls within error
+....
+
 === scripts/constants/lookup
 
 .*Source*
@@ -488,7 +535,7 @@ Block (implicit guard): 56951704.4 i/s - 1.05x  slower
 Block (explicit guard):  8803962.5 i/s - 6.79x  slower
 ....
 
-=== scripts/functions/static
+=== scripts/functions/types
 
 .*Source*
 [%collapsible]
@@ -506,24 +553,37 @@ gemfile true do
   gem "benchmark-ips"
 end
 
-class_example = Class.new do
-  def self.call(first, second) = first + second
-end
+ProcFunction = proc { |message = "message"| message }
+LambdaFunction = -> message = "benchmark" { message }
 
-module_example = Module.new do
+module ModuleFunction
   module_function
 
-  def call(first, second) = first + second
+  def call(message = "benchmark") = message
 end
 
-function_example = -> first, second { first + second }
+class ClassFunction
+  def initialize message = "benchmark"
+    @message = message
+  end
+
+  def call = message
+
+  private
+
+  attr_reader :message
+end
+
+memoized_function = ClassFunction.new
 
 Benchmark.ips do |benchmark|
   benchmark.config time: 5, warmup: 2
 
-  benchmark.report("Class") { class_example.call 10, 20 }
-  benchmark.report("Module") { module_example.call 10, 20 }
-  benchmark.report("Function") { function_example.call 10, 20 }
+  benchmark.report("Proc") { ProcFunction.call }
+  benchmark.report("Lambda") { LambdaFunction.call }
+  benchmark.report("Module") { ModuleFunction.call }
+  benchmark.report("Class (new)") { ClassFunction.new.call }
+  benchmark.report("Class (memoized)") { memoized_function.call }
 
   benchmark.compare!
 end
@@ -533,20 +593,26 @@ end
 *Benchmark*
 
 ....
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 3.4.7 (2025-10-08 revision 7a5688e2a2) +YJIT +PRISM [arm64-darwin24.6.0]
 Warming up --------------------------------------
-               Class     4.586M i/100ms
-              Module     4.072M i/100ms
-            Function     2.714M i/100ms
+                Proc     2.286M i/100ms
+              Lambda     2.350M i/100ms
+              Module     4.052M i/100ms
+         Class (new)     1.439M i/100ms
+    Class (memoized)     4.108M i/100ms
 Calculating -------------------------------------
-               Class     62.525M (± 0.4%) i/s   (15.99 ns/i) -    316.450M in   5.061239s
-              Module     62.654M (± 0.2%) i/s   (15.96 ns/i) -    313.576M in   5.004938s
-            Function     31.392M (± 2.1%) i/s   (31.86 ns/i) -    157.390M in   5.015900s
+                Proc     25.581M (± 0.3%) i/s   (39.09 ns/i) -    128.037M in   5.005105s
+              Lambda     25.148M (± 0.7%) i/s   (39.77 ns/i) -    126.888M in   5.045937s
+              Module     60.385M (± 2.1%) i/s   (16.56 ns/i) -    303.872M in   5.034485s
+         Class (new)     15.939M (± 0.9%) i/s   (62.74 ns/i) -     80.600M in   5.057388s
+    Class (memoized)     58.861M (± 1.0%) i/s   (16.99 ns/i) -    295.759M in   5.025159s
 
 Comparison:
-              Module: 62653616.0 i/s
-               Class: 62525065.5 i/s - same-ish: difference falls within error
-            Function: 31391523.8 i/s - 2.00x  slower
+              Module: 60384824.1 i/s
+    Class (memoized): 58861253.9 i/s - same-ish: difference falls within error
+                Proc: 25581483.1 i/s - 2.36x  slower
+              Lambda: 25147676.1 i/s - 2.40x  slower
+         Class (new): 15938516.3 i/s - 3.79x  slower
 ....
 
 === scripts/hashes/lookup
@@ -1254,7 +1320,7 @@ gemfile true do
 end
 
 module Import
-  def dud = true
+  def dud? = true
 end
 
 Benchmark.ips do |benchmark|
@@ -1265,7 +1331,7 @@ Benchmark.ips do |benchmark|
   end
 
   benchmark.report "Without" do
-    Module.new { def dud = true }
+    Module.new { def dud? = true }
   end
 
   benchmark.compare!
@@ -1309,7 +1375,7 @@ end
 
 module Refines
   refine String do
-    def dud = true
+    def dud? = true
   end
 end
 
@@ -1374,14 +1440,14 @@ end
 
 module Refines
   refine String do
-    def dud = true
+    def dud? = true
   end
 end
 
 module With
   using Refines
 
-  def self.call(value) = value.dud
+  def self.call(value) = value.dud?
 end
 
 module Without
@@ -1441,14 +1507,14 @@ Benchmark.ips do |benchmark|
   benchmark.report "With" do
     Module.new do
       refine String do
-        def dud = true
+        def dud? = true
       end
     end
   end
 
   benchmark.report "Without" do
     Module.new do
-      def dud = true
+      def dud? = true
     end
   end
 
