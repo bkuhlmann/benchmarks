@@ -4,11 +4,11 @@ ruby file: ".ruby-version"
 
 source "https://rubygems.org"
 
-gem "refinements", "~> 13.5"
+gem "refinements", "~> 14.0"
 
 group :quality do
   gem "caliber", "~> 0.82"
-  gem "git-lint", "~> 9.0"
+  # gem "git-lint", "~> 9.0"
   gem "reek", "~> 6.5", require: false
   gem "simplecov", "~> 0.22", require: false
 end
