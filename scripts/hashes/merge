@@ -24,20 +24,20 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-               Splat     1.220M i/100ms
-               Merge   972.824k i/100ms
-              Merge!     1.398M i/100ms
-          Dup Merge!   728.688k i/100ms
+               Splat     1.338M i/100ms
+               Merge   951.857k i/100ms
+              Merge!     1.165M i/100ms
+          Dup Merge!   641.603k i/100ms
 Calculating -------------------------------------
-               Splat     14.035M (± 1.5%) i/s   (71.25 ns/i) -     70.757M in   5.042521s
-               Merge     10.595M (± 1.4%) i/s   (94.38 ns/i) -     53.505M in   5.050960s
-              Merge!     14.980M (± 1.2%) i/s   (66.76 ns/i) -     75.471M in   5.038965s
-          Dup Merge!      7.787M (± 1.1%) i/s  (128.41 ns/i) -     39.349M in   5.053630s
+               Splat     14.253M (± 5.1%) i/s   (70.16 ns/i) -     72.227M in   5.080706s
+               Merge      9.126M (± 4.3%) i/s  (109.58 ns/i) -     45.689M in   5.015660s
+              Merge!     12.741M (± 4.1%) i/s   (78.49 ns/i) -     64.086M in   5.038507s
+          Dup Merge!      6.901M (± 4.9%) i/s  (144.90 ns/i) -     34.647M in   5.032388s
 
 Comparison:
-              Merge!: 14979505.8 i/s
-               Splat: 14035287.2 i/s - 1.07x  slower
-               Merge: 10595050.3 i/s - 1.41x  slower
-          Dup Merge!:  7787275.3 i/s - 1.92x  slower
+               Splat: 14252857.3 i/s
+              Merge!: 12741219.4 i/s - 1.12x  slower
+               Merge:  9125612.2 i/s - 1.56x  slower
+          Dup Merge!:  6901442.6 i/s - 2.07x  slower

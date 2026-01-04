@@ -8,9 +8,8 @@ gemfile true do
 
   gem "benchmark-ips"
   gem "dry-struct"
+  gem "ostruct"
 end
-
-require "ostruct"
 
 DataExample = Data.define :to, :from
 StructExample = Struct.new :to, :from
@@ -42,20 +41,20 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-                Data     4.138M i/100ms
-              Struct     4.402M i/100ms
-          OpenStruct     2.431M i/100ms
-          Dry Struct     3.723M i/100ms
+                Data     4.996M i/100ms
+              Struct     4.956M i/100ms
+          OpenStruct     2.695M i/100ms
+          Dry Struct     3.801M i/100ms
 Calculating -------------------------------------
-                Data     67.301M (± 2.9%) i/s   (14.86 ns/i) -    339.284M in   5.046842s
-              Struct     67.277M (± 0.4%) i/s   (14.86 ns/i) -    338.976M in   5.038558s
-          OpenStruct     31.752M (± 0.1%) i/s   (31.49 ns/i) -    160.441M in   5.052954s
-          Dry Struct     46.533M (± 0.2%) i/s   (21.49 ns/i) -    234.527M in   5.040063s
+                Data     65.623M (± 3.1%) i/s   (15.24 ns/i) -    329.765M in   5.031036s
+              Struct     65.816M (± 0.5%) i/s   (15.19 ns/i) -    332.049M in   5.045233s
+          OpenStruct     31.489M (± 0.1%) i/s   (31.76 ns/i) -    159.018M in   5.049951s
+          Dry Struct     46.498M (± 0.2%) i/s   (21.51 ns/i) -    235.678M in   5.068601s
 
 Comparison:
-                Data: 67301380.0 i/s
-              Struct: 67277416.8 i/s - same-ish: difference falls within error
-          Dry Struct: 46532814.0 i/s - 1.45x  slower
-          OpenStruct: 31751956.0 i/s - 2.12x  slower
+              Struct: 65816109.5 i/s
+                Data: 65623017.2 i/s - same-ish: difference falls within error
+          Dry Struct: 46497703.7 i/s - 1.42x  slower
+          OpenStruct: 31489086.6 i/s - 2.09x  slower

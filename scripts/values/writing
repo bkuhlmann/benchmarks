@@ -7,9 +7,8 @@ gemfile true do
   source "https://rubygems.org"
 
   gem "benchmark-ips"
+  gem "ostruct"
 end
-
-require "ostruct"
 
 DataExample = Data.define :to, :from
 StructExample = Struct.new :to, :from
@@ -30,17 +29,17 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-                Data   365.681k i/100ms
-              Struct     4.017M i/100ms
-          OpenStruct     1.970M i/100ms
+                Data   362.337k i/100ms
+              Struct     4.119M i/100ms
+          OpenStruct     2.193M i/100ms
 Calculating -------------------------------------
-                Data      3.818M (± 1.0%) i/s  (261.92 ns/i) -     19.381M in   5.076819s
-              Struct     53.012M (± 0.3%) i/s   (18.86 ns/i) -    265.090M in   5.000654s
-          OpenStruct     24.920M (± 0.2%) i/s   (40.13 ns/i) -    126.093M in   5.059884s
+                Data      3.656M (± 4.5%) i/s  (273.55 ns/i) -     18.479M in   5.065731s
+              Struct     51.295M (± 0.2%) i/s   (19.50 ns/i) -    259.477M in   5.058586s
+          OpenStruct     25.689M (± 1.2%) i/s   (38.93 ns/i) -    129.410M in   5.038280s
 
 Comparison:
-              Struct: 53011585.3 i/s
-          OpenStruct: 24920314.7 i/s - 2.13x  slower
-                Data:  3817956.9 i/s - 13.88x  slower
+              Struct: 51294551.5 i/s
+          OpenStruct: 25689237.2 i/s - 2.00x  slower
+                Data:  3655574.7 i/s - 14.03x  slower

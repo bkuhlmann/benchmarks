@@ -25,20 +25,20 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-             Integer     4.818M i/100ms
-               Float     4.688M i/100ms
-            Rational     1.440M i/100ms
-          BigDecimal   285.130k i/100ms
+             Integer     5.201M i/100ms
+               Float     4.672M i/100ms
+            Rational     1.511M i/100ms
+          BigDecimal   392.886k i/100ms
 Calculating -------------------------------------
-             Integer     72.057M (± 2.9%) i/s   (13.88 ns/i) -    361.327M in   5.019619s
-               Float     62.474M (± 0.7%) i/s   (16.01 ns/i) -    314.066M in   5.027353s
-            Rational     15.063M (± 0.3%) i/s   (66.39 ns/i) -     76.338M in   5.067855s
-          BigDecimal      2.871M (± 0.9%) i/s  (348.31 ns/i) -     14.542M in   5.065332s
+             Integer     69.051M (± 2.1%) i/s   (14.48 ns/i) -    348.490M in   5.049610s
+               Float     60.799M (± 0.2%) i/s   (16.45 ns/i) -    308.361M in   5.071791s
+            Rational     16.517M (± 2.9%) i/s   (60.54 ns/i) -     83.094M in   5.035595s
+          BigDecimal      4.020M (± 7.6%) i/s  (248.76 ns/i) -     20.037M in   5.011139s
 
 Comparison:
-             Integer: 72057483.7 i/s
-               Float: 62474330.5 i/s - 1.15x  slower
-            Rational: 15063323.3 i/s - 4.78x  slower
-          BigDecimal:  2871025.0 i/s - 25.10x  slower
+             Integer: 69051130.2 i/s
+               Float: 60799372.8 i/s - 1.14x  slower
+            Rational: 16517265.0 i/s - 4.18x  slower
+          BigDecimal:  4019908.7 i/s - 17.18x  slower

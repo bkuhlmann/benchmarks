@@ -22,14 +22,14 @@ end
 
 __END__
 
-ruby 3.4.2 (2025-02-15 revision d2930f8e7a) +YJIT +PRISM [arm64-darwin24.3.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-      Constant First     3.998M i/100ms
-         Value First     4.196M i/100ms
+      Constant First     4.277M i/100ms
+         Value First     4.309M i/100ms
 Calculating -------------------------------------
-      Constant First     55.766M (± 0.1%) i/s   (17.93 ns/i) -    279.893M in   5.019049s
-         Value First     55.614M (± 2.1%) i/s   (17.98 ns/i) -    281.108M in   5.057363s
+      Constant First     55.538M (± 0.2%) i/s   (18.01 ns/i) -    278.012M in   5.005822s
+         Value First     55.303M (± 1.9%) i/s   (18.08 ns/i) -    280.063M in   5.066325s
 
 Comparison:
-      Constant First: 55766326.8 i/s
-         Value First: 55613741.4 i/s - same-ish: difference falls within error
+      Constant First: 55537887.6 i/s
+         Value First: 55302727.6 i/s - same-ish: difference falls within error

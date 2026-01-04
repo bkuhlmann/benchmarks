@@ -25,23 +25,23 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-       #sub (string)   720.839k i/100ms
-        #sub (regex)   486.003k i/100ms
-      #gsub (string)   504.617k i/100ms
-       #gsub (regex)   264.917k i/100ms
+       #sub (string)   773.049k i/100ms
+        #sub (regex)   543.605k i/100ms
+      #gsub (string)   529.823k i/100ms
+       #gsub (regex)   303.931k i/100ms
                  #tr     1.303M i/100ms
 Calculating -------------------------------------
-       #sub (string)      7.516M (± 0.8%) i/s  (133.05 ns/i) -     38.204M in   5.083576s
-        #sub (regex)      5.268M (± 0.7%) i/s  (189.83 ns/i) -     26.730M in   5.074524s
-      #gsub (string)      5.380M (± 0.6%) i/s  (185.89 ns/i) -     27.249M in   5.065536s
-       #gsub (regex)      2.822M (± 0.8%) i/s  (354.38 ns/i) -     14.306M in   5.069954s
-                 #tr     13.969M (± 0.5%) i/s   (71.59 ns/i) -     70.343M in   5.035839s
+       #sub (string)      8.034M (± 3.1%) i/s  (124.47 ns/i) -     40.199M in   5.008197s
+        #sub (regex)      5.754M (± 2.3%) i/s  (173.81 ns/i) -     28.811M in   5.010357s
+      #gsub (string)      5.589M (± 1.4%) i/s  (178.93 ns/i) -     28.081M in   5.025528s
+       #gsub (regex)      3.195M (± 1.7%) i/s  (313.01 ns/i) -     16.108M in   5.043536s
+                 #tr     14.137M (± 1.7%) i/s   (70.74 ns/i) -     71.667M in   5.071218s
 
 Comparison:
-                 #tr: 13968882.9 i/s
-       #sub (string):  7515708.4 i/s - 1.86x  slower
-      #gsub (string):  5379557.6 i/s - 2.60x  slower
-        #sub (regex):  5267767.1 i/s - 2.65x  slower
-       #gsub (regex):  2821821.0 i/s - 4.95x  slower
+                 #tr: 14136555.5 i/s
+       #sub (string):  8033950.8 i/s - 1.76x  slower
+        #sub (regex):  5753543.8 i/s - 2.46x  slower
+      #gsub (string):  5588726.1 i/s - 2.53x  slower
+       #gsub (regex):  3194812.0 i/s - 4.42x  slower

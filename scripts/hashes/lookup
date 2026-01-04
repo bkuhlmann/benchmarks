@@ -25,23 +25,23 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-                 #[]     4.108M i/100ms
-              #fetch     3.613M i/100ms
-    #fetch (default)     3.746M i/100ms
-      #fetch (block)     3.709M i/100ms
-                #dig     4.047M i/100ms
+                 #[]     4.091M i/100ms
+              #fetch     3.558M i/100ms
+    #fetch (default)     3.537M i/100ms
+      #fetch (block)     3.528M i/100ms
+                #dig     3.896M i/100ms
 Calculating -------------------------------------
-                 #[]     51.006M (± 0.3%) i/s   (19.61 ns/i) -    258.811M in   5.074111s
-              #fetch     44.278M (± 0.6%) i/s   (22.58 ns/i) -    224.011M in   5.059357s
-    #fetch (default)     44.317M (± 0.3%) i/s   (22.56 ns/i) -    224.757M in   5.071557s
-      #fetch (block)     43.807M (± 0.4%) i/s   (22.83 ns/i) -    222.555M in   5.080432s
-                #dig     48.337M (± 0.1%) i/s   (20.69 ns/i) -    242.803M in   5.023111s
+                 #[]     51.599M (± 0.4%) i/s   (19.38 ns/i) -    261.851M in   5.074852s
+              #fetch     42.667M (± 0.4%) i/s   (23.44 ns/i) -    213.486M in   5.003628s
+    #fetch (default)     42.271M (± 0.6%) i/s   (23.66 ns/i) -    212.206M in   5.020335s
+      #fetch (block)     42.642M (± 0.3%) i/s   (23.45 ns/i) -    215.197M in   5.046671s
+                #dig     48.266M (± 0.6%) i/s   (20.72 ns/i) -    241.570M in   5.005108s
 
 Comparison:
-                 #[]: 51006430.3 i/s
-                #dig: 48337145.4 i/s - 1.06x  slower
-    #fetch (default): 44317430.9 i/s - 1.15x  slower
-              #fetch: 44278312.1 i/s - 1.15x  slower
-      #fetch (block): 43807023.1 i/s - 1.16x  slower
+                 #[]: 51598749.0 i/s
+                #dig: 48266387.2 i/s - 1.07x  slower
+              #fetch: 42666996.7 i/s - 1.21x  slower
+      #fetch (block): 42641658.5 i/s - 1.21x  slower
+    #fetch (default): 42270877.3 i/s - 1.22x  slower

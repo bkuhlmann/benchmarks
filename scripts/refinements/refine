@@ -31,14 +31,14 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-                With    52.000 i/100ms
-             Without   402.935k i/100ms
+                With   364.000 i/100ms
+             Without   267.270k i/100ms
 Calculating -------------------------------------
-                With    284.492 (± 0.7%) i/s    (3.52 ms/i) -      1.456k in   5.118210s
-             Without      4.116M (± 1.8%) i/s  (242.94 ns/i) -     20.953M in   5.091996s
+                With      5.265k (±190.8%) i/s  (189.93 μs/i) -     10.920k in   5.273126s
+             Without      2.578M (± 2.1%) i/s  (387.97 ns/i) -     13.096M in   5.083279s
 
 Comparison:
-             Without:  4116202.1 i/s
-                With:      284.5 i/s - 14468.62x  slower
+             Without:  2577506.5 i/s
+                With:     5265.0 i/s - 489.55x  slower

@@ -26,14 +26,14 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-             Binding   685.023k i/100ms
-             Pinning     1.868M i/100ms
+             Binding   709.213k i/100ms
+             Pinning     1.663M i/100ms
 Calculating -------------------------------------
-             Binding      7.416M (± 2.1%) i/s  (134.85 ns/i) -     37.676M in   5.082785s
-             Pinning     20.890M (± 2.7%) i/s   (47.87 ns/i) -    104.605M in   5.011139s
+             Binding      7.671M (± 5.5%) i/s  (130.37 ns/i) -     38.298M in   5.006932s
+             Pinning     18.090M (± 6.4%) i/s   (55.28 ns/i) -     91.457M in   5.077294s
 
 Comparison:
-             Pinning: 20890279.6 i/s
-             Binding:  7415714.9 i/s - 2.82x  slower
+             Pinning: 18090003.1 i/s
+             Binding:  7670731.9 i/s - 2.36x  slower

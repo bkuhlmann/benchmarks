@@ -46,23 +46,23 @@ end
 
 __END__
 
-ruby 3.4.7 (2025-10-08 revision 7a5688e2a2) +YJIT +PRISM [arm64-darwin24.6.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-                Proc     2.286M i/100ms
-              Lambda     2.350M i/100ms
-              Module     4.052M i/100ms
-         Class (new)     1.439M i/100ms
-    Class (memoized)     4.108M i/100ms
+                Proc     2.215M i/100ms
+              Lambda     2.228M i/100ms
+              Module     4.451M i/100ms
+         Class (new)     2.504M i/100ms
+    Class (memoized)     4.430M i/100ms
 Calculating -------------------------------------
-                Proc     25.581M (± 0.3%) i/s   (39.09 ns/i) -    128.037M in   5.005105s
-              Lambda     25.148M (± 0.7%) i/s   (39.77 ns/i) -    126.888M in   5.045937s
-              Module     60.385M (± 2.1%) i/s   (16.56 ns/i) -    303.872M in   5.034485s
-         Class (new)     15.939M (± 0.9%) i/s   (62.74 ns/i) -     80.600M in   5.057388s
-    Class (memoized)     58.861M (± 1.0%) i/s   (16.99 ns/i) -    295.759M in   5.025159s
+                Proc     24.163M (± 1.4%) i/s   (41.38 ns/i) -    121.842M in   5.043510s
+              Lambda     24.785M (± 1.2%) i/s   (40.35 ns/i) -    124.746M in   5.033908s
+              Module     59.937M (± 0.9%) i/s   (16.68 ns/i) -    302.661M in   5.050088s
+         Class (new)     28.137M (± 2.4%) i/s   (35.54 ns/i) -    142.739M in   5.075867s
+    Class (memoized)     55.985M (± 0.9%) i/s   (17.86 ns/i) -    283.501M in   5.064328s
 
 Comparison:
-              Module: 60384824.1 i/s
-    Class (memoized): 58861253.9 i/s - same-ish: difference falls within error
-                Proc: 25581483.1 i/s - 2.36x  slower
-              Lambda: 25147676.1 i/s - 2.40x  slower
-         Class (new): 15938516.3 i/s - 3.79x  slower
+              Module: 59937028.6 i/s
+    Class (memoized): 55984529.3 i/s - 1.07x  slower
+         Class (new): 28137026.3 i/s - 2.13x  slower
+              Lambda: 24785195.0 i/s - 2.42x  slower
+                Proc: 24163375.2 i/s - 2.48x  slower

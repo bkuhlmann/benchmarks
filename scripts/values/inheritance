@@ -28,14 +28,14 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-              Struct   538.804k i/100ms
-            Subclass   518.538k i/100ms
+              Struct   558.663k i/100ms
+            Subclass   529.001k i/100ms
 Calculating -------------------------------------
-              Struct      5.886M (± 1.3%) i/s  (169.90 ns/i) -     29.634M in   5.035664s
-            Subclass      5.620M (± 1.0%) i/s  (177.92 ns/i) -     28.520M in   5.074817s
+              Struct      5.979M (± 2.0%) i/s  (167.25 ns/i) -     30.168M in   5.047641s
+            Subclass      5.465M (± 2.1%) i/s  (182.99 ns/i) -     27.508M in   5.035777s
 
 Comparison:
-              Struct:  5885853.0 i/s
-            Subclass:  5620422.5 i/s - 1.05x  slower
+              Struct:  5979019.4 i/s
+            Subclass:  5464846.9 i/s - 1.09x  slower

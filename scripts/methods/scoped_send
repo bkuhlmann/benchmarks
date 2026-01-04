@@ -26,14 +26,14 @@ end
 
 __END__
 
-ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [arm64-darwin24.2.0]
+ruby 4.0.0 (2025-12-25 revision 553f1675f3) +YJIT +PRISM [arm64-darwin25.2.0]
 Warming up --------------------------------------
-              Public     2.011M i/100ms
-             Private     4.220M i/100ms
+              Public     1.972M i/100ms
+             Private     4.431M i/100ms
 Calculating -------------------------------------
-              Public     23.979M (± 1.1%) i/s   (41.70 ns/i) -    120.645M in   5.031991s
-             Private     61.137M (± 0.4%) i/s   (16.36 ns/i) -    308.063M in   5.038936s
+              Public     22.708M (± 1.7%) i/s   (44.04 ns/i) -    114.397M in   5.039230s
+             Private     56.018M (±14.3%) i/s   (17.85 ns/i) -    265.872M in   5.054211s
 
 Comparison:
-             Private: 61137450.6 i/s
-              Public: 23978548.9 i/s - 2.55x  slower
+             Private: 56018442.7 i/s
+              Public: 22707682.3 i/s - 2.47x  slower
