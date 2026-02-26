@@ -35,6 +35,9 @@ Style/StructInheritance:
 Style/RedundantFetchBlock:
   Exclude:
     - "scripts/hashes/lookup"
+Style/OneClassPerFile:
+  Exclude:
+    - "scripts/**/*"
 Style/OpenStructUse:
   Exclude:
     - "scripts/values/initialization"
