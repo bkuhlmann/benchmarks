@@ -2,7 +2,7 @@
 
 require "simplecov"
 
-SimpleCov.start "strict" unless ENV["COVERAGE"] == "no"
+SimpleCov.start :strict unless ENV["COVERAGE"] == "no"
 Bundler.require :tools
 
 SPEC_ROOT = Pathname(__dir__).realpath.freeze
