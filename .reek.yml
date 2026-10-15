@@ -1,6 +1,11 @@
-detectors:
-  IrresponsibleModule:
-    enabled: false
 exclude_paths:
   - tmp
   - vendor
+
+detectors:
+  LongParameterList:
+    enabled: false
+  IrresponsibleModule:
+    enabled: false
+  UnusedParameters:
+    enabled: false
